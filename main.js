@@ -2,7 +2,7 @@ import * as tensorflow from '@tensorflow/tfjs-node-gpu'
 import sharp from 'sharp'
 import filesSystem from 'fs'
 import { from, of } from 'rxjs'
-import { filter, map, concatMap, concatAll, groupBy, reduce, mergeMap, mergeAll, toArray, take, bufferCount } from 'rxjs/operators'
+import { filter, map, concatMap, tap, groupBy, reduce, mergeMap, mergeAll, toArray, take, bufferCount } from 'rxjs/operators'
 import arrayOfLabels from './ImageNetLabels.json'
 
 //const isPicture = /^.*\.(jpg|png|gif|bmp|jpeg)/i;
@@ -17,7 +17,8 @@ const BATCH_FILE_SIZE_LIMIT = 5242880; //Doesn't work with const BUFFER_COUNT = 
 //const BUFFER_COUNT = 16: //Limit for GTX 950M and image of dimension 331 and BATCH_FILE_SIZE_LIMIT = 2097152
 //const BUFFER_COUNT = 15; //Good value for my computer
 //const BUFFER_COUNT = 1;// 43 seconds 50
-const BUFFER_COUNT = 17;// 43 secondes aussi
+//const BUFFER_COUNT = 17;// 43 secondes aussi
+const BUFFER_COUNT = 17;
 const NUMBER_OF_BEST_PREDICTIONS = 25;
 
 const WIDTH_REQUIRED = 331;
@@ -108,6 +109,11 @@ function load (path)
 	}
 }
 
+function writeJSONFile(data, path)
+{
+	filesSystem.writeFileSync(path, JSON.stringify(data, null, 4), "utf8");
+}
+
 function run (MODEL)
 {
 	function classify (pictures)
@@ -125,69 +131,83 @@ function run (MODEL)
 	// TODO: Trouver solution pour libérer la mémoire de la carte graphique
 	from(filesSystem.readdirSync('./data', { encoding: 'utf8' }))
 		//Stream de paths (string)
-		.pipe(filter(keepValidFile))
-		//Stream de paths (string)
-		.pipe(map(x => `./data/${x}`))
-		//Stream de paths (string)
-		.pipe(mergeMap(path => from(resizeAndSaveImageIfBadDimensions(path))))
-		//Stream de paths (string)
-		.pipe(map(addSizeInformation))
-		//Stream d'objet ({path, size})
-		.pipe(filter(keepLittleFile))
-		//Stream d'objet ({path, size})
-		.pipe(bufferCount(BUFFER_COUNT))
-		//Stream d'arrays d'objet ({path, size})
-		.pipe(concatMap(someFiles =>
+		.pipe(groupBy(keepValidFile))
+		.pipe(mergeMap(group =>
 		{
-			return from(someFiles)
-			.pipe(mergeMap(file => load(file.path)))
-			//Stream de tenseurs
-			.pipe(toArray())
-			//Stream de array de tenseurs (1 seule array)
-			.pipe(map(arrayOfTensors =>
+			//Valid files
+			if(group.key)
 			{
-				console.log(arrayOfTensors.map(tens => tens.shape));
-				const bigTensor = tensorflow.concat(arrayOfTensors, 0);
-				console.log(bigTensor.shape);
-				if(arrayOfTensors.length !== 1)
+				return group
+				.pipe(map(x => `./data/${x}`))
+				//Stream de paths (string)
+				.pipe(mergeMap(path => from(resizeAndSaveImageIfBadDimensions(path))))
+				//Stream de paths (string)
+				.pipe(map(addSizeInformation))
+				//Stream d'objet ({path, size})
+				.pipe(filter(keepLittleFile))
+				//Stream d'objet ({path, size})
+				.pipe(bufferCount(BUFFER_COUNT))
+				//Stream d'arrays d'objet ({path, size})
+				.pipe(concatMap(someFiles =>
 				{
-					tensorflow.dispose(arrayOfTensors);
-				}
+					return from(someFiles)
+					.pipe(mergeMap(file => load(file.path)))
+					//Stream de tenseurs
+					.pipe(toArray())
+					//Stream de array de tenseurs (1 seule array)
+					.pipe(map(arrayOfTensors =>
+					{
+						console.log(arrayOfTensors.map(tens => tens.shape));
+						const bigTensor = tensorflow.concat(arrayOfTensors, 0);
+						console.log(bigTensor.shape);
+						if(arrayOfTensors.length !== 1)
+						{
+							tensorflow.dispose(arrayOfTensors);
+						}
 
-				return bigTensor;
-			}))
-			//Stream de bigTensor (1 seul)
-			.pipe(map(bigTensor => classify(bigTensor)));
-			//Stream de Stream de prédictions
-		}))
-		//Stream de Stream de Stream de prédictions
-		.pipe(mergeAll())
-		//Stream de Stream de Predictions
-		.pipe(mergeAll())
-		//Stream de Prediction individuelles ici: [ 'pineapple', -0.3546293079853058 ]
-		.pipe(groupBy(x => x[0], x => x[1]))
-		//Stream de GroupedObservable de prédictions groupées par classes
-		.pipe(mergeMap( (group) => group
-			.pipe(reduce((a, b) => a + b))
-			.pipe(map(x => [group.key, x]))
-		))
-		//Stream de prédictions réduites (score des prédictions de même classe ajoutés entre eux)
-		.pipe(toArray())
-		//Stream de array de prédictions réduites (1 seule array) attends toutes les valeurs
-		.pipe(map(x => from(x.sort((a, b) => b[1] - a[1]))))
-		//Stream de Stream de prédictions réduites triée
-		.pipe(mergeAll())
-		//Stream de prédictions réduites triée
-		.pipe(take(NUMBER_OF_BEST_PREDICTIONS))
-		//Stream de prédictions réduites triée de manière décroissante, seulement les 25 premiers éléments émis
-		.pipe(map(pred =>
-		{
-			console.log(pred);
-			return pred;
+						return bigTensor;
+					}))
+					//Stream de bigTensor (1 seul)
+					.pipe(map(bigTensor => classify(bigTensor)));
+					//Stream de Stream de prédictions
+				}))
+				//Stream de Stream de Stream de prédictions
+				.pipe(mergeAll())
+				//Stream de Stream de Predictions
+				.pipe(mergeAll())
+				//Stream de Prediction individuelles ici: [ 'pineapple', -0.3546293079853058 ]
+				.pipe(groupBy(x => x[0], x => x[1]))
+				//Stream de GroupedObservable de prédictions groupées par classes
+				.pipe(mergeMap( (group) => group
+					.pipe(reduce((a, b) => a + b))
+					.pipe(map(x => [group.key, x]))
+				))
+				//Stream de prédictions réduites (score des prédictions de même classe ajoutés entre eux)
+				.pipe(toArray())
+				//Stream de array de prédictions réduites (1 seule array) attends toutes les valeurs
+				.pipe(map(x => from(x.sort((a, b) => b[1] - a[1]))))
+				//Stream de Stream de prédictions réduites triée
+				.pipe(mergeAll())
+				//Stream de prédictions réduites triée
+				.pipe(take(NUMBER_OF_BEST_PREDICTIONS))
+				//Stream de prédictions réduites triée de manière décroissante, seulement les 25 premiers éléments émis
+				.pipe(tap(console.log))
+				.pipe(toArray())
+				.pipe(map(array => writeJSONFile(array, "./results.json")));
+			}
+			//not valid files
+			else
+			{
+				return group
+				.pipe(toArray())
+				.pipe(tap(x => console.log("Bad images paths: ", x)))
+				.pipe(map(badImagesPaths => writeJSONFile(badImagesPaths, "./badImagesPaths.json")));
+			}
 		}))
 		.pipe(toArray())
 		.subscribe(x =>
 		{
+			console.log("Analyse finie");
 			MODEL.dispose();
 		});
 }
