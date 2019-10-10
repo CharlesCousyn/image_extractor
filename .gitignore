@@ -80,3 +80,7 @@ build/Release
 
 # Models files
 /models/*
+
+# data folders
+/data/*
+/oldData/*
