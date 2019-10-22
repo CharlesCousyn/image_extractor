@@ -1,0 +1,38 @@
+[
+  {
+    "name": "pnasnet_large",
+    "heightRequired": 331,
+    "widthRequired": 331,
+    "type": "classifcation"
+  },
+  {
+    "name": "inception_resnet_v2",
+    "heightRequired": 299,
+    "widthRequired": 299,
+    "type": "classifcation"
+  },
+  {
+    "name": "mobilenet_v2_140_224",
+    "heightRequired": 224,
+    "widthRequired": 224,
+    "type": "classifcation"
+  },
+  {
+    "name": "yolov3-608",
+    "heightRequired": 416,
+    "widthRequired": 416,
+    "type": "object_detection"
+  },
+  {
+    "name": "yolov3-tiny",
+    "heightRequired": 416,
+    "widthRequired": 416,
+    "type": "object_detection"
+  },
+  {
+    "name": "yolo9000",
+    "heightRequired": 544,
+    "widthRequired": 544,
+    "type": "object_detection"
+  }
+]
