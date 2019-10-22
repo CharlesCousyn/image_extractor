@@ -3,26 +3,26 @@ import sharp from 'sharp'
 import filesSystem from 'fs'
 import { from, of } from 'rxjs'
 import { filter, map, concatMap, tap, groupBy, reduce, mergeMap, mergeAll, toArray, take, bufferCount } from 'rxjs/operators'
-import arrayOfLabels from './ImageNetLabels.json'
+import arrayOfLabels from './configFiles/imageNetLabels.json'
+import MODELS_CONFIG from './configFiles/modelsConfig.json'
 
 //const isPicture = /^.*\.(jpg|png|gif|bmp|jpeg)/i;
 const isPicture = /^.*\.(jpg|png|gif|jpeg)/i;
 
-//const BATCH_FILE_SIZE_LIMIT = 1048576; //Work with const BUFFER_COUNT = 17;
 const BATCH_FILE_SIZE_LIMIT = 5242880; //Doesn't work with const BUFFER_COUNT = 17;
-//const BATCH_FILE_SIZE_LIMIT = 3145728;
-//const BATCH_FILE_SIZE_LIMIT = 2097152;
 
-//const BUFFER_COUNT = 17: //Limit for GTX 950M and image of dimension 331 and BATCH_FILE_SIZE_LIMIT = 5242880 and no BMP files
-//const BUFFER_COUNT = 16: //Limit for GTX 950M and image of dimension 331 and BATCH_FILE_SIZE_LIMIT = 2097152
-//const BUFFER_COUNT = 15; //Good value for my computer
-//const BUFFER_COUNT = 1;// 43 seconds 50
-//const BUFFER_COUNT = 17;// 43 secondes aussi
-const BUFFER_COUNT = 17;
+const BUFFER_COUNT = 5;
 const NUMBER_OF_BEST_PREDICTIONS = 25;
 
 const WIDTH_REQUIRED = 331;
 const HEIGHT_REQUIRED = 331;
+
+//Choose the model
+const MODEL_CONFIG = MODELS_CONFIG.find(config => config.name === "mobilenet_v2_140_224");
+
+//TODO: Accept images from multiple activities
+//TODO: Accept models of classification and object detection
+//TODO: Accept mulitple ways of aggregation
 
 function keepValidFile(name)
 {
@@ -128,7 +128,6 @@ function run (MODEL)
 		return from(predictions.arraySync().map(prediction => from(prediction.map((value, index) => [arrayOfLabels[index], value]))));
 	}
 
-	// TODO: Trouver solution pour libérer la mémoire de la carte graphique
 	from(filesSystem.readdirSync('./data', { encoding: 'utf8' }))
 		//Stream de paths (string)
 		.pipe(groupBy(keepValidFile))
@@ -193,7 +192,7 @@ function run (MODEL)
 				//Stream de prédictions réduites triée de manière décroissante, seulement les 25 premiers éléments émis
 				.pipe(tap(console.log))
 				.pipe(toArray())
-				.pipe(map(array => writeJSONFile(array, "./results.json")));
+				.pipe(map(array => writeJSONFile(array, "./resultFiles/results.json")));
 			}
 			//not valid files
 			else
@@ -201,7 +200,7 @@ function run (MODEL)
 				return group
 				.pipe(toArray())
 				.pipe(tap(x => console.log("Bad images paths: ", x)))
-				.pipe(map(badImagesPaths => writeJSONFile(badImagesPaths, "./badImagesPaths.json")));
+				.pipe(map(badImagesPaths => writeJSONFile(badImagesPaths, "./resultFiles/badImagesPaths.json")));
 			}
 		}))
 		.pipe(toArray())
@@ -212,10 +211,4 @@ function run (MODEL)
 		});
 }
 
-//const MODEL_PATH = 'file://models/mobilenet1/model.json'
-//const MODEL_PATH = 'file://models/mobilenet2/model.json'
-const MODEL_PATH = 'file://models/pnasnet/model.json';
-//const MODEL_PATH = 'file://models/inception_resnetv2/model.json';
-//const MODEL_PATH = 'file://models/mobilenet1_v2/model.json'
-
-tensorflow.loadGraphModel(MODEL_PATH).then(run);
+tensorflow.loadGraphModel(`file://models/${MODEL_CONFIG.name}/model.json`).then(run);
