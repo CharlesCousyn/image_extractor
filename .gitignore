@@ -84,3 +84,4 @@ build/Release
 # data folders
 /data/*
 /oldData/*
+/resultFiles/*
