@@ -1,77 +1,104 @@
 import * as tensorflow from '@tensorflow/tfjs-node-gpu'
 import sharp from 'sharp'
 import filesSystem from 'fs'
-import { from, of , ReplaySubject} from 'rxjs'
+import { from, of, ReplaySubject} from 'rxjs'
 import { filter, map, concatMap, tap, groupBy, reduce, mergeMap, mergeAll, toArray, take, bufferCount } from 'rxjs/operators'
-import arrayOfLabels from './configFiles/imageNetLabels.json'
+import arrayOfLabels from './labelFiles/imageNetLabels.json'
 import MODELS_CONFIG from './configFiles/modelsConfig.json'
 import GENERAL_CONFIG from "./configFiles/generalConfig.json"
+import ClassificationModel from "./entities/ClassificationModel";
+import coco_classes from "./labelFiles/coco_classes";
+import yolo9000Labels from "./labelFiles/yolo9000Labels";
+import ObjectDetectionModel from "./entities/ObjectDetectionModel";
 
 //const isPicture = /^.*\.(jpg|png|gif|bmp|jpeg)/i;
 const isPicture = /^.*\.(jpg|png|gif|jpeg)/i;
 
-const BATCH_FILE_SIZE_LIMIT = 5242880; //Doesn't work with const BUFFER_COUNT = 17;
-
-const BUFFER_COUNT = 6;
-const NUMBER_OF_BEST_PREDICTIONS = 25;
-
-const WIDTH_REQUIRED = 331;
-const HEIGHT_REQUIRED = 331;
-
-//Choose the model
-const MODEL_CONFIG = MODELS_CONFIG.find(config => config.name === "mobilenet_v2_140_224");
-
 //TODO: Accept models of classification and object detection
 //TODO: Accept multiple ways of aggregation
-//TODO: Resize images in a different folder from original to keep original images
 
 function keepValidFileImageObj(imageObj)
 {
-	return isPicture.test(imageObj.pathToImage);
+	return isPicture.test(imageObj.pathToOriginalImage);
 }
 
 function keepLittleFileImageObj(imageObj)
 {
-	return imageObj.size < BATCH_FILE_SIZE_LIMIT;
+	return imageObj.size < GENERAL_CONFIG.batchFileSizeLimit;
 }
 
 //file as {path, size}
 //5.5mo max !!
 function addSizeInformationImageObj(imageObj)
 {
-	imageObj["size"] = filesSystem.statSync(imageObj.pathToImage).size;
+	imageObj["size"] = filesSystem.statSync(imageObj.pathToOriginalImage).size;
 	return imageObj;
 }
 
-async function resizeAndSaveImageIfBadDimensionsImageObj(imageObj)
+async function resizeAndSaveImageIfBadDimensionsImageObj(imageObj, MODEL_Obj)
 {
-	const imagePath = imageObj.pathToImage;
-	try
+	const imageOriginalPath = imageObj.pathToOriginalImage;
+	const basePathForResizedImages = `./data/${MODEL_Obj.name}`;
+
+	//Checking if the model folder exists
+	if (!filesSystem.existsSync(basePathForResizedImages))
 	{
+		filesSystem.mkdirSync(basePathForResizedImages);
+	}
+
+	//Checking if the resized image exists
+	const pathToResizedImage = `${basePathForResizedImages}/${imageObj.imageName}`;
+	if(filesSystem.existsSync(pathToResizedImage))
+	{
+		//Check if height and width OK
+
 		//Enable file writing with the same name
 		sharp.cache(false);
 
-		const image = sharp(imagePath);
+		const image = sharp(pathToResizedImage);
 		const metadata = await image.metadata();
-
-		//Resize only if not the good dimensions
-		if(metadata.height !== HEIGHT_REQUIRED || metadata.width !== WIDTH_REQUIRED)
+		//If yes, do nothing, if no resize with the good dimensions
+		if(metadata.height !== MODEL_Obj.heightRequired || metadata.width !== MODEL_Obj.widthRequired)
 		{
-			const buffer = await sharp(imagePath)
+			const buffer = await sharp(imageOriginalPath)
 			.resize({
-				width: WIDTH_REQUIRED,
-				height: HEIGHT_REQUIRED,
+				width: MODEL_Obj.widthRequired,
+				height: MODEL_Obj.heightRequired,
 				kernel: "nearest",
 				fit: "contain"
 			})
 			.toBuffer();
 
-			filesSystem.writeFileSync(imagePath, buffer);
+			filesSystem.writeFileSync(pathToResizedImage, buffer);
 		}
 	}
-	catch (e) {
-		console.error(e);
+	else
+	{
+		//Create a resized image
+		const image = sharp(imageOriginalPath);
+		const metadata = await image.metadata();
+
+		try
+		{
+			const buffer = await sharp(imageOriginalPath)
+			.resize({
+				width: MODEL_Obj.widthRequired,
+				height: MODEL_Obj.heightRequired,
+				kernel: "nearest",
+				fit: "contain"
+			})
+			.toBuffer();
+
+			filesSystem.writeFileSync(pathToResizedImage, buffer);
+		}
+		catch(e)
+		{
+			console.error(e);
+		}
 	}
+
+	//Update imageObj
+	imageObj["pathToResizedImage"] = pathToResizedImage;
 
 	return imageObj;
 }
@@ -118,7 +145,10 @@ function readActivityFolder(activityFolderName)
 	return from(filesSystem.readdirSync(pathToActivityFolder, { encoding: 'utf8' }))
 		.pipe(map(imageName =>
 		{
-			return {"activityName": activityFolderName, "pathToImage":`${pathToActivityFolder}${imageName}`}
+			return {
+				"activityName": activityFolderName,
+				"pathToOriginalImage":`${pathToActivityFolder}${imageName}`,
+				"imageName": imageName}
 		}));
 }
 
@@ -127,10 +157,15 @@ function writeJSONFile(data, path)
 	filesSystem.writeFileSync(path, JSON.stringify(data, null, 4), "utf8");
 }
 
-function createResultFile(data, activityName)
+function createResultFile(data, activityName, MODEL_Obj)
 {
-	const resultPath = `./resultFiles/${activityName}`;
+	const basePath = `./resultFiles/${MODEL_Obj.name}`;
+	if (!filesSystem.existsSync(basePath))
+	{
+		filesSystem.mkdirSync(basePath);
+	}
 
+	const resultPath = `${basePath}/${activityName}`;
 	if (!filesSystem.existsSync(resultPath))
 	{
 		filesSystem.mkdirSync(resultPath);
@@ -139,20 +174,20 @@ function createResultFile(data, activityName)
 	writeJSONFile(data, `${resultPath}/results.json`);
 }
 
-function processValidImages(groupedObservableValidImageOneActivity, MODEL)
+function processValidImages(groupedObservableValidImageOneActivity, MODEL_Obj)
 {
 	let activityFolderName = groupedObservableValidImageOneActivity.key;
 
 	console.log(activityFolderName);
 
 	return groupedObservableValidImageOneActivity
-	.pipe(bufferCount(BUFFER_COUNT))
+	.pipe(bufferCount(MODEL_Obj.bufferCount))
 	//.pipe(tap(x => console.log("afterbufferCount", x)))
 	.pipe(concatMap(someImageObjs =>
 	{
 		//console.log("someImageObjs: ", someImageObjs);
 		return from(someImageObjs)
-		.pipe(mergeMap(imageObj => load(imageObj.pathToImage)))
+		.pipe(mergeMap(imageObj => load(imageObj.pathToResizedImage)))
 		//Stream de tenseurs
 		.pipe(toArray())
 		//Stream de array de tenseurs (1 seule array)
@@ -169,7 +204,7 @@ function processValidImages(groupedObservableValidImageOneActivity, MODEL)
 			return bigTensor;
 		}))
 		//Stream de bigTensor (1 seul)
-		.pipe(map(bigTensor => classify(bigTensor, MODEL)));
+		.pipe(map(bigTensor => MODEL_Obj.predictOrClassify(bigTensor)));
 		//Stream de Stream de prédictions
 	}))
 	//Stream de Stream de Stream de prédictions
@@ -190,37 +225,26 @@ function processValidImages(groupedObservableValidImageOneActivity, MODEL)
 	//Stream de Stream de prédictions réduites triée
 	.pipe(mergeAll())
 	//Stream de prédictions réduites triée
-	.pipe(take(NUMBER_OF_BEST_PREDICTIONS))
+	.pipe(take(GENERAL_CONFIG.numberOfBestPredictions))
 	//Stream de prédictions réduites triée de manière décroissante, seulement les 25 premiers éléments émis
 	.pipe(tap(x => console.log(activityFolderName, "pred: ", x)))
 	.pipe(toArray())
-	.pipe(map(array => createResultFile(array, activityFolderName)));
+	.pipe(map(array => createResultFile(array, activityFolderName, MODEL_Obj)));
 }
 
-function classify(pictures, MODEL)
+function handleValids(stream, MODEL_Obj)
 {
-	//Doing a prediction
-	const predictions = MODEL.predict(pictures);
-
-	//Free the memory of the tensor pictures
-	tensorflow.dispose(pictures);
-
-	//Transform predictions to be readable
-	return from(predictions.arraySync().map(prediction => from(prediction.map((value, index) => [arrayOfLabels[index], value]))));
+	return stream.pipe(filter(keepValidFileImageObj))
+	.pipe(mergeMap(imageObj => from(resizeAndSaveImageIfBadDimensionsImageObj(imageObj, MODEL_Obj)))) //Stream de imageObj
+	.pipe(map(addSizeInformationImageObj)) //Stream de imageObj
+	.pipe(filter(keepLittleFileImageObj)) //Stream de imageObj
+	.pipe(groupBy(imageObj => imageObj.activityName, undefined, undefined, () => new ReplaySubject()))
+	.pipe(concatMap(groupByActivity => processValidImages(groupByActivity, MODEL_Obj)))
+	.toPromise()
 }
 
-function handleValids(stream, MODEL) {
-	return (
-		stream.pipe(filter(keepValidFileImageObj))
-			  .pipe(mergeMap(imageObj => from(resizeAndSaveImageIfBadDimensionsImageObj(imageObj)))) //Stream de imageObj
-			  .pipe(map(addSizeInformationImageObj)) //Stream de imageObj
-			  .pipe(filter(keepLittleFileImageObj)) //Stream de imageObj
-			  .pipe(groupBy(imageObj => imageObj.activityName, undefined, undefined, () => new ReplaySubject()))
-			  .pipe(concatMap(groupByActivity => processValidImages(groupByActivity, MODEL)))
-	).toPromise()
-}
-
-function handleInvalids(stream) {
+function handleInvalids(stream)
+{
 	return stream.pipe(filter(x => !keepValidFileImageObj(x)))
 		  	     .pipe(toArray())
 		  	     .pipe(tap(x => console.log("Bad images: ", x)))
@@ -228,19 +252,40 @@ function handleInvalids(stream) {
 	             .toPromise()
 }
 
-function run(MODEL)
+async function run(MODEL_Obj)
 {
 	const all = from(filesSystem.readdirSync(GENERAL_CONFIG.pathToFolderActivityImages, { encoding: 'utf8' }))
-					.pipe(mergeMap(readActivityFolder));//Stream de string de folders
+					.pipe(mergeMap(readActivityFolder));//Stream de imageObj
 
-	Promise.all([handleValids(all, MODEL), handleInvalids(all)])
-	.then(function ([valids, invalids]) {
-		console.log("Analyse finie");
-		MODEL.dispose();
+	await Promise.all([handleValids(all, MODEL_Obj), handleInvalids(all)]);
 
-		console.log(valids);
-		console.log(invalids);
-	})
+	console.log("Analyse finie");
+
+	//Free the memory from the model weights
+	MODEL_Obj.MODEL.dispose();
 }
 
-tensorflow.loadGraphModel(`file://models/${MODEL_CONFIG.name}/model.json`).then(run);
+//Main function
+(async function()
+{
+	//Choose the model
+	const MODEL_CONFIG = MODELS_CONFIG.find(config => config.name === "yolo9000");
+	const MODEL = await tensorflow.loadGraphModel(`file://models/${MODEL_CONFIG.name}/model.json`);
+
+	//Get the corresponding class
+	let MODEL_Obj;
+	switch (MODEL_CONFIG.type)
+	{
+		case "classification":
+			MODEL_Obj = new ClassificationModel(MODEL_CONFIG, MODEL);
+			break;
+		case "object_detection":
+			MODEL_Obj = new ObjectDetectionModel(MODEL_CONFIG, MODEL);
+			break;
+		default:
+			console.log("Bad model type");
+			MODEL_Obj = undefined;
+	}
+
+	await run(MODEL_Obj);
+})();

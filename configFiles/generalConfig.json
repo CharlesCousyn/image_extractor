@@ -1,3 +1,5 @@
 {
-  "pathToFolderActivityImages": "D:/image_retrieval/outputData/"
+  "pathToFolderActivityImages": "D:/image_retrieval/outputData/",
+  "numberOfBestPredictions": 25,
+  "batchFileSizeLimit": 5242880
 }
