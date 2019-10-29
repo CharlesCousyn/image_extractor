@@ -195,6 +195,7 @@ function processValidImages(groupedObservableValidImageOneActivity, MODEL_Obj)
 		.pipe(map(arrayOfTensors =>
 		{
 			console.log(arrayOfTensors.map(tens => tens.shape));
+			/*
 			let bigTensor;
 			if(arrayOfTensors.length !== 1)
 			{
@@ -208,7 +209,12 @@ function processValidImages(groupedObservableValidImageOneActivity, MODEL_Obj)
 			console.log(bigTensor.shape);
 			tensorflow.dispose(arrayOfTensors);
 
-			return bigTensor;
+			return bigTensor;*/
+
+			return tensorflow.tidy(() =>
+			{
+				return tensorflow.concat(arrayOfTensors, 0);
+			});
 		}))
 		//Stream de bigTensor (1 seul)
 		.pipe(map(bigTensor => MODEL_Obj.predictOrClassify(bigTensor)));
@@ -290,7 +296,7 @@ async function run(MODEL_Obj)
 			MODEL_Obj = new ObjectDetectionModel(MODEL_CONFIG, MODEL);
 			break;
 		default:
-			console.log("Bad model type");
+			console.error("Bad model type");
 			MODEL_Obj = undefined;
 	}
 
