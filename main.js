@@ -14,7 +14,6 @@ import ObjectDetectionModel from "./entities/ObjectDetectionModel";
 //const isPicture = /^.*\.(jpg|png|gif|bmp|jpeg)/i;
 const isPicture = /^.*\.(jpg|png|gif|jpeg)/i;
 
-//TODO: Accept models of classification and object detection
 //TODO: Accept multiple ways of aggregation
 
 function keepValidFileImageObj(imageObj)
@@ -159,7 +158,13 @@ function writeJSONFile(data, path)
 
 function createResultFile(data, activityName, MODEL_Obj)
 {
-	const basePath = `./resultFiles/${MODEL_Obj.name}`;
+	let basePath = `./resultFiles/${MODEL_Obj.name}`;
+
+	if(MODEL_Obj.type === "object_detection")
+	{
+		basePath += `_${MODEL_Obj.maxBoxes}_${MODEL_Obj.scoreThreshold}_${MODEL_Obj.iouThreshold}`;
+	}
+
 	if (!filesSystem.existsSync(basePath))
 	{
 		filesSystem.mkdirSync(basePath);
@@ -194,12 +199,18 @@ function processValidImages(groupedObservableValidImageOneActivity, MODEL_Obj)
 		.pipe(map(arrayOfTensors =>
 		{
 			console.log(arrayOfTensors.map(tens => tens.shape));
-			const bigTensor = tensorflow.concat(arrayOfTensors, 0);
-			console.log(bigTensor.shape);
+			let bigTensor;
 			if(arrayOfTensors.length !== 1)
 			{
-				tensorflow.dispose(arrayOfTensors);
+				bigTensor = tensorflow.concat(arrayOfTensors, 0);
 			}
+			else
+			{
+				bigTensor = tensorflow.clone(arrayOfTensors[0]);
+			}
+
+			console.log(bigTensor.shape);
+			tensorflow.dispose(arrayOfTensors);
 
 			return bigTensor;
 		}))
@@ -269,7 +280,7 @@ async function run(MODEL_Obj)
 (async function()
 {
 	//Choose the model
-	const MODEL_CONFIG = MODELS_CONFIG.find(config => config.name === "yolo9000");
+	const MODEL_CONFIG = MODELS_CONFIG.find(config => config.name === "yolov3-tiny");
 	const MODEL = await tensorflow.loadGraphModel(`file://models/${MODEL_CONFIG.name}/model.json`);
 
 	//Get the corresponding class
