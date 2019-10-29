@@ -1,4 +1,4 @@
-import arrayOfLabels from "../labelFiles/imageNetLabels";
+import arrayOfLabels from "../labelFiles/imageNetLabels.js";
 import * as tensorflow from '@tensorflow/tfjs-node-gpu'
 import { from} from 'rxjs'
 

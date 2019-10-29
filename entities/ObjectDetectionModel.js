@@ -1,6 +1,4 @@
-import arrayOfLabels from "../labelFiles/imageNetLabels";
 import * as tensorflow from '@tensorflow/tfjs-node-gpu'
-import { from} from 'rxjs'
 import coco_classes from '../labelFiles/coco_classes.js';
 import yolo9000Labels from '../labelFiles/yolo9000Labels.js';
 

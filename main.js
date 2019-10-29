@@ -3,15 +3,11 @@ import sharp from 'sharp'
 import filesSystem from 'fs'
 import { from, of, ReplaySubject} from 'rxjs'
 import { filter, map, concatMap, tap, groupBy, reduce, mergeMap, mergeAll, toArray, take, bufferCount } from 'rxjs/operators'
-import arrayOfLabels from './labelFiles/imageNetLabels.json'
 import MODELS_CONFIG from './configFiles/modelsConfig.json'
 import GENERAL_CONFIG from "./configFiles/generalConfig.json"
 import ClassificationModel from "./entities/ClassificationModel";
-import coco_classes from "./labelFiles/coco_classes";
-import yolo9000Labels from "./labelFiles/yolo9000Labels";
 import ObjectDetectionModel from "./entities/ObjectDetectionModel";
 
-//const isPicture = /^.*\.(jpg|png|gif|bmp|jpeg)/i;
 const isPicture = /^.*\.(jpg|png|gif|jpeg)/i;
 
 //TODO: Accept multiple ways of aggregation
