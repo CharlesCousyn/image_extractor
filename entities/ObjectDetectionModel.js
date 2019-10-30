@@ -4,6 +4,12 @@ import yolo9000Labels from '../labelFiles/yolo9000Labels.js';
 
 export default class ObjectDetectionModel
 {
+	/**
+	 * Represents an ObjectDetectionModel.
+	 * @constructor
+	 * @param {Object} MODEL_CONFIG - The configuration object of the model
+	 * @param {Object} MODEL - The graphModel loaded with tensorflowjs
+	 * */
 	constructor(MODEL_CONFIG, MODEL)
 	{
 		this.setModelConfig(MODEL_CONFIG);
@@ -183,11 +189,14 @@ export default class ObjectDetectionModel
 			let inputShape;
 			let anchorMask;
 
-			if (isV3) {
+			if (isV3)
+			{
 				numLayers = outputs.length;
 				anchorMask = this.v3_masks[numLayers];
 				inputShape = outputs[0].shape.slice(1, 3).map(num => num * 32);
-			} else {
+			}
+			else
+			{
 				inputShape = outputs.shape.slice(1, 3);
 			}
 
@@ -195,7 +204,8 @@ export default class ObjectDetectionModel
 			let boxes = [];
 			let boxScores = [];
 
-			for (let i = 0; i < numLayers; i++) {
+			for (let i = 0; i < numLayers; i++)
+			{
 				const [_boxes, _boxScores] = this.yoloBoxesAndScores(
 					isV3,
 					isV3 ? outputs[i] : outputs,
@@ -268,7 +278,9 @@ export default class ObjectDetectionModel
 			if (isV3)
 			{
 				boxClassProbs = tensorflow.sigmoid(probs);
-			} else {
+			}
+			else
+			{
 				boxClassProbs = tensorflow.softmax(probs);
 			}
 
