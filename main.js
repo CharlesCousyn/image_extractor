@@ -32,7 +32,7 @@ function addSizeInformationImageObj(imageObj)
 	return imageObj;
 }
 
-async function resizeAndSaveImageIfBadDimensionsImageObj(imageObj, MODEL_Obj)
+async function prepareImages(imageObj, MODEL_Obj)
 {
 	async function resizeAndWriteImage(imageOriginalPath, pathToResizedImage, MODEL_Obj, resizingMethod)
 	{
@@ -58,7 +58,7 @@ async function resizeAndSaveImageIfBadDimensionsImageObj(imageObj, MODEL_Obj)
 			await image.writeAsync(pathToResizedImage);
 		}*/
 
-		const bufToWrite = await  sharp(imageOriginalPath)
+		const bufToWrite = await sharp(imageOriginalPath)
 		.resize({
 			width: MODEL_Obj.widthRequired,
 			height: MODEL_Obj.heightRequired,
@@ -196,6 +196,21 @@ function createResultFile(data, activityName, MODEL_Obj)
 	writeJSONFile(data, `${resultPath}/results.json`);
 }
 
+function aggregateScores(aggregationType)
+{
+	switch (aggregationType)
+	{
+		case "sum":
+			return (total, current) => total + current;
+		case "sumSquaredValue":
+			return (total, current) => total + current * current;
+		case "sumLog":
+			return (total, current) => total + Math.log(current);
+		default:
+			return (total, current) => total + current;
+	}
+}
+
 function processValidImages(groupedObservableValidImageOneActivity, MODEL_Obj)
 {
 	let activityFolderName = groupedObservableValidImageOneActivity.key;
@@ -233,7 +248,7 @@ function processValidImages(groupedObservableValidImageOneActivity, MODEL_Obj)
 	.pipe(groupBy(x => x[0], x => x[1]))
 	//Stream de GroupedObservable de prédictions groupées par classes
 	.pipe(mergeMap( (groupByClass) => groupByClass
-		.pipe(reduce((a, b) => a + b))
+		.pipe(reduce(aggregateScores(GENERAL_CONFIG.aggregationType)))
 		.pipe(map(x => [groupByClass.key, x]))
 	))
 	//Stream de prédictions réduites (score des prédictions de même classe ajoutés entre eux)
@@ -253,7 +268,7 @@ function processValidImages(groupedObservableValidImageOneActivity, MODEL_Obj)
 function handleValids(stream, MODEL_Obj)
 {
 	return stream.pipe(filter(keepValidFileImageObj))
-	.pipe(mergeMap(imageObj => from(resizeAndSaveImageIfBadDimensionsImageObj(imageObj, MODEL_Obj)))) //Stream de imageObj
+	.pipe(mergeMap(imageObj => from(prepareImages(imageObj, MODEL_Obj)))) //Stream de imageObj
 	.pipe(map(addSizeInformationImageObj)) //Stream de imageObj
 	.pipe(filter(keepLittleFileImageObj)) //Stream de imageObj
 	.pipe(groupBy(imageObj => imageObj.activityName, undefined, undefined, () => new ReplaySubject()))
@@ -287,7 +302,7 @@ async function run(MODEL_Obj)
 (async function()
 {
 	//Choose the model
-	const MODEL_CONFIG = MODELS_CONFIG.find(config => config.name === "mobilenet_v2_140_224");
+	const MODEL_CONFIG = MODELS_CONFIG.find(config => config.name === "yolov3-608");
 	const MODEL = await tensorflow.loadGraphModel(`file://models/${MODEL_CONFIG.name}/model.json`);
 
 	//Get the corresponding class
