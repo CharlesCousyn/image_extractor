@@ -11,7 +11,6 @@ import Image from "./entities/Image";
 
 const isPicture = /^.*\.(jpg|png|gif|jpeg)/i;
 
-//TODO: Accept multiple ways of aggregation
 //TODO: discuss using gifs and bmp files
 
 function keepValidFileImageObj(imageObj)
