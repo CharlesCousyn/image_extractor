@@ -301,7 +301,7 @@ async function run(MODEL_Obj)
 (async function()
 {
 	//Choose the model
-	const MODEL_CONFIG = MODELS_CONFIG.find(config => config.name === "yolov3-608");
+	const MODEL_CONFIG = MODELS_CONFIG.find(config => config.name === GENERAL_CONFIG.chosenModel);
 	const MODEL = await tensorflow.loadGraphModel(`file://models/${MODEL_CONFIG.name}/model.json`);
 
 	//Get the corresponding class
