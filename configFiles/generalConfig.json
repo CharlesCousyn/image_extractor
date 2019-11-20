@@ -2,5 +2,6 @@
   "pathToFolderActivityImages": "D:/image_retrieval/outputData/",
   "numberOfBestPredictions": 25,
   "batchFileSizeLimit": 5242880,
-  "aggregationType": "sum"
+  "aggregationType": "sum",
+  "chosenModel": "yolov3-608"
 }
