@@ -163,7 +163,7 @@ function load (path)
 function readActivityFolder(activityFolderName)
 {
 	const pathToActivityFolder = `${GENERAL_CONFIG.pathToFolderActivityImages}${activityFolderName}/`;
-	return from(filesSystem.readdirSync(pathToActivityFolder, { encoding: 'utf8' }))
+	return from(filesSystem.readdirSync(pathToActivityFolder, { encoding: 'utf8'}))
 		.pipe(map(imageName => new Image(activityFolderName, `${pathToActivityFolder}${imageName}`, imageName)));
 }
 
@@ -286,7 +286,7 @@ function handleInvalids(stream)
 
 async function run(MODEL_Obj)
 {
-	const all = from(filesSystem.readdirSync(GENERAL_CONFIG.pathToFolderActivityImages, { encoding: 'utf8' }))
+	const all = from(filesSystem.readdirSync(GENERAL_CONFIG.pathToFolderActivityImages, { encoding: 'utf8', withFileTypes: true }).filter(dirent => dirent.isDirectory()).map(dirent => dirent.name))
 					.pipe(mergeMap(readActivityFolder));//Stream de imageObj
 
 	await Promise.all([handleValids(all, MODEL_Obj), handleInvalids(all)]);
