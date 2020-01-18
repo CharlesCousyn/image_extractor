@@ -1,7 +1,10 @@
 {
   "pathToFolderActivityImages": "C:/Users/Charles/WebstormProjects/image_retrieval/outputData/",
-  "numberOfBestPredictions": 25,
+  "numberOfBestPredictions": 2000,
   "batchFileSizeLimit": 5242880,
   "aggregationType": "sum",
-  "chosenModel": "yolov3-608"
+  "recognitionModel": "yolov3-608__20_0.1_0.5",
+  "searchEngine": "duckduckgo",
+  "numberOfResultsUsed": 200,
+  "pathToFolderContainingFileContainingUrls": "C:/Users/Charles/WebstormProjects/image_retrieval/data/"
 }

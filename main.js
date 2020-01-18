@@ -1,8 +1,9 @@
 import * as tensorflow from '@tensorflow/tfjs-node-gpu'
 import filesSystem from 'fs'
 import sharp from "sharp"
-import { from, of, ReplaySubject} from 'rxjs'
-import { filter, map, concatMap, tap, groupBy, reduce, mergeMap, mergeAll, toArray, take, bufferCount } from 'rxjs/operators'
+import { from, of, ReplaySubject, partition} from 'rxjs'
+import { filter, map, concatMap, tap, groupBy, reduce, mergeMap, mergeAll, toArray, take, bufferCount, count} from 'rxjs/operators'
+import * as base64url from 'base64-url'
 import MODELS_CONFIG from './configFiles/modelsConfig.json'
 import GENERAL_CONFIG from "./configFiles/generalConfig.json"
 import ClassificationModel from "./entities/ClassificationModel";
@@ -10,12 +11,18 @@ import ObjectDetectionModel from "./entities/ObjectDetectionModel";
 import Image from "./entities/Image";
 
 const isPicture = /^.*\.(jpg|png|gif|jpeg)/i;
-
-//TODO: discuss using gifs and bmp files
+//Get the file of results
+const fileContainingUrlsPath = `${GENERAL_CONFIG.pathToFolderContainingFileContainingUrls}/${filesSystem.readdirSync(GENERAL_CONFIG.pathToFolderContainingFileContainingUrls, { encoding: 'utf8' })[0]}`;
+let RESULTS = JSON.parse(filesSystem.readFileSync(fileContainingUrlsPath));
 
 function keepValidFileImageObj(imageObj)
 {
 	return isPicture.test(imageObj.pathToOriginalImage);
+}
+
+function isReadable(imageObj)
+{
+	return imageObj.isReadable;
 }
 
 function keepLittleFileImageObj(imageObj)
@@ -31,32 +38,34 @@ function addSizeInformationImageObj(imageObj)
 	return imageObj;
 }
 
-async function prepareImages(imageObj, MODEL_Obj)
+function timeConversion(ms)
+{
+	let seconds = (ms / 1000).toFixed(1);
+	let minutes = (ms / (1000 * 60)).toFixed(1);
+	let hours = (ms / (1000 * 60 * 60)).toFixed(1);
+	let days = (ms / (1000 * 60 * 60 * 24)).toFixed(1);
+
+	if (seconds < 60) {
+		return seconds + " Sec";
+	} else if (minutes < 60) {
+		return minutes + " Min";
+	} else if (hours < 24) {
+		return hours + " Hrs";
+	} else {
+		return days + " Days"
+	}
+}
+
+function showProgress(currentNumberOfActivitiesCrawled, totalNumberOfActivities, beginTime)
+{
+	const timeElapsed = timeConversion(new Date() - beginTime);
+	console.log(`Progress ${currentNumberOfActivitiesCrawled}/${totalNumberOfActivities} (${100.0 * currentNumberOfActivitiesCrawled/totalNumberOfActivities} %) (${timeElapsed} elapsed)`);
+}
+
+async function prepareImages(imageObj, MODEL_Obj, searchEngine)
 {
 	async function resizeAndWriteImage(imageOriginalPath, pathToResizedImage, MODEL_Obj, resizingMethod)
 	{
-		/*
-		if(isGIF.test(imageOriginalPath))
-		{
-			const sourceGif = await GifUtil.read(imageOriginalPath);
-			const jimFrames = sourceGif.frames.map(frame => GifUtil.copyAsJimp(Jimp, frame));
-
-			//Resize all frames
-			const newJimFrames = await Promise.all(jimFrames.map(jimpFrame => jimpFrame.resize(MODEL_Obj.widthRequired, MODEL_Obj.heightRequired, resizingMethod)));
-			const newGifWrapFrames = newJimFrames.map(frame => new GifFrame(frame.bitmap));
-
-			//const newGif = (new GifCodec()).encodeGif();
-
-			//Write the gif file
-			GifUtil.write(pathToResizedImage, newGifWrapFrames);
-		}
-		else
-		{
-			let image = await Jimp.read(imageOriginalPath);
-			await image.resize(MODEL_Obj.widthRequired, MODEL_Obj.heightRequired, resizingMethod);
-			await image.writeAsync(pathToResizedImage);
-		}*/
-
 		const bufToWrite = await sharp(imageOriginalPath)
 		.resize({
 			width: MODEL_Obj.widthRequired,
@@ -70,7 +79,7 @@ async function prepareImages(imageObj, MODEL_Obj)
 	}
 
 	const imageOriginalPath = imageObj.pathToOriginalImage;
-	const basePathForResizedImages = `./data/${MODEL_Obj.name}`;
+	const basePathForResizedImages = `./data/${searchEngine}/${MODEL_Obj.name}`;
 
 	//Checking if the model folder exists
 	if (!filesSystem.existsSync(basePathForResizedImages))
@@ -102,7 +111,8 @@ async function prepareImages(imageObj, MODEL_Obj)
 	}
 	catch(e)
 	{
-		console.error(e);
+		console.error("prepareImages: ", e, "\n"+imageOriginalPath);
+		imageObj.isReadable = false;
 	}
 
 	//Update imageObj
@@ -114,7 +124,7 @@ async function prepareImages(imageObj, MODEL_Obj)
 //Be sure that image at this path is 331x331!!
 function load (path)
 {
-	console.log("path: ", path);
+	//console.log("path: ", path);
 
 	try
 	{
@@ -160,10 +170,26 @@ function load (path)
 
 }
 
-function readActivityFolder(activityFolderName)
+function readActivityFolderByRelevance(activityFolderName, RESULTS)
 {
+	//Need to sort the files!!
+
+	//Sorted array of results
+	const goodResultObject = RESULTS.find(activityRes => activityRes.folderName === activityFolderName);
 	const pathToActivityFolder = `${GENERAL_CONFIG.pathToFolderActivityImages}${activityFolderName}/`;
-	return from(filesSystem.readdirSync(pathToActivityFolder, { encoding: 'utf8'}))
+	//Unsorted array of file names
+	const arrayOfFilesWithoutExtension = filesSystem.readdirSync(pathToActivityFolder, { encoding: 'utf8'}).map(name => name.split(".")[0]);
+
+	//Sorted array of file names
+	let goodResults = goodResultObject.results
+		.filter( res => arrayOfFilesWithoutExtension.indexOf(base64url.encode(res.urlImage)) !== -1)
+		.map(res => {
+			let arraySplit = res.urlImage.split("?").shift().split(".");
+			return `${base64url.encode(res.urlImage)}.${arraySplit[arraySplit.length - 1]}`;
+		});
+
+	//Produce a Stream of images order by pertinence in search engine in descending order
+	return from(goodResults)
 		.pipe(map(imageName => new Image(activityFolderName, `${pathToActivityFolder}${imageName}`, imageName)));
 }
 
@@ -172,14 +198,10 @@ function writeJSONFile(data, path)
 	filesSystem.writeFileSync(path, JSON.stringify(data, null, 4), "utf8");
 }
 
-function createResultFile(data, activityName, MODEL_Obj)
+function createResultFile(data, activityName, modelId, searchEngine, numberOfResultsUsed, aggregationType, MODEL_Obj)
 {
-	let basePath = `./resultFiles/${MODEL_Obj.name}`;
-
-	if(MODEL_Obj.type === "object_detection")
-	{
-		basePath += `_${MODEL_Obj.maxBoxes}_${MODEL_Obj.scoreThreshold}_${MODEL_Obj.iouThreshold}`;
-	}
+	const combination = [modelId, searchEngine, numberOfResultsUsed, aggregationType];
+	let basePath = `./resultFiles/${combination.join(" ")}`;
 
 	if (!filesSystem.existsSync(basePath))
 	{
@@ -210,8 +232,9 @@ function aggregateScores(aggregationType)
 	}
 }
 
-function processValidImages(groupedObservableValidImageOneActivity, MODEL_Obj)
+function processValidImages(groupedObservableValidImageOneActivity, MODEL_Obj, modelId, searchEngine, numberOfResultsUsed, aggregationType)
 {
+	const combination = [modelId, searchEngine, numberOfResultsUsed, aggregationType];
 	let activityFolderName = groupedObservableValidImageOneActivity.key;
 
 	console.log(activityFolderName);
@@ -232,11 +255,18 @@ function processValidImages(groupedObservableValidImageOneActivity, MODEL_Obj)
 			console.log(arrayOfTensors.map(tens => tens.shape));
 			return tensorflow.tidy(() =>
 			{
-				return tensorflow.concat(arrayOfTensors, 0);
+				let bigTensor = tensorflow.concat(arrayOfTensors, 0);
+				console.log(bigTensor.shape);
+				return bigTensor;
 			});
 		}))
 		//Stream de bigTensor (1 seul)
-		.pipe(map(bigTensor => MODEL_Obj.predictOrClassify(bigTensor)));
+		.pipe(map(bigTensor => MODEL_Obj.predictOrClassify(bigTensor)))
+		.pipe(tap(() =>
+		{
+			currentNumberOfImagesAnalysed += someImageObjs.length;
+			showProgress(currentNumberOfImagesAnalysed, totalNumberOfImages, beginTime);
+		}));
 		//Stream de Stream de prédictions
 	}))
 	//Stream de Stream de Stream de prédictions
@@ -247,7 +277,7 @@ function processValidImages(groupedObservableValidImageOneActivity, MODEL_Obj)
 	.pipe(groupBy(x => x[0], x => x[1]))
 	//Stream de GroupedObservable de prédictions groupées par classes
 	.pipe(mergeMap( (groupByClass) => groupByClass
-		.pipe(reduce(aggregateScores(GENERAL_CONFIG.aggregationType)))
+		.pipe(reduce(aggregateScores(aggregationType)))
 		.pipe(map(x => [groupByClass.key, x]))
 	))
 	//Stream de prédictions réduites (score des prédictions de même classe ajoutés entre eux)
@@ -261,47 +291,54 @@ function processValidImages(groupedObservableValidImageOneActivity, MODEL_Obj)
 	//Stream de prédictions réduites triée de manière décroissante, seulement les 25 premiers éléments émis
 	.pipe(tap(x => console.log(activityFolderName, "pred: ", x)))
 	.pipe(toArray())
-	.pipe(map(array => createResultFile(array, activityFolderName, MODEL_Obj)));
+	.pipe(map(array => createResultFile(array, activityFolderName, ...combination, MODEL_Obj)));
 }
 
-function handleValids(stream, MODEL_Obj)
+function handleValids(valids, MODEL_Obj, modelId, searchEngine, numberOfResultsUsed, aggregationType)
 {
-	return stream.pipe(filter(keepValidFileImageObj))
-	.pipe(mergeMap(imageObj => from(prepareImages(imageObj, MODEL_Obj)))) //Stream de imageObj
-	.pipe(map(addSizeInformationImageObj)) //Stream de imageObj
-	.pipe(filter(keepLittleFileImageObj)) //Stream de imageObj
-	.pipe(groupBy(imageObj => imageObj.activityName, undefined, undefined, () => new ReplaySubject()))
-	.pipe(concatMap(groupByActivity => processValidImages(groupByActivity, MODEL_Obj)))
-	.toPromise()
+	const combination = [modelId, searchEngine, numberOfResultsUsed, aggregationType];
+	let [readable, notReadable] = partition(valids.pipe(mergeMap(imageObj => from(prepareImages(imageObj, MODEL_Obj, searchEngine)))), isReadable)//Stream de imageObj
+
+	let readablePromise = readable
+		.pipe(take(numberOfResultsUsed))////Stream de imageObj
+		.pipe(map(addSizeInformationImageObj)) //Stream de imageObj
+		.pipe(filter(keepLittleFileImageObj)) //Stream de imageObj
+		.pipe(groupBy(imageObj => imageObj.activityName, undefined, undefined, () => new ReplaySubject()))
+		.pipe(concatMap(groupByActivity => processValidImages(groupByActivity, MODEL_Obj, ...combination)))
+		.toPromise();
+
+	let notReadablePromise = notReadable
+		.pipe(tap( () => {totalNumberOfImages--;}))
+		.pipe(toArray())
+		.pipe(map(notReadableImages => writeJSONFile(notReadableImages, "./resultFiles/notReadableImages.json")))
+		.toPromise();
+
+	return notReadablePromise.then(() => readablePromise);
 }
 
-function handleInvalids(stream)
+function handleInvalids(invalids)
 {
-	return stream.pipe(filter(x => !keepValidFileImageObj(x)))
-		  	     .pipe(toArray())
-		  	     .pipe(tap(x => console.log("Bad images: ", x)))
-		   	     .pipe(map(badImages => writeJSONFile(badImages, "./resultFiles/badImages.json")))
-	             .toPromise()
+	return invalids
+		.pipe(tap(x =>
+		{
+			console.log("Bad image: ", x);
+			totalNumberOfImages--;
+			//currentNumberOfImagesAnalysed += x.length;
+			showProgress(currentNumberOfImagesAnalysed, totalNumberOfImages, beginTime);
+		}))
+		.pipe(toArray())
+		.pipe(map(badImages => writeJSONFile(badImages, "./resultFiles/badImages.json")))
+		.toPromise()
 }
 
-async function run(MODEL_Obj)
+export default async function run(chosenModelId, searchEngine, numberOfResultsUsed, aggregationType)
 {
-	const all = from(filesSystem.readdirSync(GENERAL_CONFIG.pathToFolderActivityImages, { encoding: 'utf8', withFileTypes: true }).filter(dirent => dirent.isDirectory()).map(dirent => dirent.name))
-					.pipe(mergeMap(readActivityFolder));//Stream de imageObj
+	//LOG
+	const combination = [chosenModelId, searchEngine, numberOfResultsUsed, aggregationType];
+	console.log("Computing object detection for combination: ", combination, "... ");
 
-	await Promise.all([handleValids(all, MODEL_Obj), handleInvalids(all)]);
-
-	console.log("Analyse finie");
-
-	//Free the memory from the model weights
-	MODEL_Obj.MODEL.dispose();
-}
-
-//Main function
-(async function()
-{
 	//Choose the model
-	const MODEL_CONFIG = MODELS_CONFIG.find(config => config.name === GENERAL_CONFIG.chosenModel);
+	const MODEL_CONFIG = MODELS_CONFIG.find(config => config.modelId === chosenModelId);
 	const MODEL = await tensorflow.loadGraphModel(`file://models/${MODEL_CONFIG.name}/model.json`);
 
 	//Get the corresponding class
@@ -319,5 +356,39 @@ async function run(MODEL_Obj)
 			MODEL_Obj = undefined;
 	}
 
-	await run(MODEL_Obj);
-})();
+	if(MODEL_Obj !== undefined)
+	{
+		//Init progress variables
+		beginTime = new Date();
+		totalNumberOfImages = filesSystem.readdirSync(GENERAL_CONFIG.pathToFolderActivityImages, { encoding: 'utf8', withFileTypes: true })
+			.filter(dirent => dirent.isDirectory())
+			.map(dirent => dirent.name)
+			.reduce((total, activityFolderName) => total + filesSystem.readdirSync(`${GENERAL_CONFIG.pathToFolderActivityImages}${activityFolderName}/`, { encoding: 'utf8'}).length, 0);
+		currentNumberOfImagesAnalysed = 0;
+		showProgress(currentNumberOfImagesAnalysed, totalNumberOfImages, beginTime);
+
+		//Stream of images
+		const all = from(filesSystem.readdirSync(GENERAL_CONFIG.pathToFolderActivityImages, { encoding: 'utf8', withFileTypes: true }).filter(dirent => dirent.isDirectory()).map(dirent => dirent.name))
+			.pipe(mergeMap(folderName => readActivityFolderByRelevance(folderName, RESULTS)));//Stream de imageObj
+
+		//Waiting processing images...
+		let [valids, invalids] = partition(all, keepValidFileImageObj);
+		await Promise.all([handleValids(valids, MODEL_Obj, ...combination), handleInvalids(invalids)]);
+
+		console.log("Analyse finie");
+
+		//Free the memory from the model weights
+		MODEL_Obj.MODEL.dispose();
+	}
+}
+
+//Create Progress variables
+let totalNumberOfImages;
+let currentNumberOfImagesAnalysed;
+let beginTime;
+
+//Main function
+/*(async function()
+{
+	await run(GENERAL_CONFIG.recognitionModel, GENERAL_CONFIG.searchEngine, GENERAL_CONFIG.numberOfResultsUsed, GENERAL_CONFIG.aggregationType);
+})();*/

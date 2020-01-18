@@ -1,6 +1,7 @@
 [
   {
     "name": "pnasnet_large",
+    "modelId": "pnasnet_large",
     "heightRequired": 331,
     "widthRequired": 331,
     "type": "classification",
@@ -8,6 +9,7 @@
   },
   {
     "name": "inception_resnet_v2",
+    "modelId": "inception_resnet_v2",
     "heightRequired": 299,
     "widthRequired": 299,
     "type": "classification",
@@ -15,6 +17,7 @@
   },
   {
     "name": "mobilenet_v2_140_224",
+    "modelId": "mobilenet_v2_140_224",
     "heightRequired": 224,
     "widthRequired": 224,
     "type": "classification",
@@ -22,6 +25,7 @@
   },
   {
     "name": "yolov3-608",
+    "modelId": "yolov3-608__20_0.05_0.5",
     "heightRequired": 416,
     "widthRequired": 416,
     "type": "object_detection",
@@ -36,7 +40,24 @@
     }
   },
   {
+    "name": "yolov3-608",
+    "modelId": "yolov3-608__20_0.1_0.5",
+    "heightRequired": 416,
+    "widthRequired": 416,
+    "type": "object_detection",
+    "maxBoxes" : 20,
+    "scoreThreshold" : 0.1,
+    "iouThreshold" : 0.5,
+    "anchors": [10,13, 16,30, 33,23, 30,61, 62,45, 59,119, 116,90, 156,198, 373,326],
+    "labelFile": "coco_classes",
+    "v3_masks":{
+      "3": [[6, 7, 8], [3, 4, 5], [0, 1, 2]],
+      "2": [[3, 4, 5], [1, 2, 3]]
+    }
+  },
+  {
     "name": "yolov3-tiny",
+    "modelId": "yolov3-tiny__20_0.05_0.5",
     "heightRequired": 416,
     "widthRequired": 416,
     "type": "object_detection",
@@ -51,12 +72,41 @@
     }
   },
   {
+    "name": "yolov3-tiny",
+    "modelId": "yolov3-tiny__20_0.1_0.5",
+    "heightRequired": 416,
+    "widthRequired": 416,
+    "type": "object_detection",
+    "maxBoxes" : 20,
+    "scoreThreshold" : 0.1,
+    "iouThreshold" : 0.5,
+    "anchors": [10,14, 23,27, 37,58, 81,82, 135,169, 344,319],
+    "labelFile": "coco_classes",
+    "v3_masks":{
+      "3": [[6, 7, 8], [3, 4, 5], [0, 1, 2]],
+      "2": [[3, 4, 5], [1, 2, 3]]
+    }
+  },
+  {
     "name": "yolo9000",
+    "modelId": "yolo9000__20_0.05_0.5",
     "heightRequired": 544,
     "widthRequired": 544,
     "type": "object_detection",
     "maxBoxes" : 20,
     "scoreThreshold" : 0.05,
+    "iouThreshold" : 0.5,
+    "anchors": [0.77871, 1.14074, 3.00525, 4.31277, 9.22725, 9.61974],
+    "labelFile": "yolo9000Labels"
+  },
+  {
+    "name": "yolo9000",
+    "modelId": "yolo9000__20_0.1_0.5",
+    "heightRequired": 544,
+    "widthRequired": 544,
+    "type": "object_detection",
+    "maxBoxes" : 20,
+    "scoreThreshold" : 0.1,
     "iouThreshold" : 0.5,
     "anchors": [0.77871, 1.14074, 3.00525, 4.31277, 9.22725, 9.61974],
     "labelFile": "yolo9000Labels"

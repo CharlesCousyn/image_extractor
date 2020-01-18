@@ -1,0 +1,11 @@
+{
+  "criteria":
+  {
+    "recognitionModel": ["pnasnet_large", "inception_resnet_v2", "mobilenet_v2_140_224",
+      "yolo9000__20_0.05_0.5", "yolov3-tiny__20_0.05_0.5", "yolov3-608__20_0.05_0.5",
+      "yolo9000__20_0.1_0.5", "yolov3-tiny__20_0.1_0.5", "yolov3-608__20_0.1_0.5"],
+    "searchEngine": ["google", "duckduckgo"],
+    "numberOfResultsUsed": [100, 200, 500, 1000, 2000],
+    "aggregationType": ["sum", "sumSquaredValue", "sumLog"]
+  }
+}

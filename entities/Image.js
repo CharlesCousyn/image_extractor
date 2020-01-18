@@ -7,6 +7,17 @@ export default class Image
 		this._imageName = imageName;
 		this._size = size;
 		this._pathToResizedImage = pathToResizedImage;
+		this._isReadable = true;
+	}
+
+	set isReadable(value)
+	{
+		this._isReadable = value;
+	}
+
+	get isReadable()
+	{
+		return this._isReadable;
 	}
 
 	set activityName(value)
