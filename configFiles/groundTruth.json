@@ -1,0 +1,951 @@
+[
+  {
+    "query": "fill medicine cabinet",
+    "data":
+    [
+      {
+        "label": "drug",
+        "relevance": 11,
+        "correct": true
+      },
+      {
+        "label": "medication",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "medicine",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "cabinet",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "disinfectant",
+        "relevance": 6,
+        "correct": true
+      },
+      {
+        "label": "bandage",
+        "relevance": 5,
+        "correct": true
+      },
+      {
+        "label": "band-aid",
+        "relevance": 5,
+        "correct": true
+      },
+      {
+        "label": "aid kit",
+        "relevance": 4,
+        "correct": true
+      },
+      {
+        "label": "toothbrush",
+        "relevance": 3,
+        "correct": true
+      },
+      {
+        "label": "bathtub",
+        "relevance": 3,
+        "correct": true
+      }
+    ]
+  },
+  {
+    "query": "watch tv",
+    "data":
+    [
+      {
+        "label": "television",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "tvmonitor",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "monitor",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "screen",
+        "relevance": 8,
+        "correct": true
+      },
+      {
+        "label": "chair",
+        "relevance": 7,
+        "correct": true
+      },
+      {
+        "label": "sofa",
+        "relevance": 7,
+        "correct": true
+      },
+
+      {
+        "label": "person",
+        "relevance": 5,
+        "correct": true
+      }
+    ]
+  },
+  {
+    "query": "water plants",
+    "data":
+    [
+      {
+        "label": "plant",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "vegetal",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "vase",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "flower pot",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "watering can",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "water",
+        "relevance": 8,
+        "correct": true
+      },
+      {
+        "label": "land",
+        "relevance": 6,
+        "correct": true
+      },
+      {
+        "label": "ground",
+        "relevance": 6,
+        "correct": true
+      },
+      {
+        "label": "grass",
+        "relevance": 6,
+        "correct": true
+      },
+      {
+        "label": "flower",
+        "relevance": 6,
+        "correct": true
+      }
+    ]
+  },
+  {
+    "query": "answer the phone",
+    "data":
+    [
+      {
+        "label": "phone",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "cellular telephone",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "person",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "pay-phone",
+        "relevance": 6,
+        "correct": true
+      },
+      {
+        "label": "dial telephone",
+        "relevance": 5,
+        "correct": true
+      }
+    ]
+  },
+  {
+    "query": "prepare birthday card",
+    "data":
+    [
+      {
+        "label": "paper",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "cardboard",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "pen",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "pencil",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "marker",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "scissors",
+        "relevance": 8,
+        "correct": true
+      }
+    ]
+  },
+  {
+    "query": "prepare soup",
+    "data":
+    [
+      {
+        "label": "pan",
+        "relevance": 12,
+        "correct": true
+      },
+      {
+        "label": "vegetable",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "carrot",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "tomato",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "soup bowl",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "soup",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "spoon",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "salt",
+        "relevance": 8,
+        "correct": true
+      },
+      {
+        "label": "pepper",
+        "relevance": 8,
+        "correct": true
+      },
+      {
+        "label": "mug",
+        "relevance": 7,
+        "correct": true
+      },
+      {
+        "label": "cup",
+        "relevance": 7,
+        "correct": true
+      },
+      {
+        "label": "slop",
+        "relevance": 7,
+        "correct": true
+      }
+    ]
+  },
+  {
+    "query": "clean",
+    "data":
+    [
+      {
+        "label": "vacuum cleaner",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "hoover",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "brush",
+        "relevance": 14,
+        "correct": true
+      },
+      {
+        "label": "cleaning product",
+        "relevance": 13,
+        "correct": true
+      },
+      {
+        "label": "bucket",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "mop",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "sponge",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "broom",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "water",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "hand",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "gloves",
+        "relevance": 7,
+        "correct": true
+      }
+    ]
+  },
+  {
+    "query": "vacuum",
+    "data":
+    [
+      {
+        "label": "vacuum cleaner",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "hoover",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "floor",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "ground",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "person",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "carpet",
+        "relevance": 5,
+        "correct": true
+      }
+    ]
+  },
+  {
+    "query": "choosing outfit",
+    "data":
+    [
+      {
+        "label": "clothes",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "hanger",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "wardrobe",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "furniture",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "shirt",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "trousers",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "pants",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "dress",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "t-shirt",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "suit",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "skirt",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "coat",
+        "relevance": 10,
+        "correct": true
+      }
+    ]
+  },
+  {
+    "query": "make tea",
+    "data":
+    [
+      {
+        "label": "tea",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "pan",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "water",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "cup",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "glass",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "mug",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "bowl",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "spoon",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "teaspoon",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "tea-pot",
+        "relevance": 9,
+        "correct": true
+      }
+    ]
+  },
+  {
+    "query": "make coffee",
+    "data":
+    [
+      {
+        "label": "coffee",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "cup",
+        "relevance": 13,
+        "correct": true
+      },
+      {
+        "label": "coffee pot",
+        "relevance": 13,
+        "correct": true
+      },
+      {
+        "label": "coffee maker",
+        "relevance": 12,
+        "correct": true
+      },
+      {
+        "label": "glass",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "mug",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "spoon",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "teaspoon",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "bowl",
+        "relevance": 8,
+        "correct": true
+      },
+      {
+        "label": "tea-pot",
+        "relevance": 8,
+        "correct": true
+      }
+    ]
+  },
+  {
+    "query": "cook pasta",
+    "data":
+    [
+      {
+        "label": "pan",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "pasta",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "strainer",
+        "relevance": 14,
+        "correct": true
+      },
+      {
+        "label": "sieve",
+        "relevance": 14,
+        "correct": true
+      },
+      {
+        "label": "salt",
+        "relevance": 13,
+        "correct": true
+      },
+      {
+        "label": "pepper",
+        "relevance": 13,
+        "correct": true
+      },
+      {
+        "label": "water",
+        "relevance": 13,
+        "correct": true
+      },
+      {
+        "label": "spoon",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "fork",
+        "relevance": 9,
+        "correct": true
+      }
+    ]
+  },
+  {
+    "query": "do homework",
+    "data":
+    [
+      {
+        "label": "book",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "notebook",
+        "relevance": 14,
+        "correct": true
+      },
+      {
+        "label": "paper",
+        "relevance": 14,
+        "correct": true
+      },
+      {
+        "label": "pen",
+        "relevance": 14,
+        "correct": true
+      },
+      {
+        "label": "pencil",
+        "relevance": 14,
+        "correct": true
+      },
+      {
+        "label": "metric ruler",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "eraser",
+        "relevance": 10,
+        "correct": true
+      }
+    ]
+  },
+  {
+    "query": "play video games",
+    "data":
+    [
+      {
+        "label": "television",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "screen",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "tvmonitor",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "game console",
+        "relevance": 12,
+        "correct": true
+      },
+      {
+        "label": "computer",
+        "relevance": 11,
+        "correct": true
+      },
+      {
+        "label": "mouse",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "keyboard",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "joystick",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "controller",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "headset",
+        "relevance": 8,
+        "correct": true
+      },
+      {
+        "label": "gaming headset",
+        "relevance": 7,
+        "correct": true
+      },
+      {
+        "label": "game",
+        "relevance": 6,
+        "correct": true
+      },
+      {
+        "label": "mousepad",
+        "relevance": 6,
+        "correct": true
+      }
+    ]
+  },
+  {
+    "query": "bake parmesan turkey meatballs",
+    "data":
+    [
+      {
+        "label": "turkey",
+        "relevance": 12,
+        "correct": true
+      },
+      {
+        "label": "meat",
+        "relevance": 12,
+        "correct": true
+      },
+      {
+        "label": "parmesan",
+        "relevance": 12,
+        "correct": true
+      },
+      {
+        "label": "cheese",
+        "relevance": 12,
+        "correct": true
+      },
+      {
+        "label": "cup",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "teaspoon",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "salt",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "pepper",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "bread",
+        "relevance": 8,
+        "correct": true
+      }
+    ]
+  },
+  {
+    "query": "make stuffed crust pizza",
+    "data":
+    [
+      {
+        "label": "dough",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "pizza dough",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "cheese",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "peperoni",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "parmesan",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "vegetable",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "cheddar",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "meat",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "bacon",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "chicken",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "onion",
+        "relevance": 9,
+        "correct": true
+      }
+    ]
+  },
+  {
+    "query": "make mashed potato casserole",
+    "data":
+    [
+      {
+        "label": "potato",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "puree",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "mash potatoes",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "cheddar",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "cheese",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "bread",
+        "relevance": 9,
+        "correct":  true
+      },
+      {
+        "label": "bacon",
+        "relevance": 9,
+        "correct":  true
+      },
+      {
+        "label": "butter",
+        "relevance": 9,
+        "correct":  true
+      },
+      {
+        "label": "chive",
+        "relevance": 5,
+        "correct": true
+      },
+      {
+        "label": "casserole",
+        "relevance": 5,
+        "correct": true
+      },
+      {
+        "label": "pan",
+        "relevance": 5,
+        "correct": true
+      }
+    ]
+  },
+  {
+    "query": "make low carb pancakes",
+    "data":
+    [
+      {
+        "label": "flour",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "milk",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "egg",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "almond flour",
+        "relevance": 12,
+        "correct": true
+      },
+      {
+        "label": "butter",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "sugar",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "cheese",
+        "relevance": 5,
+        "correct": true
+      },
+      {
+        "label": "syrup",
+        "relevance": 5,
+        "correct": true
+      },
+      {
+        "label": "strawberry",
+        "relevance": 5,
+        "correct": true
+      }
+    ]
+  }
+]
