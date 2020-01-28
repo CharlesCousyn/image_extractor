@@ -198,7 +198,7 @@ function writeJSONFile(data, path)
 	filesSystem.writeFileSync(path, JSON.stringify(data, null, 4), "utf8");
 }
 
-function createResultFile(data, activityName, modelId, searchEngine, numberOfResultsUsed, aggregationType, MODEL_Obj)
+function createResultFile(arrayOfPred, activityName, modelId, searchEngine, numberOfResultsUsed, aggregationType, MODEL_Obj)
 {
 	const combination = [modelId, searchEngine, numberOfResultsUsed, aggregationType];
 	let basePath = `./resultFiles/${combination.join(" ")}`;
@@ -208,13 +208,11 @@ function createResultFile(data, activityName, modelId, searchEngine, numberOfRes
 		filesSystem.mkdirSync(basePath);
 	}
 
-	const resultPath = `${basePath}/${activityName}`;
-	if (!filesSystem.existsSync(resultPath))
-	{
-		filesSystem.mkdirSync(resultPath);
-	}
+	const resultPath = `${basePath}/${activityName}.json`;
 
-	writeJSONFile(data, `${resultPath}/results.json`);
+	//Construct data
+	const data = {query: activityName, data: arrayOfPred.map(elem => ({label: elem[0], relevance: elem[1], correct: null}) )};
+	writeJSONFile(data, resultPath);
 }
 
 function aggregateScores(aggregationType)
