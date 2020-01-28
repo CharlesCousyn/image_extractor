@@ -1,5 +1,6 @@
 import EXPERIMENTATIONS_CONFIG from './configFiles/experimentationsConfig.json'
 import RUN from "./main.js"
+import mAP from "./performanceMetrics.js"
 
 function generateCombination(criteria)
 {
@@ -40,6 +41,15 @@ function generateCombination(criteria)
     for(let i = 0; i < combinations.length; i++)
     {
         await RUN(...combinations[i]);
+
+        //Evaluate on combination
+
+
     }
 
 })();
+
+function evaluateComb(combination)
+{
+
+}
