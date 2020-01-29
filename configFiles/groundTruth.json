@@ -1,6 +1,6 @@
 [
   {
-    "query": "fill medicine cabinet",
+    "query": "fill_medicine_cabinet",
     "data":
     [
       {
@@ -56,7 +56,7 @@
     ]
   },
   {
-    "query": "watch tv",
+    "query": "watch_tv",
     "data":
     [
       {
@@ -98,7 +98,7 @@
     ]
   },
   {
-    "query": "water plants",
+    "query": "water_plants",
     "data":
     [
       {
@@ -154,7 +154,7 @@
     ]
   },
   {
-    "query": "answer the phone",
+    "query": "answer_the_phone",
     "data":
     [
       {
@@ -185,7 +185,7 @@
     ]
   },
   {
-    "query": "prepare birthday card",
+    "query": "prepare_birthday_card",
     "data":
     [
       {
@@ -221,7 +221,7 @@
     ]
   },
   {
-    "query": "prepare soup",
+    "query": "prepare_soup",
     "data":
     [
       {
@@ -384,7 +384,7 @@
     ]
   },
   {
-    "query": "choosing outfit",
+    "query": "choosing_outfit",
     "data":
     [
       {
@@ -450,7 +450,7 @@
     ]
   },
   {
-    "query": "make tea",
+    "query": "make_tea",
     "data":
     [
       {
@@ -506,7 +506,7 @@
     ]
   },
   {
-    "query": "make coffee",
+    "query": "make_coffee",
     "data":
     [
       {
@@ -562,7 +562,7 @@
     ]
   },
   {
-    "query": "cook pasta",
+    "query": "cook_pasta",
     "data":
     [
       {
@@ -613,7 +613,7 @@
     ]
   },
   {
-    "query": "do homework",
+    "query": "do_homework",
     "data":
     [
       {
@@ -654,7 +654,7 @@
     ]
   },
   {
-    "query": "play video games",
+    "query": "play_video_games",
     "data":
     [
       {
@@ -725,7 +725,7 @@
     ]
   },
   {
-    "query": "bake parmesan turkey meatballs",
+    "query": "bake_parmesan_turkey_meatballs",
     "data":
     [
       {
@@ -776,7 +776,7 @@
     ]
   },
   {
-    "query": "make stuffed crust pizza",
+    "query": "make_stuffed_crust_pizza",
     "data":
     [
       {
@@ -837,7 +837,7 @@
     ]
   },
   {
-    "query": "make mashed potato casserole",
+    "query": "make_mashed_potato_casserole",
     "data":
     [
       {
@@ -898,7 +898,7 @@
     ]
   },
   {
-    "query": "make low carb pancakes",
+    "query": "make_low_carb_pancakes",
     "data":
     [
       {
