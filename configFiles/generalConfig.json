@@ -1,5 +1,6 @@
 {
-  "pathToFolderActivityImages": "C:/Users/Charles/WebstormProjects/image_retrieval/outputData/",
+  "pathToFolderActivityImagesDuckDuck": "C:/Users/Charles/WebstormProjects/image_retrieval/outputData/",
+  "pathToFolderActivityImagesGoogle": "C:/Users/Charles/WebstormProjects/image_retrieval/outputData/",
   "numberOfBestPredictions": 2000,
   "batchFileSizeLimit": 5242880,
   "aggregationType": "sum",

@@ -170,13 +170,13 @@ function load (path)
 
 }
 
-function readActivityFolderByRelevance(activityFolderName, RESULTS)
+function readActivityFolderByRelevance(activityFolderName, imageFolder, RESULTS)
 {
 	//Need to sort the files!!
 
 	//Sorted array of results
 	const goodResultObject = RESULTS.find(activityRes => activityRes.folderName === activityFolderName);
-	const pathToActivityFolder = `${GENERAL_CONFIG.pathToFolderActivityImages}${activityFolderName}/`;
+	const pathToActivityFolder = `${imageFolder}${activityFolderName}/`;
 	//Unsorted array of file names
 	const arrayOfFilesWithoutExtension = filesSystem.readdirSync(pathToActivityFolder, { encoding: 'utf8'}).map(name => name.split(".")[0]);
 
@@ -339,6 +339,20 @@ export default async function run(chosenModelId, searchEngine, numberOfResultsUs
 	const MODEL_CONFIG = MODELS_CONFIG.find(config => config.modelId === chosenModelId);
 	const MODEL = await tensorflow.loadGraphModel(`file://models/${MODEL_CONFIG.name}/model.json`);
 
+	//Choose the folder of image
+	let imageFolder = "";
+	switch (searchEngine)
+	{
+		case "duckduckgo":
+			imageFolder = GENERAL_CONFIG.pathToFolderActivityImagesDuckDuck;
+			break;
+		case "google":
+			imageFolder = GENERAL_CONFIG.pathToFolderActivityImagesGoogle;
+			break;
+		default:
+			throw new Error("Bad search engine name")
+	}
+
 	//Get the corresponding class
 	let MODEL_Obj;
 	switch (MODEL_CONFIG.type)
@@ -358,16 +372,16 @@ export default async function run(chosenModelId, searchEngine, numberOfResultsUs
 	{
 		//Init progress variables
 		beginTime = new Date();
-		totalNumberOfImages = filesSystem.readdirSync(GENERAL_CONFIG.pathToFolderActivityImages, { encoding: 'utf8', withFileTypes: true })
+		totalNumberOfImages = filesSystem.readdirSync(imageFolder, { encoding: 'utf8', withFileTypes: true })
 			.filter(dirent => dirent.isDirectory())
 			.map(dirent => dirent.name)
-			.reduce((total, activityFolderName) => total + filesSystem.readdirSync(`${GENERAL_CONFIG.pathToFolderActivityImages}${activityFolderName}/`, { encoding: 'utf8'}).length, 0);
+			.reduce((total, activityFolderName) => total + filesSystem.readdirSync(`${imageFolder}${activityFolderName}/`, { encoding: 'utf8'}).length, 0);
 		currentNumberOfImagesAnalysed = 0;
 		showProgress(currentNumberOfImagesAnalysed, totalNumberOfImages, beginTime);
 
 		//Stream of images
-		const all = from(filesSystem.readdirSync(GENERAL_CONFIG.pathToFolderActivityImages, { encoding: 'utf8', withFileTypes: true }).filter(dirent => dirent.isDirectory()).map(dirent => dirent.name))
-			.pipe(mergeMap(folderName => readActivityFolderByRelevance(folderName, RESULTS)));//Stream de imageObj
+		const all = from(filesSystem.readdirSync(imageFolder, { encoding: 'utf8', withFileTypes: true }).filter(dirent => dirent.isDirectory()).map(dirent => dirent.name))
+			.pipe(mergeMap(folderName => readActivityFolderByRelevance(folderName, imageFolder, RESULTS)));//Stream de imageObj
 
 		//Waiting processing images...
 		let [valids, invalids] = partition(all, keepValidFileImageObj);
