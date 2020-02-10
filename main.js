@@ -12,8 +12,10 @@ import Image from "./entities/Image";
 
 const isPicture = /^.*\.(jpg|png|gif|jpeg)/i;
 //Get the file of results
-const fileContainingUrlsPath = `${GENERAL_CONFIG.pathToFolderContainingFileContainingUrls}/${filesSystem.readdirSync(GENERAL_CONFIG.pathToFolderContainingFileContainingUrls, { encoding: 'utf8' })[0]}`;
-let RESULTS = JSON.parse(filesSystem.readFileSync(fileContainingUrlsPath));
+const fileContainingUrlsPathGoogle = `${GENERAL_CONFIG.pathToFolderContainingFileContainingUrlsGoogle}/${filesSystem.readdirSync(GENERAL_CONFIG.pathToFolderContainingFileContainingUrlsGoogle, { encoding: 'utf8' })[0]}`;
+let RESULTSGOOGLE = JSON.parse(filesSystem.readFileSync(fileContainingUrlsPathGoogle));
+const fileContainingUrlsPathDuckDuck = `${GENERAL_CONFIG.pathToFolderContainingFileContainingUrlsDuckDuck}/${filesSystem.readdirSync(GENERAL_CONFIG.pathToFolderContainingFileContainingUrlsDuckDuck, { encoding: 'utf8' })[0]}`;
+let RESULTSDUCKDUCK = JSON.parse(filesSystem.readFileSync(fileContainingUrlsPathDuckDuck));
 
 function keepValidFileImageObj(imageObj)
 {
@@ -67,18 +69,20 @@ async function prepareImages(imageObj, MODEL_Obj, searchEngine)
 	async function resizeAndWriteImage(imageOriginalPath, pathToResizedImage, MODEL_Obj, resizingMethod)
 	{
 		const bufToWrite = await sharp(imageOriginalPath)
-		.resize({
-			width: MODEL_Obj.widthRequired,
-			height: MODEL_Obj.heightRequired,
-			kernel: "nearest",
-			fit: "contain"
-		})
-		.toBuffer();
+			.resize({
+				width: MODEL_Obj.widthRequired,
+				height: MODEL_Obj.heightRequired,
+				kernel: "nearest",
+				fit: "contain"
+			})
+			.png()
+			.toBuffer();
 
 		filesSystem.writeFileSync(pathToResizedImage, bufToWrite);
 	}
 
 	const imageOriginalPath = imageObj.pathToOriginalImage;
+	//console.log(imageOriginalPath);
 	const basePathForResizedImages = `./data/${searchEngine}/${MODEL_Obj.name}`;
 
 	//Checking if the model folder exists
@@ -88,7 +92,9 @@ async function prepareImages(imageObj, MODEL_Obj, searchEngine)
 	}
 
 	//Checking if the resized image exists
-	const pathToResizedImage = `${basePathForResizedImages}/${imageObj.imageName}`;
+	const arraySplit = imageObj.imageName.split(".");
+	const [extension, imageName] = [arraySplit.pop(), arraySplit.pop()];
+	const pathToResizedImage = `${basePathForResizedImages}/${imageName}.png`;
 	try
 	{
 		if (filesSystem.existsSync(pathToResizedImage))
@@ -111,7 +117,9 @@ async function prepareImages(imageObj, MODEL_Obj, searchEngine)
 	}
 	catch(e)
 	{
-		console.error("prepareImages: ", e, "\n"+imageOriginalPath);
+		console.error("prepareImages: ", e);
+		console.error("imageOriginalPath", imageOriginalPath);
+		console.error("pathToResizedImage", pathToResizedImage);
 		imageObj.isReadable = false;
 	}
 
@@ -121,11 +129,8 @@ async function prepareImages(imageObj, MODEL_Obj, searchEngine)
 	return imageObj;
 }
 
-//Be sure that image at this path is 331x331!!
 function load (path)
 {
-	//console.log("path: ", path);
-
 	try
 	{
 		const tensorsToReturn = tensorflow.tidy(()=>
@@ -178,14 +183,16 @@ function readActivityFolderByRelevance(activityFolderName, imageFolder, RESULTS)
 	const goodResultObject = RESULTS.find(activityRes => activityRes.folderName === activityFolderName);
 	const pathToActivityFolder = `${imageFolder}${activityFolderName}/`;
 	//Unsorted array of file names
-	const arrayOfFilesWithoutExtension = filesSystem.readdirSync(pathToActivityFolder, { encoding: 'utf8'}).map(name => name.split(".")[0]);
+	const arrayOfFilesSplitExtension = filesSystem.readdirSync(pathToActivityFolder, { encoding: 'utf8'}).map(name => name.split("."));
 
 	//Sorted array of file names
 	let goodResults = goodResultObject.results
-		.filter( res => arrayOfFilesWithoutExtension.indexOf(base64url.encode(res.urlImage)) !== -1)
-		.map(res => {
-			let arraySplit = res.urlImage.split("?").shift().split(".");
-			return `${base64url.encode(res.urlImage)}.${arraySplit[arraySplit.length - 1]}`;
+		.map((elem, index) => [elem, index])
+		.filter( ([elem, index]) => arrayOfFilesSplitExtension.map(el => el[0].split("_").pop()).indexOf(""+index) !== -1)
+		.map(([res, index]) =>
+		{
+			let indexGoodFile = arrayOfFilesSplitExtension.map(el => el[0].split("_").pop()).indexOf(""+index);
+			return `${arrayOfFilesSplitExtension[indexGoodFile][0]}.${arrayOfFilesSplitExtension[indexGoodFile][1]}`;
 		});
 
 	//Produce a Stream of images order by pertinence in search engine in descending order
@@ -235,8 +242,6 @@ function processValidImages(groupedObservableValidImageOneActivity, MODEL_Obj, m
 	const combination = [modelId, searchEngine, numberOfResultsUsed, aggregationType];
 	let activityFolderName = groupedObservableValidImageOneActivity.key;
 
-	console.log(activityFolderName);
-
 	return groupedObservableValidImageOneActivity
 	.pipe(bufferCount(MODEL_Obj.bufferCount))
 	//.pipe(tap(x => console.log("afterbufferCount", x)))
@@ -244,7 +249,8 @@ function processValidImages(groupedObservableValidImageOneActivity, MODEL_Obj, m
 	{
 		//console.log("someImageObjs: ", someImageObjs);
 		return from(someImageObjs)
-		.pipe(mergeMap(imageObj => load(imageObj.pathToResizedImage)))
+		.pipe(mergeMap(imageObj => load(imageObj.pathToResizedImage)
+		))
 		//Stream de tenseurs
 		.pipe(toArray())
 		//Stream de array de tenseurs (1 seule array)
@@ -319,14 +325,14 @@ function handleInvalids(invalids)
 	return invalids
 		.pipe(tap(x =>
 		{
-			console.log("Bad image: ", x);
+			//console.log("Bad image: ", x);
 			totalNumberOfImages--;
 			//currentNumberOfImagesAnalysed += x.length;
 			showProgress(currentNumberOfImagesAnalysed, totalNumberOfImages, beginTime);
 		}))
 		.pipe(toArray())
 		.pipe(map(badImages => writeJSONFile(badImages, "./resultFiles/badImages.json")))
-		.toPromise()
+		.toPromise();
 }
 
 export default async function run(chosenModelId, searchEngine, numberOfResultsUsed, aggregationType)
@@ -341,17 +347,24 @@ export default async function run(chosenModelId, searchEngine, numberOfResultsUs
 
 	//Choose the folder of image
 	let imageFolder = "";
+	let RESULTS;
 	switch (searchEngine)
 	{
 		case "duckduckgo":
 			imageFolder = GENERAL_CONFIG.pathToFolderActivityImagesDuckDuck;
+			RESULTS = RESULTSDUCKDUCK;
 			break;
 		case "google":
 			imageFolder = GENERAL_CONFIG.pathToFolderActivityImagesGoogle;
+			RESULTS = RESULTSGOOGLE;
 			break;
 		default:
 			throw new Error("Bad search engine name")
 	}
+
+
+
+	console.error("imageFolder", imageFolder);
 
 	//Get the corresponding class
 	let MODEL_Obj;
@@ -391,6 +404,10 @@ export default async function run(chosenModelId, searchEngine, numberOfResultsUs
 
 		//Free the memory from the model weights
 		MODEL_Obj.MODEL.dispose();
+	}
+	else
+	{
+		console.error("MODEL_Obj", MODEL_Obj);
 	}
 }
 

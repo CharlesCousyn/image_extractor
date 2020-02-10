@@ -11,7 +11,7 @@
   "author": "Charles Cousyn",
   "license": "MIT",
   "dependencies": {
-    "@tensorflow/tfjs-node-gpu": "1.5.1",
+    "@tensorflow/tfjs-node-gpu": "1.5.2",
     "base64-url": "^2.3.3",
     "esm": "^3.2.25",
     "rxjs": "^6.5.4",

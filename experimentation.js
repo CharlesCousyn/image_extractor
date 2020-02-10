@@ -39,7 +39,8 @@ function generateCombination(criteria)
 {
     //Generate all combinations
     const criteria = EXPERIMENTATIONS_CONFIG.criteria;
-    let combinations = generateCombination(Object.keys(criteria).map((criterionName) => criteria[criterionName]));
+    //let combinations = generateCombination(Object.keys(criteria).map((criterionName) => criteria[criterionName]));
+    let combinations = generateCombination(Object.keys(criteria).map((criterionName) => criteria[criterionName])).filter((elem, index) => index < 1);
 
     //Use every combination
     for(let i = 0; i < combinations.length; i++)

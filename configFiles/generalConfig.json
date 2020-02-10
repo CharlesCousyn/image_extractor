@@ -1,11 +1,12 @@
 {
-  "pathToFolderActivityImagesDuckDuck": "C:/Users/Charles/WebstormProjects/image_retrieval/outputData/",
-  "pathToFolderActivityImagesGoogle": "C:/Users/Charles/WebstormProjects/image_retrieval/outputData/",
+  "pathToFolderActivityImagesDuckDuck": "C:/Users/Charles/WebstormProjects/image_retrieval/outputDataDuckDuck/",
+  "pathToFolderActivityImagesGoogle": "C:/Users/Charles/WebstormProjects/image_retrieval/outputDataGoogle/",
   "numberOfBestPredictions": 2000,
   "batchFileSizeLimit": 5242880,
   "aggregationType": "sum",
   "recognitionModel": "yolov3-608__20_0.1_0.5",
   "searchEngine": "duckduckgo",
   "numberOfResultsUsed": 200,
-  "pathToFolderContainingFileContainingUrls": "C:/Users/Charles/WebstormProjects/image_retrieval/data/"
+  "pathToFolderContainingFileContainingUrlsDuckDuck": "C:/Users/Charles/WebstormProjects/image_retrieval/dataDuckDuck/",
+  "pathToFolderContainingFileContainingUrlsGoogle": "C:/Users/Charles/WebstormProjects/image_retrieval/dataGoogle/"
 }
