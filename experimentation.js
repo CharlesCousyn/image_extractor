@@ -40,7 +40,7 @@ function generateCombination(criteria)
     //Generate all combinations
     const criteria = EXPERIMENTATIONS_CONFIG.criteria;
     //let combinations = generateCombination(Object.keys(criteria).map((criterionName) => criteria[criterionName]));
-    let combinations = generateCombination(Object.keys(criteria).map((criterionName) => criteria[criterionName])).filter((elem, index) => index < 1);
+    let combinations = generateCombination(Object.keys(criteria).map((criterionName) => criteria[criterionName]))/*.filter((elem, index) => index < 1)*/;
 
     //Use every combination
     for(let i = 0; i < combinations.length; i++)
@@ -57,7 +57,7 @@ function evaluateComb(combination, groundTruth, k)
 {
     const path = `resultFiles/${combination.join(" ")}`;
     const filePaths = filesSystem.readdirSync( path, { encoding: 'utf8', withFileTypes: true })
-        .filter(dirent => dirent.isFile())
+        .filter(dirent => dirent.isFile() && dirent.name !== "finalResult.json")
         .map(dirent => `${path}/${dirent.name}`);
 
     const resultObjects = filePaths.map(filePath =>
@@ -76,15 +76,13 @@ function evaluateComb(combination, groundTruth, k)
     });
 
     //Calculate mAP
-    const meanAveragePrecision = mAP(k, "trapezoidal", resultObjects);
+    const res = mAP(k, "trapezoidal", resultObjects, true);
 
-
-    //Get all queries
-    const queries = resultObjects.map(res => res.query);
+    //Adding value of k
+    res.k = k;
 
     //Write file of combination
-    const jsonFinalResult = {queries, meanAveragePrecision};
-    writeJSONFile(jsonFinalResult, `${path}/finalResult.json`);
+    writeJSONFile(res, `${path}/finalResult.json`);
 }
 
 function writeJSONFile(data, path)

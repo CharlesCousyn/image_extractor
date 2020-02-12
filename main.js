@@ -241,7 +241,6 @@ function processValidImages(groupedObservableValidImageOneActivity, MODEL_Obj, m
 {
 	const combination = [modelId, searchEngine, numberOfResultsUsed, aggregationType];
 	let activityFolderName = groupedObservableValidImageOneActivity.key;
-	console.log("activityFolderName", activityFolderName);
 
 	return groupedObservableValidImageOneActivity
 		.pipe(take(numberOfResultsUsed))
@@ -257,11 +256,11 @@ function processValidImages(groupedObservableValidImageOneActivity, MODEL_Obj, m
 			//Stream de array de tenseurs (1 seule array)
 			.pipe(map(arrayOfTensors =>
 			{
-				console.log(arrayOfTensors.map(tens => tens.shape));
+				//console.log(arrayOfTensors.map(tens => tens.shape));
 				return tensorflow.tidy(() =>
 				{
 					let bigTensor = tensorflow.concat(arrayOfTensors, 0);
-					console.log(bigTensor.shape);
+					//console.log(bigTensor.shape);
 					return bigTensor;
 				});
 			}))
@@ -306,21 +305,14 @@ async function handleValids(valids, MODEL_Obj, modelId, searchEngine, numberOfRe
 	const validImageObjs = await valids
 		.pipe(mergeMap(imageObj => from(prepareImages(imageObj, MODEL_Obj, searchEngine))))
 		.pipe(toArray())
-
-		.pipe(tap(imageObj => console.log("azerty", imageObj[100], imageObj[1372])))
 		.toPromise();
 
-	console.log(validImageObjs.length);
-
 	let [readable, notReadable] = partition(from(validImageObjs), isReadable);//Stream de imageObj
-
-	console.log((await readable.pipe(toArray()).toPromise()).length);
 
 	let readablePromise = readable////Stream de imageObj
 		.pipe(map(addSizeInformationImageObj)) //Stream de imageObj
 		.pipe(filter(keepLittleFileImageObj)) //Stream de imageObj
 		.pipe(groupBy(imageObj => imageObj.activityName, undefined, undefined, () => new ReplaySubject()))
-		.pipe(tap(group => console.log( group.key)))
 		.pipe(concatMap(groupByActivity => processValidImages(groupByActivity, MODEL_Obj, ...combination)))
 		.pipe(toArray())
 		.toPromise();
@@ -377,10 +369,6 @@ export default async function run(chosenModelId, searchEngine, numberOfResultsUs
 			throw new Error("Bad search engine name")
 	}
 
-
-
-	console.error("imageFolder", imageFolder);
-
 	//Get the corresponding class
 	let MODEL_Obj;
 	switch (MODEL_CONFIG.type)
@@ -420,8 +408,6 @@ export default async function run(chosenModelId, searchEngine, numberOfResultsUs
 		//Waiting processing images...
 		let [valids, invalids] = partition(from(all), keepValidFileImageObj);
 		await Promise.all([handleValids(valids, MODEL_Obj, ...combination), handleInvalids(invalids)]);
-
-		console.log("Analyse finie");
 
 		//Free the memory from the model weights
 		MODEL_Obj.MODEL.dispose();

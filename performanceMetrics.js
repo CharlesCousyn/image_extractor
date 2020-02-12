@@ -29,7 +29,7 @@ function recall(TP, NumberPositives)
 function AP(k, aucRule, results)
 {
     //Get all the positive label to compare
-    let allPositivesLabels = results.data.map(line => line[1]).filter(pred => pred.correct).map(pred => pred.label);
+    let allPositivesLabels = results.data.map(line => line[1]).filter(pred => pred !== undefined && pred.correct).map(pred => pred.label);
 
     //Adding correctness column (Are the label predicted in groundtruth and correct?)
     results.data = results.data.map(line => [...line, allPositivesLabels.indexOf(line[0].label) !== -1]);
@@ -87,12 +87,22 @@ function AP(k, aucRule, results)
  * @param {Number} k - Rank used to compute
  * @param {String} aucRule - AUC computation method
  * @param {Results[]} results - Array of results for multiple queries
- * @returns {Number} mAP - Return mean of Average precision by query
+ * @param {boolean} giveAPForEachQuery - Boolean to give AP for each query
+ * @returns {Number|Object} mAP - Return mean of Average precision by query
  */
-function mAP(k, aucRule, results)
+function mAP(k, aucRule, results, giveAPForEachQuery)
 {
-    let APs = results.map(resultsOneQuery => AP(k, aucRule, resultsOneQuery));
-    return APs.reduce((sum, curr) => sum + curr, 0) / APs.length;
+    let APs = results.map(resultsOneQuery => ({query: resultsOneQuery.query, AP:AP(k, aucRule, resultsOneQuery)}));
+    let mAP = APs.map(obj => obj.AP).reduce((sum, curr) => sum + curr, 0) / APs.length;
+
+    if(giveAPForEachQuery)
+    {
+        return {APs, mAP};
+    }
+    else
+    {
+        return mAP;
+    }
 }
 
 export default mAP;
