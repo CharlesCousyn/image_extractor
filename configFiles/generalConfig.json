@@ -4,8 +4,8 @@
   "numberOfBestPredictions": 2000,
   "batchFileSizeLimit": 5242880,
   "aggregationType": "sum",
-  "recognitionModel": "yolov3-608__20_0.1_0.5",
-  "searchEngine": "duckduckgo",
+  "recognitionModel": "pnasnet_large",
+  "searchEngine": "google",
   "numberOfResultsUsed": 200,
   "pathToFolderContainingFileContainingUrlsDuckDuck": "C:/Users/Charles/WebstormProjects/image_retrieval/dataDuckDuck/",
   "pathToFolderContainingFileContainingUrlsGoogle": "C:/Users/Charles/WebstormProjects/image_retrieval/dataGoogle/"

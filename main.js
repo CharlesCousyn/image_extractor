@@ -241,80 +241,95 @@ function processValidImages(groupedObservableValidImageOneActivity, MODEL_Obj, m
 {
 	const combination = [modelId, searchEngine, numberOfResultsUsed, aggregationType];
 	let activityFolderName = groupedObservableValidImageOneActivity.key;
+	console.log("activityFolderName", activityFolderName);
 
 	return groupedObservableValidImageOneActivity
-	.pipe(bufferCount(MODEL_Obj.bufferCount))
-	//.pipe(tap(x => console.log("afterbufferCount", x)))
-	.pipe(concatMap(someImageObjs =>
-	{
-		//console.log("someImageObjs: ", someImageObjs);
-		return from(someImageObjs)
-		.pipe(mergeMap(imageObj => load(imageObj.pathToResizedImage)
-		))
-		//Stream de tenseurs
-		.pipe(toArray())
-		//Stream de array de tenseurs (1 seule array)
-		.pipe(map(arrayOfTensors =>
+		.pipe(take(numberOfResultsUsed))
+		.pipe(bufferCount(MODEL_Obj.bufferCount))
+		//.pipe(tap(x => console.log("afterbufferCount", x)))
+		.pipe(concatMap(someImageObjs =>
 		{
-			console.log(arrayOfTensors.map(tens => tens.shape));
-			return tensorflow.tidy(() =>
+			//console.log("someImageObjs: ", someImageObjs);
+			return from(someImageObjs)
+			.pipe(mergeMap(imageObj => load(imageObj.pathToResizedImage)))
+			//Stream de tenseurs
+			.pipe(toArray())
+			//Stream de array de tenseurs (1 seule array)
+			.pipe(map(arrayOfTensors =>
 			{
-				let bigTensor = tensorflow.concat(arrayOfTensors, 0);
-				console.log(bigTensor.shape);
-				return bigTensor;
-			});
+				console.log(arrayOfTensors.map(tens => tens.shape));
+				return tensorflow.tidy(() =>
+				{
+					let bigTensor = tensorflow.concat(arrayOfTensors, 0);
+					console.log(bigTensor.shape);
+					return bigTensor;
+				});
+			}))
+			//Stream de bigTensor (1 seul)
+			.pipe(map(bigTensor => MODEL_Obj.predictOrClassify(bigTensor)))
+			.pipe(tap(() =>
+			{
+				currentNumberOfImagesAnalysed += someImageObjs.length;
+				showProgress(currentNumberOfImagesAnalysed, totalNumberOfImages, beginTime);
+			}));
+			//Stream de Stream de prédictions
 		}))
-		//Stream de bigTensor (1 seul)
-		.pipe(map(bigTensor => MODEL_Obj.predictOrClassify(bigTensor)))
-		.pipe(tap(() =>
-		{
-			currentNumberOfImagesAnalysed += someImageObjs.length;
-			showProgress(currentNumberOfImagesAnalysed, totalNumberOfImages, beginTime);
-		}));
-		//Stream de Stream de prédictions
-	}))
-	//Stream de Stream de Stream de prédictions
-	.pipe(mergeAll())
-	//Stream de Stream de Predictions
-	.pipe(mergeAll())
-	//Stream de Prediction individuelles ici: [ 'pineapple', -0.3546293079853058 ];
-	.pipe(groupBy(x => x[0], x => x[1]))
-	//Stream de GroupedObservable de prédictions groupées par classes
-	.pipe(mergeMap( (groupByClass) => groupByClass
-		.pipe(reduce(aggregateScores(aggregationType)))
-		.pipe(map(x => [groupByClass.key, x]))
-	))
-	//Stream de prédictions réduites (score des prédictions de même classe ajoutés entre eux)
-	.pipe(toArray())
-	//Stream de array de prédictions réduites (1 seule array) attends toutes les valeurs
-	.pipe(map(x => from(x.sort((a, b) => b[1] - a[1]))))
-	//Stream de Stream de prédictions réduites triée
-	.pipe(mergeAll())
-	//Stream de prédictions réduites triée
-	.pipe(take(GENERAL_CONFIG.numberOfBestPredictions))
-	//Stream de prédictions réduites triée de manière décroissante, seulement les 25 premiers éléments émis
-	.pipe(tap(x => console.log(activityFolderName, "pred: ", x)))
-	.pipe(toArray())
-	.pipe(map(array => createResultFile(array, activityFolderName, ...combination, MODEL_Obj)));
+		//Stream de Stream de Stream de prédictions
+		.pipe(mergeAll())
+		//Stream de Stream de Predictions
+		.pipe(mergeAll())
+		//Stream de Prediction individuelles ici: [ 'pineapple', -0.3546293079853058 ];
+		.pipe(groupBy(x => x[0], x => x[1]))
+		//Stream de GroupedObservable de prédictions groupées par classes
+		.pipe(mergeMap( (groupByClass) => groupByClass
+			.pipe(reduce(aggregateScores(aggregationType)))
+			.pipe(map(x => [groupByClass.key, x]))
+		))
+		//Stream de prédictions réduites (score des prédictions de même classe ajoutés entre eux)
+		.pipe(toArray())
+		//Stream de array de prédictions réduites (1 seule array) attends toutes les valeurs
+		.pipe(map(x => from(x.sort((a, b) => b[1] - a[1]))))
+		//Stream de Stream de prédictions réduites triée
+		.pipe(mergeAll())
+		//Stream de prédictions réduites triée
+		.pipe(take(GENERAL_CONFIG.numberOfBestPredictions))
+		//Stream de prédictions réduites triée de manière décroissante, seulement les 25 premiers éléments émis
+		.pipe(tap(x => console.log(activityFolderName, "pred: ", x)))
+		.pipe(toArray())
+		.pipe(map(array => createResultFile(array, activityFolderName, ...combination, MODEL_Obj)));
 }
 
-function handleValids(valids, MODEL_Obj, modelId, searchEngine, numberOfResultsUsed, aggregationType)
+async function handleValids(valids, MODEL_Obj, modelId, searchEngine, numberOfResultsUsed, aggregationType)
 {
 	const combination = [modelId, searchEngine, numberOfResultsUsed, aggregationType];
-	let [readable, notReadable] = partition(valids.pipe(mergeMap(imageObj => from(prepareImages(imageObj, MODEL_Obj, searchEngine)))), isReadable)//Stream de imageObj
 
-	let readablePromise = readable
-		.pipe(take(numberOfResultsUsed))////Stream de imageObj
+	const validImageObjs = await valids
+		.pipe(mergeMap(imageObj => from(prepareImages(imageObj, MODEL_Obj, searchEngine))))
+		.pipe(toArray())
+
+		.pipe(tap(imageObj => console.log("azerty", imageObj[100], imageObj[1372])))
+		.toPromise();
+
+	console.log(validImageObjs.length);
+
+	let [readable, notReadable] = partition(from(validImageObjs), isReadable);//Stream de imageObj
+
+	console.log((await readable.pipe(toArray()).toPromise()).length);
+
+	let readablePromise = readable////Stream de imageObj
 		.pipe(map(addSizeInformationImageObj)) //Stream de imageObj
 		.pipe(filter(keepLittleFileImageObj)) //Stream de imageObj
 		.pipe(groupBy(imageObj => imageObj.activityName, undefined, undefined, () => new ReplaySubject()))
+		.pipe(tap(group => console.log( group.key)))
 		.pipe(concatMap(groupByActivity => processValidImages(groupByActivity, MODEL_Obj, ...combination)))
+		.pipe(toArray())
 		.toPromise();
 
 	let notReadablePromise = notReadable
 		.pipe(tap( () => {totalNumberOfImages--;}))
 		.pipe(toArray())
 		.pipe(map(notReadableImages => writeJSONFile(notReadableImages, "./resultFiles/notReadableImages.json")))
+		.pipe(toArray())
 		.toPromise();
 
 	return notReadablePromise.then(() => readablePromise);
@@ -388,16 +403,22 @@ export default async function run(chosenModelId, searchEngine, numberOfResultsUs
 		totalNumberOfImages = filesSystem.readdirSync(imageFolder, { encoding: 'utf8', withFileTypes: true })
 			.filter(dirent => dirent.isDirectory())
 			.map(dirent => dirent.name)
-			.reduce((total, activityFolderName) => total + filesSystem.readdirSync(`${imageFolder}${activityFolderName}/`, { encoding: 'utf8'}).length, 0);
+			.reduce((total, activityFolderName) =>
+			{
+				const nbFiles = filesSystem.readdirSync(`${imageFolder}${activityFolderName}/`, { encoding: 'utf8'}).length;
+				return total + (nbFiles < numberOfResultsUsed ? nbFiles : numberOfResultsUsed)
+			}, 0);
 		currentNumberOfImagesAnalysed = 0;
 		showProgress(currentNumberOfImagesAnalysed, totalNumberOfImages, beginTime);
 
 		//Stream of images
-		const all = from(filesSystem.readdirSync(imageFolder, { encoding: 'utf8', withFileTypes: true }).filter(dirent => dirent.isDirectory()).map(dirent => dirent.name))
-			.pipe(mergeMap(folderName => readActivityFolderByRelevance(folderName, imageFolder, RESULTS)));//Stream de imageObj
+		const all = await from(filesSystem.readdirSync(imageFolder, { encoding: 'utf8', withFileTypes: true }).filter(dirent => dirent.isDirectory()).map(dirent => dirent.name))
+			.pipe(mergeMap(folderName => readActivityFolderByRelevance(folderName, imageFolder, RESULTS)))//Stream de imageObj
+			.pipe(toArray())
+			.toPromise();
 
 		//Waiting processing images...
-		let [valids, invalids] = partition(all, keepValidFileImageObj);
+		let [valids, invalids] = partition(from(all), keepValidFileImageObj);
 		await Promise.all([handleValids(valids, MODEL_Obj, ...combination), handleInvalids(invalids)]);
 
 		console.log("Analyse finie");
