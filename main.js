@@ -256,13 +256,18 @@ function processValidImages(groupedObservableValidImageOneActivity, MODEL_Obj, m
 			//Stream de array de tenseurs (1 seule array)
 			.pipe(map(arrayOfTensors =>
 			{
-				//console.log(arrayOfTensors.map(tens => tens.shape));
-				return tensorflow.tidy(() =>
+				//console.log('numTensors (before): ' + tensorflow.memory().numTensors);
+				if(arrayOfTensors.length === 1)
+				{
+					return tensorflow.concat(arrayOfTensors, 0);
+				}
+				else
 				{
 					let bigTensor = tensorflow.concat(arrayOfTensors, 0);
-					//console.log(bigTensor.shape);
+					tensorflow.dispose(arrayOfTensors);
+					//console.log('numTensors (after): ' + tensorflow.memory().numTensors);
 					return bigTensor;
-				});
+				}
 			}))
 			//Stream de bigTensor (1 seul)
 			.pipe(map(bigTensor => MODEL_Obj.predictOrClassify(bigTensor)))
@@ -270,6 +275,7 @@ function processValidImages(groupedObservableValidImageOneActivity, MODEL_Obj, m
 			{
 				currentNumberOfImagesAnalysed += someImageObjs.length;
 				showProgress(currentNumberOfImagesAnalysed, totalNumberOfImages, beginTime);
+				//console.log(tensorflow.memory());
 			}));
 			//Stream de Stream de prédictions
 		}))
@@ -411,6 +417,9 @@ export default async function run(chosenModelId, searchEngine, numberOfResultsUs
 
 		//Free the memory from the model weights
 		MODEL_Obj.MODEL.dispose();
+
+		//Free all memory!
+		tensorflow.disposeVariables();
 	}
 	else
 	{
