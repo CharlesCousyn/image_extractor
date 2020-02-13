@@ -32,7 +32,9 @@ function AP(k, aucRule, results)
     let allPositivesLabels = results.data.map(line => line[1]).filter(pred => pred !== undefined && pred.correct).map(pred => pred.label);
 
     //Adding correctness column (Are the label predicted in groundtruth and correct?)
-    results.data = results.data.map(line => [...line, allPositivesLabels.indexOf(line[0].label) !== -1]);
+    results.data = results.data
+        .map(line => (line[0] === undefined ? undefined : [...line, allPositivesLabels.indexOf(line[0].label) !== -1]))//Add boolean (true or false positive)
+        .filter(line => line !== undefined); //filter lines when there's more labels than predictions
 
     //Min number of positive label knowing k
     let kOrLength = Math.min(k, allPositivesLabels.length);

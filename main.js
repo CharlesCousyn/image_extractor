@@ -275,7 +275,6 @@ function processValidImages(groupedObservableValidImageOneActivity, MODEL_Obj, m
 			{
 				currentNumberOfImagesAnalysed += someImageObjs.length;
 				showProgress(currentNumberOfImagesAnalysed, totalNumberOfImages, beginTime);
-				//console.log(tensorflow.memory());
 			}));
 			//Stream de Stream de prédictions
 		}))
