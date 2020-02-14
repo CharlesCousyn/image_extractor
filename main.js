@@ -256,7 +256,6 @@ function processValidImages(groupedObservableValidImageOneActivity, MODEL_Obj, m
 			//Stream de array de tenseurs (1 seule array)
 			.pipe(map(arrayOfTensors =>
 			{
-				//console.log('numTensors (before): ' + tensorflow.memory().numTensors);
 				if(arrayOfTensors.length === 1)
 				{
 					return tensorflow.concat(arrayOfTensors, 0);
@@ -265,7 +264,6 @@ function processValidImages(groupedObservableValidImageOneActivity, MODEL_Obj, m
 				{
 					let bigTensor = tensorflow.concat(arrayOfTensors, 0);
 					tensorflow.dispose(arrayOfTensors);
-					//console.log('numTensors (after): ' + tensorflow.memory().numTensors);
 					return bigTensor;
 				}
 			}))

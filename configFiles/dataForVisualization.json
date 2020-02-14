@@ -1,0 +1,792 @@
+{
+    "searchEngine": {
+        "type": "bar",
+        "data": {
+            "datasets": [
+                {
+                    "label": "duckduckgo",
+                    "data": [
+                        0.044297113774886904,
+                        null,
+                        0.03802763594430261,
+                        null,
+                        0.0521320650842532,
+                        null,
+                        null,
+                        0.010601288991811869,
+                        null,
+                        0.007730803147469815,
+                        0.10040178943322216,
+                        0.09908140016640433,
+                        0.10001799983281466,
+                        0.10053226951375101
+                    ],
+                    "yAxisID": "perf",
+                    "backgroundColor": "#CC0000"
+                },
+                {
+                    "label": "google",
+                    "data": [
+                        0.04299093890440044,
+                        0.04038850537625047,
+                        0.04397996581003116,
+                        0.04076106556074505,
+                        0.05008712460398842,
+                        0.03647357509536997,
+                        0.039018331751968734,
+                        0.0099186182070169,
+                        0.01057566404788627,
+                        0.009347866639533305,
+                        0.07873456665886457,
+                        0.07986625390166292,
+                        0.07992319408986076,
+                        0.07778366836211767
+                    ],
+                    "yAxisID": "perf",
+                    "backgroundColor": "#FF6633"
+                }
+            ]
+        },
+        "options": {
+            "responsive": true,
+            "legend": {
+                "position": "top"
+            },
+            "title": {
+                "display": true,
+                "text": "Performances computed by used config"
+            },
+            "scales": {
+                "yAxes": [
+                    {
+                        "label": "Performance",
+                        "id": "perf",
+                        "type": "linear",
+                        "position": "left",
+                        "scaleLabel": {
+                            "labelString": "Performance",
+                            "display": true,
+                            "fontSize": 16,
+                            "fontColor": "#666",
+                            "fontStyle": "bold"
+                        }
+                    }
+                ],
+                "xAxes": [
+                    {
+                        "type": "category",
+                        "labels": [
+                            "inception_resnet_v2 100 sum",
+                            "inception_resnet_v2 200 sum",
+                            "mobilenet_v2_140_224 100 sum",
+                            "mobilenet_v2_140_224 200 sum",
+                            "pnasnet_large 100 sum",
+                            "pnasnet_large 1000 sum",
+                            "pnasnet_large 200 sum",
+                            "yolo9000__20_0.05_0.5 100 sum",
+                            "yolo9000__20_0.05_0.5 200 sum",
+                            "yolo9000__20_0.1_0.5 100 sum",
+                            "yolov3-608__20_0.05_0.5 100 sum",
+                            "yolov3-608__20_0.1_0.5 100 sum",
+                            "yolov3-tiny__20_0.05_0.5 100 sum",
+                            "yolov3-tiny__20_0.1_0.5 100 sum"
+                        ],
+                        "label": "Combinations",
+                        "scaleLabel": {
+                            "labelString": "Combinations",
+                            "display": true,
+                            "fontSize": 16,
+                            "fontColor": "#666",
+                            "fontStyle": "bold"
+                        }
+                    }
+                ]
+            },
+            "plugins": {}
+        }
+    },
+    "recognitionModel": {
+        "type": "bar",
+        "data": {
+            "datasets": [
+                {
+                    "label": "inception_resnet_v2",
+                    "data": [
+                        0.044297113774886904,
+                        0.04299093890440044,
+                        null,
+                        0.04038850537625047
+                    ],
+                    "yAxisID": "perf",
+                    "backgroundColor": "#CC0000"
+                },
+                {
+                    "label": "mobilenet_v2_140_224",
+                    "data": [
+                        0.03802763594430261,
+                        0.04397996581003116,
+                        null,
+                        0.04076106556074505
+                    ],
+                    "yAxisID": "perf",
+                    "backgroundColor": "#FF6633"
+                },
+                {
+                    "label": "pnasnet_large",
+                    "data": [
+                        0.0521320650842532,
+                        0.05008712460398842,
+                        0.03647357509536997,
+                        0.039018331751968734
+                    ],
+                    "yAxisID": "perf",
+                    "backgroundColor": "#FFFF00"
+                },
+                {
+                    "label": "yolo9000__20_0.05_0.5",
+                    "data": [
+                        0.010601288991811869,
+                        0.0099186182070169,
+                        null,
+                        0.01057566404788627
+                    ],
+                    "yAxisID": "perf",
+                    "backgroundColor": "#00CC00"
+                },
+                {
+                    "label": "yolo9000__20_0.1_0.5",
+                    "data": [
+                        0.007730803147469815,
+                        0.009347866639533305,
+                        null,
+                        null
+                    ],
+                    "yAxisID": "perf",
+                    "backgroundColor": "#009999"
+                },
+                {
+                    "label": "yolov3-608__20_0.05_0.5",
+                    "data": [
+                        0.10040178943322216,
+                        0.07873456665886457,
+                        null,
+                        null
+                    ],
+                    "yAxisID": "perf",
+                    "backgroundColor": "#0099FF"
+                },
+                {
+                    "label": "yolov3-608__20_0.1_0.5",
+                    "data": [
+                        0.09908140016640433,
+                        0.07986625390166292,
+                        null,
+                        null
+                    ],
+                    "yAxisID": "perf",
+                    "backgroundColor": "#0000FF"
+                },
+                {
+                    "label": "yolov3-tiny__20_0.05_0.5",
+                    "data": [
+                        0.10001799983281466,
+                        0.07992319408986076,
+                        null,
+                        null
+                    ],
+                    "yAxisID": "perf",
+                    "backgroundColor": "#9900CC"
+                },
+                {
+                    "label": "yolov3-tiny__20_0.1_0.5",
+                    "data": [
+                        0.10053226951375101,
+                        0.07778366836211767,
+                        null,
+                        null
+                    ],
+                    "yAxisID": "perf",
+                    "backgroundColor": "#FF6633"
+                }
+            ]
+        },
+        "options": {
+            "responsive": true,
+            "legend": {
+                "position": "top"
+            },
+            "title": {
+                "display": true,
+                "text": "Performances computed by used config"
+            },
+            "scales": {
+                "yAxes": [
+                    {
+                        "label": "Performance",
+                        "id": "perf",
+                        "type": "linear",
+                        "position": "left",
+                        "scaleLabel": {
+                            "labelString": "Performance",
+                            "display": true,
+                            "fontSize": 16,
+                            "fontColor": "#666",
+                            "fontStyle": "bold"
+                        }
+                    }
+                ],
+                "xAxes": [
+                    {
+                        "type": "category",
+                        "labels": [
+                            "duckduckgo 100 sum",
+                            "google 100 sum",
+                            "google 1000 sum",
+                            "google 200 sum"
+                        ],
+                        "label": "Combinations",
+                        "scaleLabel": {
+                            "labelString": "Combinations",
+                            "display": true,
+                            "fontSize": 16,
+                            "fontColor": "#666",
+                            "fontStyle": "bold"
+                        }
+                    }
+                ]
+            },
+            "plugins": {}
+        }
+    },
+    "numberOfResultsUsed": {
+        "type": "bar",
+        "data": {
+            "datasets": [
+                {
+                    "label": "100",
+                    "data": [
+                        0.044297113774886904,
+                        0.04299093890440044,
+                        0.03802763594430261,
+                        0.04397996581003116,
+                        0.0521320650842532,
+                        0.05008712460398842,
+                        0.010601288991811869,
+                        0.0099186182070169,
+                        0.007730803147469815,
+                        0.009347866639533305,
+                        0.10040178943322216,
+                        0.07873456665886457,
+                        0.09908140016640433,
+                        0.07986625390166292,
+                        0.10001799983281466,
+                        0.07992319408986076,
+                        0.10053226951375101,
+                        0.07778366836211767
+                    ],
+                    "yAxisID": "perf",
+                    "backgroundColor": "#CC0000"
+                },
+                {
+                    "label": "200",
+                    "data": [
+                        null,
+                        0.04038850537625047,
+                        null,
+                        0.04076106556074505,
+                        null,
+                        0.039018331751968734,
+                        null,
+                        0.01057566404788627,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                    ],
+                    "yAxisID": "perf",
+                    "backgroundColor": "#FF6633"
+                },
+                {
+                    "label": "1000",
+                    "data": [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        0.03647357509536997,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                    ],
+                    "yAxisID": "perf",
+                    "backgroundColor": "#FFFF00"
+                }
+            ]
+        },
+        "options": {
+            "responsive": true,
+            "legend": {
+                "position": "top"
+            },
+            "title": {
+                "display": true,
+                "text": "Performances computed by used config"
+            },
+            "scales": {
+                "yAxes": [
+                    {
+                        "label": "Performance",
+                        "id": "perf",
+                        "type": "linear",
+                        "position": "left",
+                        "scaleLabel": {
+                            "labelString": "Performance",
+                            "display": true,
+                            "fontSize": 16,
+                            "fontColor": "#666",
+                            "fontStyle": "bold"
+                        }
+                    }
+                ],
+                "xAxes": [
+                    {
+                        "type": "category",
+                        "labels": [
+                            "inception_resnet_v2 duckduckgo sum",
+                            "inception_resnet_v2 google sum",
+                            "mobilenet_v2_140_224 duckduckgo sum",
+                            "mobilenet_v2_140_224 google sum",
+                            "pnasnet_large duckduckgo sum",
+                            "pnasnet_large google sum",
+                            "yolo9000__20_0.05_0.5 duckduckgo sum",
+                            "yolo9000__20_0.05_0.5 google sum",
+                            "yolo9000__20_0.1_0.5 duckduckgo sum",
+                            "yolo9000__20_0.1_0.5 google sum",
+                            "yolov3-608__20_0.05_0.5 duckduckgo sum",
+                            "yolov3-608__20_0.05_0.5 google sum",
+                            "yolov3-608__20_0.1_0.5 duckduckgo sum",
+                            "yolov3-608__20_0.1_0.5 google sum",
+                            "yolov3-tiny__20_0.05_0.5 duckduckgo sum",
+                            "yolov3-tiny__20_0.05_0.5 google sum",
+                            "yolov3-tiny__20_0.1_0.5 duckduckgo sum",
+                            "yolov3-tiny__20_0.1_0.5 google sum"
+                        ],
+                        "label": "Combinations",
+                        "scaleLabel": {
+                            "labelString": "Combinations",
+                            "display": true,
+                            "fontSize": 16,
+                            "fontColor": "#666",
+                            "fontStyle": "bold"
+                        }
+                    }
+                ]
+            },
+            "plugins": {}
+        }
+    },
+    "searchEngineGlobal": {
+        "type": "bar",
+        "data": {
+            "labels": [
+                "duckduckgo",
+                "google"
+            ],
+            "datasets": [
+                {
+                    "label": "Criterion",
+                    "borderWidth": 1,
+                    "data": [
+                        {
+                            "x": "duckduckgo",
+                            "y": 0.06142470732099073,
+                            "sdMAP": 0.0370424214757525
+                        },
+                        {
+                            "x": "google",
+                            "y": 0.04570352421497833,
+                            "sdMAP": 0.024649875429877538
+                        }
+                    ],
+                    "errorBars": {
+                        "duckduckgo": {
+                            "plus": 0.0370424214757525,
+                            "minus": -0.0370424214757525
+                        },
+                        "google": {
+                            "plus": 0.024649875429877538,
+                            "minus": -0.024649875429877538
+                        }
+                    },
+                    "yAxisID": "y-axis-0",
+                    "backgroundColor": "rgba(204,0,0,0.5)",
+                    "borderColor": "#CC0000"
+                }
+            ]
+        },
+        "options": {
+            "responsive": true,
+            "legend": {
+                "position": "top"
+            },
+            "title": {
+                "display": true,
+                "text": "Performances computed by used config"
+            },
+            "scales": {
+                "yAxes": [
+                    {
+                        "label": "Performances",
+                        "id": "y-axis-0",
+                        "type": "linear",
+                        "position": "left",
+                        "scaleLabel": {
+                            "labelString": "Performances",
+                            "display": true,
+                            "fontSize": 16,
+                            "fontColor": "#666",
+                            "fontStyle": "bold"
+                        },
+                        "ticks": {
+                            "beginAtZero": true
+                        }
+                    }
+                ],
+                "xAxes": [
+                    {
+                        "type": "category",
+                        "labels": [
+                            "duckduckgo",
+                            "google"
+                        ],
+                        "label": "Combinations",
+                        "scaleLabel": {
+                            "labelString": "Combinations",
+                            "display": true,
+                            "fontSize": 16,
+                            "fontColor": "#666",
+                            "fontStyle": "bold"
+                        }
+                    }
+                ]
+            },
+            "plugins": {
+                "chartJsPluginErrorBars": {
+                    "width": "20px",
+                    "lineWidth": "2px",
+                    "absoluteValues": false
+                }
+            },
+            "tooltips": {
+                "mode": "index",
+                "axis": "y",
+                "callbacks": {},
+                "footerFontStyle": "normal"
+            }
+        }
+    },
+    "recognitionModelGlobal": {
+        "type": "bar",
+        "data": {
+            "labels": [
+                "inception_resnet_v2",
+                "mobilenet_v2_140_224",
+                "pnasnet_large",
+                "yolo9000__20_0.05_0.5",
+                "yolo9000__20_0.1_0.5",
+                "yolov3-608__20_0.05_0.5",
+                "yolov3-608__20_0.1_0.5",
+                "yolov3-tiny__20_0.05_0.5",
+                "yolov3-tiny__20_0.1_0.5"
+            ],
+            "datasets": [
+                {
+                    "label": "Criterion",
+                    "borderWidth": 1,
+                    "data": [
+                        {
+                            "x": "inception_resnet_v2",
+                            "y": 0.042558852685179276,
+                            "sdMAP": 0.0016246699724566513
+                        },
+                        {
+                            "x": "mobilenet_v2_140_224",
+                            "y": 0.040922889105026276,
+                            "sdMAP": 0.002432721089948979
+                        },
+                        {
+                            "x": "pnasnet_large",
+                            "y": 0.04442777413389508,
+                            "sdMAP": 0.006780776062129071
+                        },
+                        {
+                            "x": "yolo9000__20_0.05_0.5",
+                            "y": 0.01036519041557168,
+                            "sdMAP": 0.00031594747720459004
+                        },
+                        {
+                            "x": "yolo9000__20_0.1_0.5",
+                            "y": 0.00853933489350156,
+                            "sdMAP": 0.000808531746031745
+                        },
+                        {
+                            "x": "yolov3-608__20_0.05_0.5",
+                            "y": 0.08956817804604336,
+                            "sdMAP": 0.010833611387178796
+                        },
+                        {
+                            "x": "yolov3-608__20_0.1_0.5",
+                            "y": 0.08947382703403363,
+                            "sdMAP": 0.009607573132370706
+                        },
+                        {
+                            "x": "yolov3-tiny__20_0.05_0.5",
+                            "y": 0.08997059696133772,
+                            "sdMAP": 0.01004740287147695
+                        },
+                        {
+                            "x": "yolov3-tiny__20_0.1_0.5",
+                            "y": 0.08915796893793435,
+                            "sdMAP": 0.011374300575816669
+                        }
+                    ],
+                    "errorBars": {
+                        "inception_resnet_v2": {
+                            "plus": 0.0016246699724566513,
+                            "minus": -0.0016246699724566513
+                        },
+                        "mobilenet_v2_140_224": {
+                            "plus": 0.002432721089948979,
+                            "minus": -0.002432721089948979
+                        },
+                        "pnasnet_large": {
+                            "plus": 0.006780776062129071,
+                            "minus": -0.006780776062129071
+                        },
+                        "yolo9000__20_0.05_0.5": {
+                            "plus": 0.00031594747720459004,
+                            "minus": -0.00031594747720459004
+                        },
+                        "yolo9000__20_0.1_0.5": {
+                            "plus": 0.000808531746031745,
+                            "minus": -0.000808531746031745
+                        },
+                        "yolov3-608__20_0.05_0.5": {
+                            "plus": 0.010833611387178796,
+                            "minus": -0.010833611387178796
+                        },
+                        "yolov3-608__20_0.1_0.5": {
+                            "plus": 0.009607573132370706,
+                            "minus": -0.009607573132370706
+                        },
+                        "yolov3-tiny__20_0.05_0.5": {
+                            "plus": 0.01004740287147695,
+                            "minus": -0.01004740287147695
+                        },
+                        "yolov3-tiny__20_0.1_0.5": {
+                            "plus": 0.011374300575816669,
+                            "minus": -0.011374300575816669
+                        }
+                    },
+                    "yAxisID": "y-axis-0",
+                    "backgroundColor": "rgba(204,0,0,0.5)",
+                    "borderColor": "#CC0000"
+                }
+            ]
+        },
+        "options": {
+            "responsive": true,
+            "legend": {
+                "position": "top"
+            },
+            "title": {
+                "display": true,
+                "text": "Performances computed by used config"
+            },
+            "scales": {
+                "yAxes": [
+                    {
+                        "label": "Performances",
+                        "id": "y-axis-0",
+                        "type": "linear",
+                        "position": "left",
+                        "scaleLabel": {
+                            "labelString": "Performances",
+                            "display": true,
+                            "fontSize": 16,
+                            "fontColor": "#666",
+                            "fontStyle": "bold"
+                        },
+                        "ticks": {
+                            "beginAtZero": true
+                        }
+                    }
+                ],
+                "xAxes": [
+                    {
+                        "type": "category",
+                        "labels": [
+                            "inception_resnet_v2",
+                            "mobilenet_v2_140_224",
+                            "pnasnet_large",
+                            "yolo9000__20_0.05_0.5",
+                            "yolo9000__20_0.1_0.5",
+                            "yolov3-608__20_0.05_0.5",
+                            "yolov3-608__20_0.1_0.5",
+                            "yolov3-tiny__20_0.05_0.5",
+                            "yolov3-tiny__20_0.1_0.5"
+                        ],
+                        "label": "Combinations",
+                        "scaleLabel": {
+                            "labelString": "Combinations",
+                            "display": true,
+                            "fontSize": 16,
+                            "fontColor": "#666",
+                            "fontStyle": "bold"
+                        }
+                    }
+                ]
+            },
+            "plugins": {
+                "chartJsPluginErrorBars": {
+                    "width": "20px",
+                    "lineWidth": "2px",
+                    "absoluteValues": false
+                }
+            },
+            "tooltips": {
+                "mode": "index",
+                "axis": "y",
+                "callbacks": {},
+                "footerFontStyle": "normal"
+            }
+        }
+    },
+    "numberOfResultsUsedGlobal": {
+        "type": "bar",
+        "data": {
+            "labels": [
+                "100",
+                "200",
+                "1000"
+            ],
+            "datasets": [
+                {
+                    "label": "Criterion",
+                    "borderWidth": 1,
+                    "data": [
+                        {
+                            "x": "100",
+                            "y": 0.056969697948132926,
+                            "sdMAP": 0.032811829331132324
+                        },
+                        {
+                            "x": "200",
+                            "y": 0.032685891684212626,
+                            "sdMAP": 0.012781829428596023
+                        },
+                        {
+                            "x": "1000",
+                            "y": 0.03647357509536997,
+                            "sdMAP": 0
+                        }
+                    ],
+                    "errorBars": {
+                        "100": {
+                            "plus": 0.032811829331132324,
+                            "minus": -0.032811829331132324
+                        },
+                        "200": {
+                            "plus": 0.012781829428596023,
+                            "minus": -0.012781829428596023
+                        },
+                        "1000": {
+                            "plus": 0,
+                            "minus": 0
+                        }
+                    },
+                    "yAxisID": "y-axis-0",
+                    "backgroundColor": "rgba(204,0,0,0.5)",
+                    "borderColor": "#CC0000"
+                }
+            ]
+        },
+        "options": {
+            "responsive": true,
+            "legend": {
+                "position": "top"
+            },
+            "title": {
+                "display": true,
+                "text": "Performances computed by used config"
+            },
+            "scales": {
+                "yAxes": [
+                    {
+                        "label": "Performances",
+                        "id": "y-axis-0",
+                        "type": "linear",
+                        "position": "left",
+                        "scaleLabel": {
+                            "labelString": "Performances",
+                            "display": true,
+                            "fontSize": 16,
+                            "fontColor": "#666",
+                            "fontStyle": "bold"
+                        },
+                        "ticks": {
+                            "beginAtZero": true
+                        }
+                    }
+                ],
+                "xAxes": [
+                    {
+                        "type": "category",
+                        "labels": [
+                            "100",
+                            "200",
+                            "1000"
+                        ],
+                        "label": "Combinations",
+                        "scaleLabel": {
+                            "labelString": "Combinations",
+                            "display": true,
+                            "fontSize": 16,
+                            "fontColor": "#666",
+                            "fontStyle": "bold"
+                        }
+                    }
+                ]
+            },
+            "plugins": {
+                "chartJsPluginErrorBars": {
+                    "width": "20px",
+                    "lineWidth": "2px",
+                    "absoluteValues": false
+                }
+            },
+            "tooltips": {
+                "mode": "index",
+                "axis": "y",
+                "callbacks": {},
+                "footerFontStyle": "normal"
+            }
+        }
+    }
+}

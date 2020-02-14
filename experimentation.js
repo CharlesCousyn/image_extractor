@@ -5,6 +5,7 @@ import filesSystem from "fs";
 import groundTruth from "./configFiles/groundTruth.json"
 import Prediction from "./entities/Prediction";
 import Results from "./entities/Results";
+import {getAllDataForVisualization} from "./visualizationPreprocess";
 
 function generateCombination(criteria)
 {
@@ -40,7 +41,8 @@ function generateCombination(criteria)
     //Generate all combinations
     const criteria = EXPERIMENTATIONS_CONFIG.criteria;
     //let combinations = generateCombination(Object.keys(criteria).map((criterionName) => criteria[criterionName]));
-    let combinations = generateCombination(Object.keys(criteria).map((criterionName) => criteria[criterionName]))/*.filter((elem, index) => index < 1)*/;
+    let combinations = generateCombination(Object.keys(criteria).map((criterionName) => criteria[criterionName]));
+    //combinations = [[ 'yolo9000__20_0.05_0.5', 'google', 200, 'sum' ]];
 
     //Use every combination
     for(let i = 0; i < combinations.length; i++)
@@ -50,6 +52,10 @@ function generateCombination(criteria)
         //Evaluate on combination
         evaluateComb(combinations[i], groundTruth, 25);
     }
+
+    //Write json data for visualization
+    const dataForVisualization = getAllDataForVisualization();
+    writeJSONFile(dataForVisualization, "./configFiles/dataForVisualization.json");
 
 })();
 

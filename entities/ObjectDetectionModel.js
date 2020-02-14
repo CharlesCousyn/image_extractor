@@ -101,35 +101,35 @@ export default class ObjectDetectionModel
 	scoreThreshold = this.scoreThreshold,
 	iouThreshold = this.iouThreshold)
 	{
-		const isV3 = this.name.indexOf("v3") > -1;
-		const [boxes, boxScores] = this.yoloEval(isV3, outputs, anchors, numClasses, imageShape);
-
-		//Free memory of output
-		tensorflow.dispose(outputs);
-
-		let boxes_ = [];
-		let scores_ = [];
-		let classes_ = [];
-
-		const _classes = tensorflow.argMax(boxScores, -1);
-		const _boxScores = tensorflow.max(boxScores, -1);
-
-		// const splitBoxScores = boxScores.split(numClasses, 1);
-
-		// for (let i = 0; i < numClasses; i++) {
-		//   const _boxScores = splitBoxScores[i].as1D();
-		const nmsIndex = await tensorflow.image.nonMaxSuppressionAsync(
-			boxes,
-			_boxScores,
-			// maxBoxesPerClass,
-			maxBoxes,
-			iouThreshold,
-			scoreThreshold
-		);
-
-		if (nmsIndex.size)
+		return tensorflow.tidy(() =>
 		{
-			tensorflow.tidy(() =>
+			const isV3 = this.name.indexOf("v3") > -1;
+			const [boxes, boxScores] = this.yoloEval(isV3, outputs, anchors, numClasses, imageShape);
+
+			//Free memory of output
+			tensorflow.dispose(outputs);
+
+			let boxes_ = [];
+			let scores_ = [];
+			let classes_ = [];
+
+			const _classes = tensorflow.argMax(boxScores, -1);
+			const _boxScores = tensorflow.max(boxScores, -1);
+
+			// const splitBoxScores = boxScores.split(numClasses, 1);
+
+			// for (let i = 0; i < numClasses; i++) {
+			//   const _boxScores = splitBoxScores[i].as1D();
+			const nmsIndex = tensorflow.image.nonMaxSuppression(
+				boxes,
+				_boxScores,
+				// maxBoxesPerClass,
+				maxBoxes,
+				iouThreshold,
+				scoreThreshold
+			);
+
+			if (nmsIndex.size)
 			{
 				const classBoxes = tensorflow.gather(boxes, nmsIndex);
 				const classBoxScores = tensorflow.gather(_boxScores, nmsIndex);
@@ -141,39 +141,41 @@ export default class ObjectDetectionModel
 				classBoxScores.dataSync().map(score => {
 					scores_.push(score);
 				});
+				//tensorflow.dispose(classBoxes);
+				//tensorflow.dispose(classBoxScores);
 				// classes.dataSync().map(cls => {
 				//   classes_.push(cls);
 				// });
 				classes_ = _classes.gather(nmsIndex).dataSync();
-			});
-		}
-		_boxScores.dispose();
-		_classes.dispose();
-		nmsIndex.dispose();
-		// }
-
-		boxes.dispose();
-		boxScores.dispose();
-		// tensorflow.dispose(splitBoxScores);
-
-		return boxes_.map((box, i) => {
-			const top = Math.max(0, box[0]);
-			const left = Math.max(0, box[1]);
-			const bottom = Math.min(imageShape[0], box[2]);
-			const right = Math.min(imageShape[1], box[3]);
-			const height = bottom - top;
-			const width = right - left;
-			return {
-				top,
-				left,
-				bottom,
-				right,
-				height,
-				width,
-				score: scores_[i],
-				class: classNames[classes_[i]]
 			}
-	});
+			//tensorflow.dispose(_boxScores);
+			//tensorflow.dispose(_classes);
+			//tensorflow.dispose(nmsIndex);
+			//tensorflow.dispose(boxes);
+			//tensorflow.dispose(boxScores);
+
+			// tensorflow.dispose(splitBoxScores);
+
+			return boxes_.map((box, i) => {
+				const top = Math.max(0, box[0]);
+				const left = Math.max(0, box[1]);
+				const bottom = Math.min(imageShape[0], box[2]);
+				const right = Math.min(imageShape[1], box[3]);
+				const height = bottom - top;
+				const width = right - left;
+				return {
+					top,
+					left,
+					bottom,
+					right,
+					height,
+					width,
+					score: scores_[i],
+					class: classNames[classes_[i]]
+				}
+			});
+
+		});
 }
 
 	yoloEval(
@@ -184,46 +186,47 @@ export default class ObjectDetectionModel
 	imageShape)
 	{
 		return tensorflow.tidy(() =>
-		{
-			let numLayers = 1;
-			let inputShape;
-			let anchorMask;
-
-			if (isV3)
 			{
-				numLayers = outputs.length;
-				anchorMask = this.v3_masks[numLayers];
-				inputShape = outputs[0].shape.slice(1, 3).map(num => num * 32);
+				let numLayers = 1;
+				let inputShape;
+				let anchorMask;
+
+				if (isV3)
+				{
+					numLayers = outputs.length;
+					anchorMask = this.v3_masks[numLayers];
+					inputShape = outputs[0].shape.slice(1, 3).map(num => num * 32);
+				}
+				else{
+					inputShape = outputs.shape.slice(1, 3);
+				}
+
+				const anchorsTensor = tensorflow.tensor1d(anchors).reshape([-1, 2]);
+				let boxesArray = [];
+				let boxScoresArray = [];
+				let boxesTensor;
+				let boxScoresTensor;
+				for (let i = 0; i < numLayers; i++)
+				{
+					const [_boxes, _boxScores] = this.yoloBoxesAndScores(
+						isV3,
+						isV3 ? outputs[i] : outputs,
+						isV3 ? anchorsTensor.gather(tensorflow.tensor1d(anchorMask[i], 'int32')) : anchorsTensor,
+						numClasses,
+						inputShape,
+						imageShape
+					);
+
+					boxesArray.push(_boxes);
+					boxScoresArray.push(_boxScores);
+				}
+
+				boxesTensor = tensorflow.concat(boxesArray);
+				boxScoresTensor = tensorflow.concat(boxScoresArray);
+
+				return [boxesTensor, boxScoresTensor];
 			}
-			else
-			{
-				inputShape = outputs.shape.slice(1, 3);
-			}
-
-			const anchorsTensor = tensorflow.tensor1d(anchors).reshape([-1, 2]);
-			let boxes = [];
-			let boxScores = [];
-
-			for (let i = 0; i < numLayers; i++)
-			{
-				const [_boxes, _boxScores] = this.yoloBoxesAndScores(
-					isV3,
-					isV3 ? outputs[i] : outputs,
-					isV3 ? anchorsTensor.gather(tensorflow.tensor1d(anchorMask[i], 'int32')) : anchorsTensor,
-					numClasses,
-					inputShape,
-					imageShape
-				);
-
-				boxes.push(_boxes);
-				boxScores.push(_boxScores);
-			}
-
-			boxes = tensorflow.concat(boxes);
-			boxScores = tensorflow.concat(boxScores);
-
-			return [boxes, boxScores];
-		});
+		);
 }
 
 	yoloBoxesAndScores(
@@ -238,13 +241,15 @@ export default class ObjectDetectionModel
 		{
 			const [boxXy, boxWh, boxConfidence, boxClassProbs] = this.yoloHead(isV3, feats, anchors, numClasses, inputShape);
 
-			let boxes = this.yoloCorrectBoxes(boxXy, boxWh, imageShape);
-			boxes = boxes.reshape([-1, 4]);
-			let boxScores = tensorflow.mul(boxConfidence, boxClassProbs);
-			boxScores = tensorflow.reshape(boxScores, [-1, numClasses]);
+			let boxes1 = this.yoloCorrectBoxes(boxXy, boxWh, imageShape);
+			let boxes2 = boxes1.reshape([-1, 4]);
 
-			return [boxes, boxScores];
+			let boxScores1 = tensorflow.mul(boxConfidence, boxClassProbs);
+			let boxScores2 = tensorflow.reshape(boxScores1, [-1, numClasses]);
+
+			return [boxes2, boxScores2];
 		});
+
 	}
 
 	yoloHead(
@@ -293,7 +298,7 @@ export default class ObjectDetectionModel
 	boxWh,
 	imageShape)
 	{
-		return tensorflow.tidy(() =>
+		return tensorflow.tidy(()=>
 		{
 			let boxYx = tensorflow.concat(tensorflow.split(boxXy, 2, 3).reverse(), 3);
 			let boxHw = tensorflow.concat(tensorflow.split(boxWh, 2, 3).reverse(), 3);
