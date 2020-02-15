@@ -168,6 +168,11 @@
         "correct": true
       },
       {
+        "label": "cell phone",
+        "relevance": 10,
+        "correct": true
+      },
+      {
         "label": "person",
         "relevance": 9,
         "correct": true
