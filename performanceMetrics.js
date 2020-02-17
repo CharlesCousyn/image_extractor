@@ -3,7 +3,7 @@ import Results from "./entities/Results.js";
 /**
  * @param {Number} TP - Number of true positives
  * @param {Number} NumberPredicted - Total number of predictions
- * @returns {Number} recall - Return the recall
+ * @returns {Number} precision - Return the precision
  */
 function precision(TP, NumberPredicted)
 {
