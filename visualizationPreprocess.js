@@ -24,13 +24,18 @@ export function getAllDataForVisualization()
     //Separation per numberOfResultsUsed
     const perNumberOfResultsUsed = classCombinationPerCriterionIndex(2, allCombinations);
 
+    //Separation per combination to analyse each activity
+    let perCombination = allCombinations.map(comb => generateChartConfigFromOneCombination(comb));
+
+
     return ({
         searchEngine: generateChartConfigFromOneCriterion(1, perSearchEngine),
         recognitionModel: generateChartConfigFromOneCriterion(0, perRecognitionModel),
         numberOfResultsUsed: generateChartConfigFromOneCriterion(2, perNumberOfResultsUsed),
         searchEngineGlobal: generateChartConfigFromOneCriterionGlobal(1, perSearchEngine),
         recognitionModelGlobal: generateChartConfigFromOneCriterionGlobal(0, perRecognitionModel),
-        numberOfResultsUsedGlobal: generateChartConfigFromOneCriterionGlobal(2, perNumberOfResultsUsed)
+        numberOfResultsUsedGlobal: generateChartConfigFromOneCriterionGlobal(2, perNumberOfResultsUsed),
+        perCombination: perCombination
     });
 }
 
@@ -262,6 +267,74 @@ function generateChartConfigFromOneCriterionGlobal(criterionIndex, classedCombin
 
             }
     };
+}
+
+function generateChartConfigFromOneCombination(combination)
+{
+    const finalResultJson = JSON.parse(filesSystem.readFileSync( `./resultFiles/${combination.join(" ")}/finalResult.json`));
+
+    const datasets = [
+        {
+            label: `Performance per activity with the config ${combination.join(" ")}`,
+            borderWidth: 1,
+            data: finalResultJson.APs.map(obj => ({x: obj.query, y: obj.AP})),
+            yAxisID: "y-axis-0",
+            backgroundColor: hex2rgba(colorCodes[0], 0.5),
+            borderColor: colorCodes[0]
+        }
+    ];
+
+    const data = {labels: finalResultJson.APs.map(obj => obj.query), datasets: datasets};
+
+    //Final config object
+    const config = {
+        type: 'bar',
+        data: data,
+        options:
+            {
+                responsive: true,
+                legend: {position: 'top'},
+                title: {display: true, text: 'Performances computed by activity'},
+                scales:
+                    {
+                        yAxes:
+                            [
+                                {
+                                    label:"Performances",
+                                    id: 'y-axis-0',
+                                    type: 'linear',
+                                    position: 'left',
+                                    scaleLabel: {
+                                        labelString: "Performances",
+                                        display: true,
+                                        fontSize: 16,
+                                        fontColor: "#666",
+                                        fontStyle: "bold"
+                                    },
+                                    ticks: { beginAtZero: true }
+                                }],
+                        xAxes:
+                            [
+                                {
+                                    type: 'category',
+                                    labels: finalResultJson.APs.map(obj => obj.query),
+                                    label: "Activities",
+                                    scaleLabel:
+                                        {
+                                            labelString: "Activities",
+                                            display: true,
+                                            fontSize: 16,
+                                            fontColor: "#666",
+                                            fontStyle: "bold"
+                                        }
+                                }
+                            ]
+                    }
+            }
+    };
+
+    //Result
+    return {combination: combination.join(" "), config}
 }
 
 /*const dataForVisualization = getAllDataForVisualization();
