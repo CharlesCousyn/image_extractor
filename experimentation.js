@@ -10,9 +10,6 @@ import {getAllDataForVisualization} from "./visualizationPreprocess";
 import coco_classes from "./labelFiles/coco_classes";
 import yolo9000Labels from "./labelFiles/yolo9000Labels";
 import imageNetLabels from "./labelFiles/imageNetLabels";
-console.log("coco_classes", coco_classes.length);
-console.log("yolo9000Labels", yolo9000Labels.length);
-console.log("imageNetLabels", imageNetLabels.length);
 
 function generateCombination(criteria)
 {
