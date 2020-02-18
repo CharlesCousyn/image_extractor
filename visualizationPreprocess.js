@@ -250,7 +250,7 @@ function generateChartConfigFromOneCriterionGlobal(criterionIndex, classedCombin
                         axis: 'y',
                         callbacks: {
                             // Use the footer callback to display the result of a function
-                            label: "callBackGlobal"
+                            label: "callbackGlobal"
                         },
                         footerFontStyle: 'normal'
                     }
@@ -327,7 +327,7 @@ function generateChartConfigFromOneCombination(combination)
                         axis: 'y',
                         callbacks: {
                             // Use the footer callback to display the result of a function
-                            label: "callBackCombination"
+                            label: "callbackCombination"
                         },
                         footerFontStyle: 'normal'
                     }

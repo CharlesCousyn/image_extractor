@@ -699,7 +699,9 @@
             "tooltips": {
                 "mode": "index",
                 "axis": "y",
-                "callbacks": {},
+                "callbacks": {
+                    "label": "callbackGlobal"
+                },
                 "footerFontStyle": "normal"
             }
         }
@@ -876,7 +878,9 @@
             "tooltips": {
                 "mode": "index",
                 "axis": "y",
-                "callbacks": {},
+                "callbacks": {
+                    "label": "callbackGlobal"
+                },
                 "footerFontStyle": "normal"
             }
         }
@@ -1009,7 +1013,9 @@
             "tooltips": {
                 "mode": "index",
                 "axis": "y",
-                "callbacks": {},
+                "callbacks": {
+                    "label": "callbackGlobal"
+                },
                 "footerFontStyle": "normal"
             }
         }
@@ -1185,6 +1191,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -1359,6 +1373,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -1533,6 +1555,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -1707,6 +1737,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -1881,6 +1919,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -2055,6 +2101,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -2229,6 +2283,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -2403,6 +2465,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -2577,6 +2647,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -2751,6 +2829,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -2925,6 +3011,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -3099,6 +3193,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -3273,6 +3375,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -3447,6 +3557,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -3621,6 +3739,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -3795,6 +3921,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -3969,6 +4103,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -4143,6 +4285,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -4317,6 +4467,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -4491,6 +4649,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -4665,6 +4831,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -4839,6 +5013,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -5013,6 +5195,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -5187,6 +5377,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -5361,6 +5559,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -5535,6 +5741,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -5709,6 +5923,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -5883,6 +6105,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -6057,6 +6287,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -6231,6 +6469,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -6405,6 +6651,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -6579,6 +6833,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -6753,6 +7015,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -6927,6 +7197,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -7101,6 +7379,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -7275,6 +7561,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -7449,6 +7743,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -7623,6 +7925,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -7797,6 +8107,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -7971,6 +8289,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -8145,6 +8471,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -8319,6 +8653,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -8493,6 +8835,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -8667,6 +9017,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -8841,6 +9199,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -9015,6 +9381,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -9189,6 +9563,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -9363,6 +9745,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -9537,6 +9927,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -9711,6 +10109,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -9885,6 +10291,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -10059,6 +10473,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -10233,6 +10655,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -10407,6 +10837,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -10581,6 +11019,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -10755,6 +11201,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -10929,6 +11383,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -11103,6 +11565,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -11277,6 +11747,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -11451,6 +11929,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -11487,75 +11973,93 @@
                             "data": [
                                 {
                                     "x": "answer_the_phone",
-                                    "y": 1
+                                    "y": 1,
+                                    "recognizableObjectRate": 0.3333333333333333
                                 },
                                 {
                                     "x": "bake_parmesan_turkey_meatballs",
-                                    "y": 0.4708333333333333
+                                    "y": 0.4708333333333333,
+                                    "recognizableObjectRate": 0.3333333333333333
                                 },
                                 {
                                     "x": "choosing_outfit",
-                                    "y": null
+                                    "y": null,
+                                    "recognizableObjectRate": 0
                                 },
                                 {
                                     "x": "clean",
-                                    "y": null
+                                    "y": null,
+                                    "recognizableObjectRate": 0
                                 },
                                 {
                                     "x": "cook_pasta",
-                                    "y": 0.29166666666666663
+                                    "y": 0.29166666666666663,
+                                    "recognizableObjectRate": 0.2222222222222222
                                 },
                                 {
                                     "x": "do_homework",
-                                    "y": 1
+                                    "y": 1,
+                                    "recognizableObjectRate": 0.14285714285714285
                                 },
                                 {
                                     "x": "fill_medicine_cabinet",
-                                    "y": 0.05263157894736842
+                                    "y": 0.05263157894736842,
+                                    "recognizableObjectRate": 0.1
                                 },
                                 {
                                     "x": "make_coffee",
-                                    "y": 0.7555555555555555
+                                    "y": 0.7555555555555555,
+                                    "recognizableObjectRate": 0.3
                                 },
                                 {
                                     "x": "make_low_carb_pancakes",
-                                    "y": null
+                                    "y": null,
+                                    "recognizableObjectRate": 0
                                 },
                                 {
                                     "x": "make_mashed_potato_casserole",
-                                    "y": null
+                                    "y": null,
+                                    "recognizableObjectRate": 0
                                 },
                                 {
                                     "x": "make_stuffed_crust_pizza",
-                                    "y": null
+                                    "y": null,
+                                    "recognizableObjectRate": 0
                                 },
                                 {
                                     "x": "make_tea",
-                                    "y": 1
+                                    "y": 1,
+                                    "recognizableObjectRate": 0.3
                                 },
                                 {
                                     "x": "play_video_games",
-                                    "y": 0.3611111111111111
+                                    "y": 0.3611111111111111,
+                                    "recognizableObjectRate": 0.23076923076923078
                                 },
                                 {
                                     "x": "prepare_birthday_card",
-                                    "y": 0.125
+                                    "y": 0.125,
+                                    "recognizableObjectRate": 0.16666666666666666
                                 },
                                 {
                                     "x": "prepare_soup",
-                                    "y": 0.6984126984126983
+                                    "y": 0.6984126984126983,
+                                    "recognizableObjectRate": 0.25
                                 },
                                 {
                                     "x": "vacuum",
-                                    "y": 1
+                                    "y": 1,
+                                    "recognizableObjectRate": 0.16666666666666666
                                 },
                                 {
                                     "x": "watch_tv",
-                                    "y": 0.8303571428571428
+                                    "y": 0.8303571428571428,
+                                    "recognizableObjectRate": 0.5714285714285714
                                 },
                                 {
                                     "x": "water_plants",
-                                    "y": 0.3333333333333333
+                                    "y": 0.3333333333333333,
+                                    "recognizableObjectRate": 0.1
                                 }
                             ],
                             "yAxisID": "y-axis-0",
@@ -11625,6 +12129,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -11799,6 +12311,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -11973,6 +12493,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -12147,6 +12675,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -12321,6 +12857,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -12495,6 +13039,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -12669,6 +13221,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -12843,6 +13403,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -13017,6 +13585,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -13191,6 +13767,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -13365,6 +13949,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -13539,6 +14131,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -13713,6 +14313,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -13887,6 +14495,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -14061,6 +14677,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -14235,6 +14859,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -14409,6 +15041,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -14583,6 +15223,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -14757,6 +15405,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -14931,6 +15587,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -15105,6 +15769,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -15279,6 +15951,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -15453,6 +16133,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -15627,6 +16315,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -15801,6 +16497,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -15975,6 +16679,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -16149,6 +16861,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -16323,6 +17043,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -16497,6 +17225,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }
@@ -16671,6 +17407,14 @@
                                 }
                             }
                         ]
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callbackCombination"
+                        },
+                        "footerFontStyle": "normal"
                     }
                 }
             }

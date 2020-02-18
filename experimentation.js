@@ -54,7 +54,8 @@ function generateCombination(criteria)
         await RUN(...combinations[i]);
 
         //Evaluate on combination
-        evaluateComb(combinations[i], groundTruth, 25);
+        //evaluateComb(combinations[i], groundTruth, 25);
+        evaluateComb2(combinations[i], groundTruth);
     }
 
     //evaluateComb2(combinations.find(comb => comb[0] === "yolov3-608__20_0.1_0.5" && comb[1] === "duckduckgo" && comb[2] ===  100 && comb[3] === "sum"), groundTruth, 25);
