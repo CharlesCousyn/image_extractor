@@ -10,6 +10,9 @@ import {getAllDataForVisualization} from "./visualizationPreprocess";
 import coco_classes from "./labelFiles/coco_classes";
 import yolo9000Labels from "./labelFiles/yolo9000Labels";
 import imageNetLabels from "./labelFiles/imageNetLabels";
+console.log("coco_classes", coco_classes.length);
+console.log("yolo9000Labels", yolo9000Labels.length);
+console.log("imageNetLabels", imageNetLabels.length);
 
 function generateCombination(criteria)
 {
@@ -58,7 +61,7 @@ function generateCombination(criteria)
         evaluateComb2(combinations[i], groundTruth);
     }
 
-    //evaluateComb2(combinations.find(comb => comb[0] === "yolov3-608__20_0.1_0.5" && comb[1] === "duckduckgo" && comb[2] ===  100 && comb[3] === "sum"), groundTruth, 25);
+    //evaluateComb2(combinations.find(comb => comb[0] === "yolov3-608__20_0.1_0.5" && comb[1] === "duckduckgo" && comb[2] ===  100 && comb[3] === "sum"), groundTruth);
 
     //Write json data for visualization
     const dataForVisualization = getAllDataForVisualization();
@@ -68,6 +71,7 @@ function generateCombination(criteria)
 
 function evaluateComb(combination, groundTruth, k)
 {
+    console.log(`Evaluation of combination: ${combination} ...`);
     const path = `resultFiles/${combination.join(" ")}`;
     const filePaths = filesSystem.readdirSync( path, { encoding: 'utf8', withFileTypes: true })
         .filter(dirent => dirent.isFile() && dirent.name !== "finalResult.json")
@@ -100,9 +104,10 @@ function evaluateComb(combination, groundTruth, k)
 
 function evaluateComb2(combination, groundTruth)
 {
+    console.log(`Evaluation of combination: ${combination} ...`);
     //Get or create groundtruth for current model
-    const pathRealGroundTruth = `./configFiles/groundTruthModel/groundTruth__${combination[0]}.json`;
-    if(!filesSystem.existsSync(pathRealGroundTruth))
+    const pathUsedGroundTruth = `./configFiles/groundTruthModel/groundTruth__${combination[0]}.json`;
+    if(!filesSystem.existsSync(pathUsedGroundTruth))
     {
         let modelOneConfig = modelConfig.find(conf => conf.modelId === combination[0]);
 
@@ -122,17 +127,13 @@ function evaluateComb2(combination, groundTruth)
                 labels = [];
         }
 
-        //Create
-        let newGroundTruth =  groundTruth.map(activityGroundTruth =>
-        {
-            activityGroundTruth.data = activityGroundTruth.data.filter((elem) => labels.indexOf(elem.label) !== -1);
-            return activityGroundTruth;
-        });
+        //Create a new ground truth wich is a deep copy
+        let newGroundTruth =  groundTruth.map(activityGroundTruth => ({query: activityGroundTruth.query, data: activityGroundTruth.data.filter((elem) => labels.indexOf(elem.label) !== -1)}));
 
-        writeJSONFile(newGroundTruth, pathRealGroundTruth);
+        writeJSONFile(newGroundTruth, pathUsedGroundTruth);
     }
     //Get good groundTruth
-    let usedGroundTruth = JSON.parse(filesSystem.readFileSync(pathRealGroundTruth));
+    let usedGroundTruth = JSON.parse(filesSystem.readFileSync(pathUsedGroundTruth));
 
     //Get final results
     const path = `resultFiles/${combination.join(" ")}`;

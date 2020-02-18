@@ -15,7 +15,7 @@
     "widthRequired": 299,
     "type": "classification",
     "bufferCount": 6,
-    "labelFileName": "imageNetLabels"
+    "labelFile": "imageNetLabels"
   },
   {
     "name": "mobilenet_v2_140_224",
@@ -24,7 +24,7 @@
     "widthRequired": 224,
     "type": "classification",
     "bufferCount": 6,
-    "labelFileName": "imageNetLabels"
+    "labelFile": "imageNetLabels"
   },
   {
     "name": "yolov3-608",

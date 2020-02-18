@@ -1,0 +1,232 @@
+[
+    {
+        "query": "fill_medicine_cabinet",
+        "data": [
+            {
+                "label": "toothbrush",
+                "relevance": 3,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "watch_tv",
+        "data": [
+            {
+                "label": "tvmonitor",
+                "relevance": 10,
+                "correct": true
+            },
+            {
+                "label": "chair",
+                "relevance": 7,
+                "correct": true
+            },
+            {
+                "label": "sofa",
+                "relevance": 7,
+                "correct": true
+            },
+            {
+                "label": "person",
+                "relevance": 5,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "water_plants",
+        "data": [
+            {
+                "label": "vase",
+                "relevance": 9,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "answer_the_phone",
+        "data": [
+            {
+                "label": "cell phone",
+                "relevance": 10,
+                "correct": true
+            },
+            {
+                "label": "person",
+                "relevance": 9,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "prepare_birthday_card",
+        "data": [
+            {
+                "label": "scissors",
+                "relevance": 8,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "prepare_soup",
+        "data": [
+            {
+                "label": "carrot",
+                "relevance": 9,
+                "correct": true
+            },
+            {
+                "label": "spoon",
+                "relevance": 9,
+                "correct": true
+            },
+            {
+                "label": "cup",
+                "relevance": 7,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "clean",
+        "data": []
+    },
+    {
+        "query": "vacuum",
+        "data": [
+            {
+                "label": "person",
+                "relevance": 9,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "choosing_outfit",
+        "data": []
+    },
+    {
+        "query": "make_tea",
+        "data": [
+            {
+                "label": "cup",
+                "relevance": 10,
+                "correct": true
+            },
+            {
+                "label": "bowl",
+                "relevance": 9,
+                "correct": true
+            },
+            {
+                "label": "spoon",
+                "relevance": 9,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "make_coffee",
+        "data": [
+            {
+                "label": "cup",
+                "relevance": 13,
+                "correct": true
+            },
+            {
+                "label": "spoon",
+                "relevance": 9,
+                "correct": true
+            },
+            {
+                "label": "bowl",
+                "relevance": 8,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "cook_pasta",
+        "data": [
+            {
+                "label": "spoon",
+                "relevance": 9,
+                "correct": true
+            },
+            {
+                "label": "fork",
+                "relevance": 9,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "do_homework",
+        "data": [
+            {
+                "label": "book",
+                "relevance": 15,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "play_video_games",
+        "data": [
+            {
+                "label": "tvmonitor",
+                "relevance": 15,
+                "correct": true
+            },
+            {
+                "label": "mouse",
+                "relevance": 10,
+                "correct": true
+            },
+            {
+                "label": "keyboard",
+                "relevance": 10,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "bake_parmesan_turkey_meatballs",
+        "data": [
+            {
+                "label": "person",
+                "relevance": 12,
+                "correct": true
+            },
+            {
+                "label": "cup",
+                "relevance": 10,
+                "correct": true
+            },
+            {
+                "label": "bowl",
+                "relevance": 10,
+                "correct": true
+            },
+            {
+                "label": "spoon",
+                "relevance": 10,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "make_stuffed_crust_pizza",
+        "data": []
+    },
+    {
+        "query": "make_mashed_potato_casserole",
+        "data": []
+    },
+    {
+        "query": "make_low_carb_pancakes",
+        "data": []
+    }
+]

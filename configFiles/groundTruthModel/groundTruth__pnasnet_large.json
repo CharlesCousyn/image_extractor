@@ -1,0 +1,214 @@
+[
+    {
+        "query": "fill_medicine_cabinet",
+        "data": [
+            {
+                "label": "bathtub",
+                "relevance": 3,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "watch_tv",
+        "data": [
+            {
+                "label": "television",
+                "relevance": 15,
+                "correct": true
+            },
+            {
+                "label": "monitor",
+                "relevance": 10,
+                "correct": true
+            },
+            {
+                "label": "screen",
+                "relevance": 8,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "water_plants",
+        "data": [
+            {
+                "label": "vase",
+                "relevance": 9,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "answer_the_phone",
+        "data": [
+            {
+                "label": "cellular telephone",
+                "relevance": 10,
+                "correct": true
+            },
+            {
+                "label": "pay-phone",
+                "relevance": 6,
+                "correct": true
+            },
+            {
+                "label": "dial telephone",
+                "relevance": 5,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "prepare_birthday_card",
+        "data": []
+    },
+    {
+        "query": "prepare_soup",
+        "data": [
+            {
+                "label": "soup bowl",
+                "relevance": 9,
+                "correct": true
+            },
+            {
+                "label": "cup",
+                "relevance": 7,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "clean",
+        "data": [
+            {
+                "label": "bucket",
+                "relevance": 10,
+                "correct": true
+            },
+            {
+                "label": "broom",
+                "relevance": 9,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "vacuum",
+        "data": []
+    },
+    {
+        "query": "choosing_outfit",
+        "data": [
+            {
+                "label": "wardrobe",
+                "relevance": 15,
+                "correct": true
+            },
+            {
+                "label": "suit",
+                "relevance": 10,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "make_tea",
+        "data": [
+            {
+                "label": "cup",
+                "relevance": 10,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "make_coffee",
+        "data": [
+            {
+                "label": "cup",
+                "relevance": 13,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "cook_pasta",
+        "data": [
+            {
+                "label": "strainer",
+                "relevance": 14,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "do_homework",
+        "data": [
+            {
+                "label": "notebook",
+                "relevance": 14,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "play_video_games",
+        "data": [
+            {
+                "label": "television",
+                "relevance": 15,
+                "correct": true
+            },
+            {
+                "label": "screen",
+                "relevance": 15,
+                "correct": true
+            },
+            {
+                "label": "mouse",
+                "relevance": 10,
+                "correct": true
+            },
+            {
+                "label": "joystick",
+                "relevance": 10,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "bake_parmesan_turkey_meatballs",
+        "data": [
+            {
+                "label": "cup",
+                "relevance": 10,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "make_stuffed_crust_pizza",
+        "data": [
+            {
+                "label": "dough",
+                "relevance": 15,
+                "correct": true
+            }
+        ]
+    },
+    {
+        "query": "make_mashed_potato_casserole",
+        "data": []
+    },
+    {
+        "query": "make_low_carb_pancakes",
+        "data": [
+            {
+                "label": "strawberry",
+                "relevance": 5,
+                "correct": true
+            }
+        ]
+    }
+]
