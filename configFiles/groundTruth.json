@@ -735,6 +735,11 @@
     [
       {
         "label": "turkey",
+        "relevance": 13,
+        "correct": true
+      },
+	  {
+        "label": "person",
         "relevance": 12,
         "correct": true
       },
@@ -758,8 +763,18 @@
         "relevance": 10,
         "correct": true
       },
+	  {
+        "label": "bowl",
+        "relevance": 10,
+        "correct": true
+      },
       {
         "label": "teaspoon",
+        "relevance": 10,
+        "correct": true
+      },
+	  {
+        "label": "spoon",
         "relevance": 10,
         "correct": true
       },

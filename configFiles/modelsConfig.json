@@ -5,7 +5,8 @@
     "heightRequired": 331,
     "widthRequired": 331,
     "type": "classification",
-    "bufferCount": 6
+    "bufferCount": 6,
+    "labelFile": "imageNetLabels"
   },
   {
     "name": "inception_resnet_v2",
@@ -13,7 +14,8 @@
     "heightRequired": 299,
     "widthRequired": 299,
     "type": "classification",
-    "bufferCount": 6
+    "bufferCount": 6,
+    "labelFileName": "imageNetLabels"
   },
   {
     "name": "mobilenet_v2_140_224",
@@ -21,7 +23,8 @@
     "heightRequired": 224,
     "widthRequired": 224,
     "type": "classification",
-    "bufferCount": 6
+    "bufferCount": 6,
+    "labelFileName": "imageNetLabels"
   },
   {
     "name": "yolov3-608",
