@@ -3,6 +3,16 @@
         "query": "fill_medicine_cabinet",
         "data": [
             {
+                "label": "person",
+                "relevance": 11,
+                "correct": true
+            },
+            {
+                "label": "bottle",
+                "relevance": 11,
+                "correct": true
+            },
+            {
                 "label": "cabinet",
                 "relevance": 9,
                 "correct": true
@@ -53,6 +63,16 @@
                 "correct": true
             },
             {
+                "label": "laptop",
+                "relevance": 5,
+                "correct": true
+            },
+            {
+                "label": "computer",
+                "relevance": 5,
+                "correct": true
+            },
+            {
                 "label": "person",
                 "relevance": 5,
                 "correct": true
@@ -62,6 +82,11 @@
     {
         "query": "water_plants",
         "data": [
+            {
+                "label": "person",
+                "relevance": 10,
+                "correct": true
+            },
             {
                 "label": "plant",
                 "relevance": 10,
@@ -128,7 +153,22 @@
                 "correct": true
             },
             {
+                "label": "person",
+                "relevance": 10,
+                "correct": true
+            },
+            {
                 "label": "pen",
+                "relevance": 9,
+                "correct": true
+            },
+            {
+                "label": "laptop",
+                "relevance": 9,
+                "correct": true
+            },
+            {
+                "label": "computer",
                 "relevance": 9,
                 "correct": true
             },
@@ -147,6 +187,11 @@
     {
         "query": "prepare_soup",
         "data": [
+            {
+                "label": "person",
+                "relevance": 12,
+                "correct": true
+            },
             {
                 "label": "pan",
                 "relevance": 12,
@@ -169,6 +214,11 @@
             },
             {
                 "label": "soup bowl",
+                "relevance": 9,
+                "correct": true
+            },
+            {
+                "label": "bowl",
                 "relevance": 9,
                 "correct": true
             },
@@ -203,6 +253,11 @@
         "query": "clean",
         "data": [
             {
+                "label": "person",
+                "relevance": 15,
+                "correct": true
+            },
+            {
                 "label": "brush",
                 "relevance": 14,
                 "correct": true
@@ -233,13 +288,13 @@
         "query": "vacuum",
         "data": [
             {
-                "label": "floor",
-                "relevance": 10,
+                "label": "person",
+                "relevance": 15,
                 "correct": true
             },
             {
-                "label": "person",
-                "relevance": 9,
+                "label": "floor",
+                "relevance": 10,
                 "correct": true
             }
         ]
@@ -247,6 +302,31 @@
     {
         "query": "choosing_outfit",
         "data": [
+            {
+                "label": "person",
+                "relevance": 16,
+                "correct": true
+            },
+            {
+                "label": "bag",
+                "relevance": 19,
+                "correct": true
+            },
+            {
+                "label": "tie",
+                "relevance": 19,
+                "correct": true
+            },
+            {
+                "label": "clothing",
+                "relevance": 15,
+                "correct": true
+            },
+            {
+                "label": "umbrella",
+                "relevance": 15,
+                "correct": true
+            },
             {
                 "label": "hanger",
                 "relevance": 15,
@@ -298,6 +378,11 @@
                 "correct": true
             },
             {
+                "label": "person",
+                "relevance": 15,
+                "correct": true
+            },
+            {
                 "label": "pan",
                 "relevance": 15,
                 "correct": true
@@ -337,6 +422,11 @@
     {
         "query": "make_coffee",
         "data": [
+            {
+                "label": "person",
+                "relevance": 15,
+                "correct": true
+            },
             {
                 "label": "coffee",
                 "relevance": 15,
@@ -413,6 +503,11 @@
                 "correct": true
             },
             {
+                "label": "cup",
+                "relevance": 9,
+                "correct": true
+            },
+            {
                 "label": "fork",
                 "relevance": 9,
                 "correct": true
@@ -422,6 +517,16 @@
     {
         "query": "do_homework",
         "data": [
+            {
+                "label": "person",
+                "relevance": 15,
+                "correct": true
+            },
+            {
+                "label": "chair",
+                "relevance": 15,
+                "correct": true
+            },
             {
                 "label": "book",
                 "relevance": 15,
@@ -458,6 +563,21 @@
         "query": "play_video_games",
         "data": [
             {
+                "label": "person",
+                "relevance": 15,
+                "correct": true
+            },
+            {
+                "label": "chair",
+                "relevance": 15,
+                "correct": true
+            },
+            {
+                "label": "sofa",
+                "relevance": 15,
+                "correct": true
+            },
+            {
                 "label": "television",
                 "relevance": 15,
                 "correct": true
@@ -465,6 +585,11 @@
             {
                 "label": "screen",
                 "relevance": 15,
+                "correct": true
+            },
+            {
+                "label": "laptop",
+                "relevance": 11,
                 "correct": true
             },
             {
@@ -548,7 +673,22 @@
         "query": "make_stuffed_crust_pizza",
         "data": [
             {
+                "label": "person",
+                "relevance": 15,
+                "correct": true
+            },
+            {
+                "label": "bowl",
+                "relevance": 15,
+                "correct": true
+            },
+            {
                 "label": "dough",
+                "relevance": 15,
+                "correct": true
+            },
+            {
+                "label": "pizza",
                 "relevance": 15,
                 "correct": true
             },
@@ -577,6 +717,26 @@
     {
         "query": "make_mashed_potato_casserole",
         "data": [
+            {
+                "label": "person",
+                "relevance": 15,
+                "correct": true
+            },
+            {
+                "label": "bowl",
+                "relevance": 15,
+                "correct": true
+            },
+            {
+                "label": "spoon",
+                "relevance": 15,
+                "correct": true
+            },
+            {
+                "label": "fork",
+                "relevance": 15,
+                "correct": true
+            },
             {
                 "label": "potato",
                 "relevance": 15,
@@ -612,6 +772,21 @@
     {
         "query": "make_low_carb_pancakes",
         "data": [
+            {
+                "label": "person",
+                "relevance": 15,
+                "correct": true
+            },
+            {
+                "label": "cup",
+                "relevance": 15,
+                "correct": true
+            },
+            {
+                "label": "bowl",
+                "relevance": 15,
+                "correct": true
+            },
             {
                 "label": "milk",
                 "relevance": 15,

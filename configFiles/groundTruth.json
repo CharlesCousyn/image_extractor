@@ -8,6 +8,16 @@
         "relevance": 11,
         "correct": true
       },
+	  {
+        "label": "person",
+        "relevance": 11,
+        "correct": true
+      },
+	  {
+        "label": "bottle",
+        "relevance": 11,
+        "correct": true
+      },
       {
         "label": "medication",
         "relevance": 10,
@@ -59,7 +69,7 @@
     "query": "watch_tv",
     "data":
     [
-      {
+	  {
         "label": "television",
         "relevance": 15,
         "correct": true
@@ -89,7 +99,26 @@
         "relevance": 7,
         "correct": true
       },
-
+      {
+        "label": "laptop",
+        "relevance": 5,
+        "correct": true
+      },
+      {
+        "label": "desktop",
+        "relevance": 5,
+        "correct": true
+      },
+      {
+        "label": "computer",
+        "relevance": 5,
+        "correct": true
+      },
+      {
+        "label": "cell phone",
+        "relevance": 5,
+        "correct": true
+      },
       {
         "label": "person",
         "relevance": 5,
@@ -102,6 +131,16 @@
     "data":
     [
       {
+        "label": "person",
+        "relevance": 10,
+        "correct": true
+      },
+	  {
+        "label": "pottedplant",
+        "relevance": 10,
+        "correct": true
+      },
+	  {
         "label": "plant",
         "relevance": 10,
         "correct": true
@@ -198,6 +237,11 @@
         "relevance": 10,
         "correct": true
       },
+	  {
+        "label": "person",
+        "relevance": 10,
+        "correct": true
+      },
       {
         "label": "cardboard",
         "relevance": 10,
@@ -205,6 +249,21 @@
       },
       {
         "label": "pen",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "laptop",
+        "relevance": 9,
+        "correct": true
+      },
+	  {
+        "label": "computer",
+        "relevance": 9,
+        "correct": true
+      },
+	  {
+        "label": "desktop",
         "relevance": 9,
         "correct": true
       },
@@ -230,6 +289,11 @@
     "data":
     [
       {
+        "label": "person",
+        "relevance": 12,
+        "correct": true
+      },
+	  {
         "label": "pan",
         "relevance": 12,
         "correct": true
@@ -251,6 +315,11 @@
       },
       {
         "label": "soup bowl",
+        "relevance": 9,
+        "correct": true
+      },
+      {
+        "label": "bowl",
         "relevance": 9,
         "correct": true
       },
@@ -297,6 +366,11 @@
     [
       {
         "label": "vacuum cleaner",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "person",
         "relevance": 15,
         "correct": true
       },
@@ -357,6 +431,11 @@
     "data":
     [
       {
+        "label": "person",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
         "label": "vacuum cleaner",
         "relevance": 15,
         "correct": true
@@ -377,11 +456,6 @@
         "correct": true
       },
       {
-        "label": "person",
-        "relevance": 9,
-        "correct": true
-      },
-      {
         "label": "carpet",
         "relevance": 5,
         "correct": true
@@ -393,7 +467,37 @@
     "data":
     [
       {
+        "label": "person",
+        "relevance": 16,
+        "correct": true
+      },
+	  {
+        "label": "handbag",
+        "relevance": 19,
+        "correct": true
+      },
+	  {
+        "label": "bag",
+        "relevance": 19,
+        "correct": true
+      },
+	  {
+        "label": "tie",
+        "relevance": 19,
+        "correct": true
+      },
+	  {
         "label": "clothes",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "clothing",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "umbrella",
         "relevance": 15,
         "correct": true
       },
@@ -463,6 +567,11 @@
         "relevance": 15,
         "correct": true
       },
+	  {
+        "label": "person",
+        "relevance": 15,
+        "correct": true
+      },
       {
         "label": "pan",
         "relevance": 15,
@@ -515,6 +624,11 @@
     "data":
     [
       {
+        "label": "person",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
         "label": "coffee",
         "relevance": 15,
         "correct": true
@@ -610,6 +724,11 @@
         "relevance": 9,
         "correct": true
       },
+	  {
+        "label": "cup",
+        "relevance": 9,
+        "correct": true
+      },
       {
         "label": "fork",
         "relevance": 9,
@@ -622,6 +741,16 @@
     "data":
     [
       {
+        "label": "person",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "chair",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
         "label": "book",
         "relevance": 15,
         "correct": true
@@ -663,6 +792,31 @@
     "data":
     [
       {
+        "label": "person",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "chair",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "sofa",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "cell phone",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "remote",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
         "label": "television",
         "relevance": 15,
         "correct": true
@@ -680,6 +834,16 @@
       {
         "label": "game console",
         "relevance": 12,
+        "correct": true
+      },
+      {
+        "label": "desktop",
+        "relevance": 11,
+        "correct": true
+      },
+      {
+        "label": "laptop",
+        "relevance": 11,
         "correct": true
       },
       {
@@ -800,7 +964,22 @@
     "data":
     [
       {
+        "label": "person",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "bowl",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
         "label": "dough",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "pizza",
         "relevance": 15,
         "correct": true
       },
@@ -861,6 +1040,26 @@
     "data":
     [
       {
+        "label": "person",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "bowl",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "spoon",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "fork",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
         "label": "potato",
         "relevance": 15,
         "correct": true
@@ -922,7 +1121,27 @@
     "data":
     [
       {
+        "label": "person",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
         "label": "flour",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "cup",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "bowl",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "cake",
         "relevance": 15,
         "correct": true
       },

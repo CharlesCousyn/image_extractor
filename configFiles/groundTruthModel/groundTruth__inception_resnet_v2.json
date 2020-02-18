@@ -26,6 +26,11 @@
                 "label": "screen",
                 "relevance": 8,
                 "correct": true
+            },
+            {
+                "label": "laptop",
+                "relevance": 5,
+                "correct": true
             }
         ]
     },
@@ -61,7 +66,13 @@
     },
     {
         "query": "prepare_birthday_card",
-        "data": []
+        "data": [
+            {
+                "label": "laptop",
+                "relevance": 9,
+                "correct": true
+            }
+        ]
     },
     {
         "query": "prepare_soup",
@@ -101,6 +112,11 @@
         "query": "choosing_outfit",
         "data": [
             {
+                "label": "umbrella",
+                "relevance": 15,
+                "correct": true
+            },
+            {
                 "label": "wardrobe",
                 "relevance": 15,
                 "correct": true
@@ -139,6 +155,11 @@
                 "label": "strainer",
                 "relevance": 14,
                 "correct": true
+            },
+            {
+                "label": "cup",
+                "relevance": 9,
+                "correct": true
             }
         ]
     },
@@ -163,6 +184,11 @@
             {
                 "label": "screen",
                 "relevance": 15,
+                "correct": true
+            },
+            {
+                "label": "laptop",
+                "relevance": 11,
                 "correct": true
             },
             {
@@ -194,6 +220,11 @@
                 "label": "dough",
                 "relevance": 15,
                 "correct": true
+            },
+            {
+                "label": "pizza",
+                "relevance": 15,
+                "correct": true
             }
         ]
     },
@@ -204,6 +235,11 @@
     {
         "query": "make_low_carb_pancakes",
         "data": [
+            {
+                "label": "cup",
+                "relevance": 15,
+                "correct": true
+            },
             {
                 "label": "strawberry",
                 "relevance": 5,
