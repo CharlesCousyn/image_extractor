@@ -250,16 +250,7 @@ function generateChartConfigFromOneCriterionGlobal(criterionIndex, classedCombin
                         axis: 'y',
                         callbacks: {
                             // Use the footer callback to display the result of a function
-                            label:
-                                (tooltipItem, data) => {
-                                    let mean = 0.0;
-                                    let sdMAP = 0.0;
-                                    mean = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].y;
-                                    sdMAP = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].sdMAP;
-
-                                    //return ["Mean: " + mean, "Standard Deviation: " + sdMAP];
-                                    return /*[*/"Mean: " + mean/*, "Standard Deviation: " + sdMAP]*/;
-                                }
+                            label: "callBackGlobal"
                         },
                         footerFontStyle: 'normal'
                     }
@@ -277,7 +268,7 @@ function generateChartConfigFromOneCombination(combination)
         {
             label: `Performance per activity with the config ${combination.join(" ")}`,
             borderWidth: 1,
-            data: finalResultJson.APs.map(obj => ({x: obj.query, y: obj.AP})),
+            data: finalResultJson.APs.map(obj => ({x: obj.query, y: obj.AP, recognizableObjectRate: obj.recognizableObjectRate})),
             yAxisID: "y-axis-0",
             backgroundColor: hex2rgba(colorCodes[0], 0.5),
             borderColor: colorCodes[0]
@@ -329,6 +320,16 @@ function generateChartConfigFromOneCombination(combination)
                                         }
                                 }
                             ]
+                    },
+                tooltips:
+                    {
+                        mode: 'index',
+                        axis: 'y',
+                        callbacks: {
+                            // Use the footer callback to display the result of a function
+                            label: "callBackCombination"
+                        },
+                        footerFontStyle: 'normal'
                     }
             }
     };
