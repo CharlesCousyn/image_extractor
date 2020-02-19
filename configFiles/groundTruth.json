@@ -9,6 +9,11 @@
         "correct": true
       },
 	  {
+        "label": "medicine chest",
+        "relevance": 11,
+        "correct": true
+      },
+	  {
         "label": "person",
         "relevance": 11,
         "correct": true
@@ -38,6 +43,11 @@
         "relevance": 6,
         "correct": true
       },
+	  {
+        "label": "pill bottle",
+        "relevance": 6,
+        "correct": true
+      },
       {
         "label": "bandage",
         "relevance": 5,
@@ -46,6 +56,16 @@
       {
         "label": "band-aid",
         "relevance": 5,
+        "correct": true
+      },
+      {
+        "label": "Band Aid",
+        "relevance": 5,
+        "correct": true
+      },
+      {
+        "label": "syringe",
+        "relevance": 4,
         "correct": true
       },
       {
@@ -71,6 +91,11 @@
     [
 	  {
         "label": "television",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "home theater",
         "relevance": 15,
         "correct": true
       },
@@ -100,12 +125,47 @@
         "correct": true
       },
       {
+        "label": "cinema",
+        "relevance": 7,
+        "correct": true
+      },
+      {
+        "label": "studio couch",
+        "relevance": 7,
+        "correct": true
+      },
+      {
+        "label": "entertainment center",
+        "relevance": 7,
+        "correct": true
+      },
+      {
+        "label": "projector",
+        "relevance": 7,
+        "correct": true
+      },
+      {
+        "label": "loudspeaker",
+        "relevance": 7,
+        "correct": true
+      },
+      {
         "label": "laptop",
         "relevance": 5,
         "correct": true
       },
       {
-        "label": "desktop",
+        "label": "desktop computer",
+        "relevance": 5,
+        "correct": true
+      },
+      {
+        "label": "remote",
+        "relevance": 5,
+        "correct": true
+      },
+      {
+        "label": "remote control",
         "relevance": 5,
         "correct": true
       },
@@ -136,7 +196,22 @@
         "correct": true
       },
 	  {
+        "label": "greenhouse",
+        "relevance": 10,
+        "correct": true
+      },
+	  {
         "label": "pottedplant",
+        "relevance": 10,
+        "correct": true
+      },
+	  {
+        "label": "daisy",
+        "relevance": 10,
+        "correct": true
+      },
+	  {
+        "label": "pot",
         "relevance": 10,
         "correct": true
       },
@@ -202,6 +277,16 @@
         "correct": true
       },
       {
+        "label": "microphone",
+        "relevance": 10,
+        "correct": true
+      },
+	  {
+        "label": "hand-held computer",
+        "relevance": 10,
+        "correct": true
+      },
+      {
         "label": "cellular telephone",
         "relevance": 10,
         "correct": true
@@ -238,6 +323,11 @@
         "correct": true
       },
 	  {
+        "label": "envelope",
+        "relevance": 10,
+        "correct": true
+      },
+	  {
         "label": "person",
         "relevance": 10,
         "correct": true
@@ -263,7 +353,7 @@
         "correct": true
       },
 	  {
-        "label": "desktop",
+        "label": "desktop computer",
         "relevance": 9,
         "correct": true
       },
@@ -279,6 +369,11 @@
       },
       {
         "label": "scissors",
+        "relevance": 8,
+        "correct": true
+      },
+      {
+        "label": "carton",
         "relevance": 8,
         "correct": true
       }
@@ -334,7 +429,17 @@
         "correct": true
       },
       {
+        "label": "caldron",
+        "relevance": 8,
+        "correct": true
+      },
+      {
         "label": "salt",
+        "relevance": 8,
+        "correct": true
+      },
+      {
+        "label": "consomme",
         "relevance": 8,
         "correct": true
       },
@@ -436,6 +541,11 @@
         "correct": true
       },
 	  {
+        "label": "vacuum",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
         "label": "vacuum cleaner",
         "relevance": 15,
         "correct": true
@@ -487,12 +597,52 @@
         "correct": true
       },
 	  {
+        "label": "Windsor tie",
+        "relevance": 19,
+        "correct": true
+      },
+	  {
         "label": "clothes",
         "relevance": 15,
         "correct": true
       },
 	  {
+        "label": "running shoe",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "sock",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "apron",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "sarong",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "sandal",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "kimono",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
         "label": "clothing",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "sweatshirt",
         "relevance": 15,
         "correct": true
       },
@@ -517,7 +667,62 @@
         "correct": true
       },
       {
+        "label": "brassiere",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "cardigan",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "sunglass",
+        "relevance": 10,
+        "correct": true
+      },
+	  {
+        "label": "sunglasses",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "jersey",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "miniskirt",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "gown",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "abaya",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "overskirt",
+        "relevance": 10,
+        "correct": true
+      },
+      {
         "label": "shirt",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "stole",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "maillot",
         "relevance": 10,
         "correct": true
       },
@@ -526,8 +731,18 @@
         "relevance": 10,
         "correct": true
       },
+	  {
+        "label": "jean",
+        "relevance": 10,
+        "correct": true
+      },
       {
         "label": "pants",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "bow tie",
         "relevance": 10,
         "correct": true
       },
@@ -542,6 +757,11 @@
         "correct": true
       },
       {
+        "label": "pajama",
+        "relevance": 10,
+        "correct": true
+      },
+      {
         "label": "suit",
         "relevance": 10,
         "correct": true
@@ -552,7 +772,42 @@
         "correct": true
       },
       {
+        "label": "lab coat",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "trench coat",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "fur coat",
+        "relevance": 10,
+        "correct": true
+      },
+      {
         "label": "coat",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "cloak",
+        "relevance": 10,
+        "correct": true
+      },
+	  {
+        "label": "cowboy boot",
+        "relevance": 10,
+        "correct": true
+      },
+	  {
+        "label": "cowboy hat",
+        "relevance": 10,
+        "correct": true
+      },
+	  {
+        "label": "backpack",
         "relevance": 10,
         "correct": true
       }
@@ -616,6 +871,11 @@
         "label": "tea-pot",
         "relevance": 9,
         "correct": true
+      },
+      {
+        "label": "teapot",
+        "relevance": 9,
+        "correct": true
       }
     ]
   },
@@ -625,6 +885,16 @@
     [
       {
         "label": "person",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "espresso maker",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "espresso",
         "relevance": 15,
         "correct": true
       },
@@ -651,6 +921,11 @@
       {
         "label": "glass",
         "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "coffee mug",
+        "relevance": 9,
         "correct": true
       },
       {
@@ -686,6 +961,16 @@
     [
       {
         "label": "pan",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "frying pan",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "carbonara",
         "relevance": 15,
         "correct": true
       },
@@ -725,6 +1010,11 @@
         "correct": true
       },
 	  {
+        "label": "wooden spoon",
+        "relevance": 9,
+        "correct": true
+      },
+	  {
         "label": "cup",
         "relevance": 9,
         "correct": true
@@ -756,6 +1046,16 @@
         "correct": true
       },
       {
+        "label": "desk",
+        "relevance": 14,
+        "correct": true
+      },
+      {
+        "label": "binder",
+        "relevance": 14,
+        "correct": true
+      },
+      {
         "label": "notebook",
         "relevance": 14,
         "correct": true
@@ -771,6 +1071,16 @@
         "correct": true
       },
       {
+        "label": "pencil sharpener",
+        "relevance": 14,
+        "correct": true
+      },
+      {
+        "label": "pencil box",
+        "relevance": 14,
+        "correct": true
+      },
+      {
         "label": "pencil",
         "relevance": 14,
         "correct": true
@@ -781,7 +1091,32 @@
         "correct": true
       },
       {
+        "label": "fountain pen",
+        "relevance": 10,
+        "correct": true
+      },
+      {
         "label": "eraser",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "rubber eraser",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "book jacket",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "rule",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "ballpoint",
         "relevance": 10,
         "correct": true
       }
@@ -812,12 +1147,32 @@
         "correct": true
       },
 	  {
+        "label": "microphone",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "cellular telephone",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
         "label": "remote",
         "relevance": 15,
         "correct": true
       },
 	  {
+        "label": "remote control",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
         "label": "television",
+        "relevance": 15,
+        "correct": true
+      },
+      {
+        "label": "iPod",
         "relevance": 15,
         "correct": true
       },
@@ -832,12 +1187,17 @@
         "correct": true
       },
       {
+        "label": "monitor",
+        "relevance": 15,
+        "correct": true
+      },
+      {
         "label": "game console",
         "relevance": 12,
         "correct": true
       },
       {
-        "label": "desktop",
+        "label": "desktop computer",
         "relevance": 11,
         "correct": true
       },
@@ -858,6 +1218,11 @@
       },
       {
         "label": "keyboard",
+        "relevance": 10,
+        "correct": true
+      },
+      {
+        "label": "computer keyboard",
         "relevance": 10,
         "correct": true
       },
@@ -903,7 +1268,37 @@
         "correct": true
       },
 	  {
+        "label": "frying pan",
+        "relevance": 13,
+        "correct": true
+      },
+	  {
+        "label": "mixing bowl",
+        "relevance": 13,
+        "correct": true
+      },
+	  {
+        "label": "bowl",
+        "relevance": 13,
+        "correct": true
+      },
+	  {
+        "label": "wok",
+        "relevance": 13,
+        "correct": true
+      },
+	  {
+        "label": "pan",
+        "relevance": 13,
+        "correct": true
+      },
+	  {
         "label": "person",
+        "relevance": 12,
+        "correct": true
+      },
+      {
+        "label": "plate",
         "relevance": 12,
         "correct": true
       },
@@ -1070,6 +1465,11 @@
         "correct": true
       },
       {
+        "label": "mashed potato",
+        "relevance": 15,
+        "correct": true
+      },
+      {
         "label": "mash potatoes",
         "relevance": 15,
         "correct": true
@@ -1113,6 +1513,11 @@
         "label": "pan",
         "relevance": 5,
         "correct": true
+      },
+      {
+        "label": "frying pan",
+        "relevance": 5,
+        "correct": true
       }
     ]
   },
@@ -1126,7 +1531,27 @@
         "correct": true
       },
 	  {
+        "label": "frying pan",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "pan",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
         "label": "flour",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "dough",
+        "relevance": 15,
+        "correct": true
+      },
+	  {
+        "label": "spatula",
         "relevance": 15,
         "correct": true
       },
