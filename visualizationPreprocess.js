@@ -1,5 +1,6 @@
 import filesSystem from "fs";
 const colorCodes = ["#CC0000", "#FF6633", "#FFFF00", "#00CC00", "#009999", "#0099FF", "#0000FF", "#9900CC", "#FF6633", "#FF0099"];
+import {usedPerformanceMetrics} from "./experimentation";
 
 function hex2rgba(hex, alpha = 1)
 {
@@ -29,12 +30,34 @@ export function getAllDataForVisualization()
 
 
     return ({
-        searchEngine: generateChartConfigFromOneCriterion(1, perSearchEngine),
-        recognitionModel: generateChartConfigFromOneCriterion(0, perRecognitionModel),
-        numberOfResultsUsed: generateChartConfigFromOneCriterion(2, perNumberOfResultsUsed),
-        searchEngineGlobal: generateChartConfigFromOneCriterionGlobal(1, perSearchEngine),
-        recognitionModelGlobal: generateChartConfigFromOneCriterionGlobal(0, perRecognitionModel),
-        numberOfResultsUsedGlobal: generateChartConfigFromOneCriterionGlobal(2, perNumberOfResultsUsed),
+        metricsNames: Object.keys(usedPerformanceMetrics),
+        perCriterion:
+        [
+            {
+                criterion: "searchEngine",
+                config: generateChartConfigFromOneCriterion(1, perSearchEngine)
+            },
+            {
+                criterion: "recognitionModel",
+                config: generateChartConfigFromOneCriterion(0, perRecognitionModel)
+            },
+            {
+                criterion: "numberOfResultsUsed",
+                config: generateChartConfigFromOneCriterion(2, perNumberOfResultsUsed)
+            },
+            {
+                criterion: "searchEngineGlobal",
+                config: generateChartConfigFromOneCriterionGlobal(1, perSearchEngine)
+            },
+            {
+                criterion: "recognitionModelGlobal",
+                config: generateChartConfigFromOneCriterionGlobal(0, perRecognitionModel)
+            },
+            {
+                criterion: "numberOfResultsUsedGlobal",
+                config: generateChartConfigFromOneCriterionGlobal(2, perNumberOfResultsUsed)
+            }
+        ],
         perCombination: perCombination
     });
 }
@@ -68,32 +91,38 @@ function generateChartConfigFromOneCriterion(criterionIndex, classedCombinations
         .sort((a,b) => a.localeCompare(b));
 
     //Computing data
-    const allMAPPerCriterionValue = Object.keys(classedCombinations)
-        .map(key => (
+    let meanNames=[];
+    let dataObj = {};
+    Object.keys(classedCombinations)
+        .forEach(key =>
             {
-                criterionValue: key,
-                allMAP: classedCombinations[key]
-                    .map(comb =>
+                const allMeansCombs = classedCombinations[key].map(comb =>
+                {
+                    const combOld = [...comb];
+                    comb.splice(criterionIndex, 0, key);
+                    let means = JSON.parse(filesSystem.readFileSync( `./resultFiles/${comb.join(" ")}/finalResult.json`)).means;
+                    let obj = {x: combOld.join(" ")};
+
+                    Object.keys(means).forEach((meanName, indexName) =>
+                    {
+                        if(indexName === 0)
                         {
-                            const combOld = [...comb];
-                            comb.splice(criterionIndex, 0, key);
-                            return (
-                                {
-                                    combination: combOld.join(" "),
-                                    mAP: JSON.parse(filesSystem.readFileSync( `./resultFiles/${comb.join(" ")}/finalResult.json`)).mAP
-                                })}
-                    )
-            })
+                            obj.y = means[meanName];
+                        }
+                        obj[meanName] = means[meanName];
+                    });
+                    return obj;
+                });
+
+                dataObj[key] = allMeansCombs;
+            }
         );
 
-    const datasets = allMAPPerCriterionValue.map((obj, indexCriterionValue) =>
+
+    const datasets = Object.keys(dataObj).map((criterionValue, indexCriterionValue) =>
         ({
-            label: obj.criterionValue,
-            data: orderedLabels.map(label =>
-            {
-                const index = obj.allMAP.map(mAPObj => mAPObj.combination).indexOf(label);
-                return (index !== -1 ? obj.allMAP[index].mAP : undefined);
-            }),
+            label: criterionValue,
+            data: dataObj[criterionValue],
             yAxisID: "perf",
             backgroundColor: colorCodes[indexCriterionValue]
         })
@@ -159,33 +188,62 @@ function generateChartConfigFromOneCriterionGlobal(criterionIndex, classedCombin
         .keys(classedCombinations);
 
     //Computing data
-    const mMAPPerCriterionValue = Object.keys(classedCombinations)
+    let meanNames=[];
+    const meanMeansPerCriterionValue = Object.keys(classedCombinations)
         .map(key =>
             {
-                const allMAP = classedCombinations[key].map(comb => JSON.parse(filesSystem.readFileSync( `./resultFiles/${comb.join(" ")}/finalResult.json`)).mAP);
-                const mMAP = allMAP.reduce((sum, curr) => sum + curr, 0) / allMAP.length;
-                const sdMAP = Math.sqrt(allMAP.reduce((sum, curr) => sum + Math.pow(curr - mMAP, 2), 0) / allMAP.length);
+                const allMeansCombs = classedCombinations[key].map(comb => JSON.parse(filesSystem.readFileSync( `./resultFiles/${comb.join(" ")}/finalResult.json`)).means);
+                meanNames = Object.keys(allMeansCombs[0]);
+                let obj = {criterionValue: key};
 
-                return ({criterionValue: key, mMAP: mMAP, sdMAP: sdMAP});
+                meanNames.forEach(name =>
+                {
+                    const meanMeans = allMeansCombs.reduce((sum, curr) => sum + curr[name], 0) / allMeansCombs.length;
+                    const standardDeviationMeans = Math.sqrt(allMeansCombs.reduce((sum, curr) => sum + Math.pow(curr[name] - meanMeans, 2), 0) / allMeansCombs.length);
+                    obj[`mean_${name}`] = meanMeans;
+                    obj[`standardDeviation_${name}`] = standardDeviationMeans;
+                });
+                return obj;
             }
         );
 
-
-    let errorBars = {};
-    mMAPPerCriterionValue.forEach(obj =>
+    //Create errors bars
+    let allErrorBars = {};
+    meanNames.forEach(name =>
     {
-        errorBars[obj.criterionValue] = {plus: obj.sdMAP, minus: - obj.sdMAP};
+        let errorBars = {};
+        meanMeansPerCriterionValue.forEach(obj =>
+        {
+            errorBars[obj.criterionValue] = {plus: obj[`standardDeviation_${name}`], minus: - obj[`standardDeviation_${name}`]};
+        });
+        allErrorBars[name] = errorBars;
+    });
+
+    //Create data in dataset
+    let dataInDataset = meanMeansPerCriterionValue.map(obj =>
+    {
+        let res = {x: obj.criterionValue};
+        Object.keys(obj).forEach((name, index) =>
+        {
+            if(index === 1)
+            {
+                res.y = obj[name];
+            }
+            res[name] = obj[name];
+        });
+        return res;
     });
 
     const datasets = [
         {
             label: "Criterion",
             borderWidth: 1,
-            data: mMAPPerCriterionValue.map(obj => ({x: obj.criterionValue, y: obj.mMAP, sdMAP: obj.sdMAP})),
-            errorBars: errorBars,
+            data: dataInDataset,
+            errorBars: Object.keys(allErrorBars).map(key => allErrorBars[key])[0],
             yAxisID: "y-axis-0",
             backgroundColor: hex2rgba(colorCodes[0], 0.5),
-            borderColor: colorCodes[0]
+            borderColor: colorCodes[0],
+            allErrorBars: allErrorBars
         }
     ];
 
@@ -264,18 +322,33 @@ function generateChartConfigFromOneCombination(combination)
 {
     const finalResultJson = JSON.parse(filesSystem.readFileSync( `./resultFiles/${combination.join(" ")}/finalResult.json`));
 
+    let dataInDataset = finalResultJson.performanceMetrics.map(obj =>
+    {
+        let res = {x: obj.query};
+        Object.keys(obj.metrics).forEach((name, index) =>
+        {
+            if(index === 0)
+            {
+                res.y = obj.metrics[name];
+            }
+            res[name] = obj.metrics[name];
+        });
+        return res;
+    });
+
+
     const datasets = [
         {
             label: `Performance per activity with the config ${combination.join(" ")}`,
             borderWidth: 1,
-            data: finalResultJson.APs.map(obj => ({x: obj.query, y: obj.AP, recognizableObjectRate: obj.recognizableObjectRate})),
+            data: dataInDataset,
             yAxisID: "y-axis-0",
             backgroundColor: hex2rgba(colorCodes[0], 0.5),
             borderColor: colorCodes[0]
         }
     ];
 
-    const data = {labels: finalResultJson.APs.map(obj => obj.query), datasets: datasets};
+    const data = {labels: finalResultJson.performanceMetrics.map(obj => obj.query), datasets: datasets};
 
     //Final config object
     const config = {
@@ -308,7 +381,7 @@ function generateChartConfigFromOneCombination(combination)
                             [
                                 {
                                     type: 'category',
-                                    labels: finalResultJson.APs.map(obj => obj.query),
+                                    labels: finalResultJson.performanceMetrics.map(obj => obj.query),
                                     label: "Activities",
                                     scaleLabel:
                                         {

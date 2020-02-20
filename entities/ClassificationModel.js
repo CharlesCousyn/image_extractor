@@ -25,6 +25,8 @@ export default class ClassificationModel
 		this.heightRequired = MODEL_CONFIG.heightRequired;
 		this.name = MODEL_CONFIG.name;
 		this.bufferCount = MODEL_CONFIG.bufferCount;
+		this.labelFile = MODEL_CONFIG.labelFile;
+		this.needNormalization = MODEL_CONFIG.needNormalization;
 	}
 
 	predictOrClassify(pictures)
@@ -35,7 +37,12 @@ export default class ClassificationModel
 	classify(pictures)
 	{
 		//Doing a prediction
-		const predictions = this.MODEL.predict(pictures);
+		let predictions = this.MODEL.predict(pictures);
+
+		if(this.needNormalization)
+		{
+			predictions = tensorflow.softmax(predictions);
+		}
 
 		//Free the memory of the tensor pictures
 		tensorflow.dispose(pictures);

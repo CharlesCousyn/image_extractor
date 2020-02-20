@@ -43,6 +43,11 @@
                 "correct": true
             },
             {
+                "label": "remote",
+                "relevance": 5,
+                "correct": true
+            },
+            {
                 "label": "cell phone",
                 "relevance": 5,
                 "correct": true
@@ -180,6 +185,11 @@
             {
                 "label": "umbrella",
                 "relevance": 15,
+                "correct": true
+            },
+            {
+                "label": "backpack",
+                "relevance": 10,
                 "correct": true
             }
         ]
@@ -327,6 +337,11 @@
     {
         "query": "bake_parmesan_turkey_meatballs",
         "data": [
+            {
+                "label": "bowl",
+                "relevance": 13,
+                "correct": true
+            },
             {
                 "label": "person",
                 "relevance": 12,

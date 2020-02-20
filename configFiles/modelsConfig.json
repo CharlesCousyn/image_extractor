@@ -6,7 +6,8 @@
     "widthRequired": 331,
     "type": "classification",
     "bufferCount": 6,
-    "labelFile": "imageNetLabels"
+    "labelFile": "imageNetLabels",
+    "needNormalization": true
   },
   {
     "name": "inception_resnet_v2",
@@ -15,7 +16,8 @@
     "widthRequired": 299,
     "type": "classification",
     "bufferCount": 6,
-    "labelFile": "imageNetLabels"
+    "labelFile": "imageNetLabels",
+    "needNormalization": false
   },
   {
     "name": "mobilenet_v2_140_224",
@@ -24,7 +26,8 @@
     "widthRequired": 224,
     "type": "classification",
     "bufferCount": 6,
-    "labelFile": "imageNetLabels"
+    "labelFile": "imageNetLabels",
+    "needNormalization": true
   },
   {
     "name": "yolov3-608",
@@ -40,7 +43,8 @@
     "v3_masks":{
       "3": [[6, 7, 8], [3, 4, 5], [0, 1, 2]],
       "2": [[3, 4, 5], [1, 2, 3]]
-    }
+    },
+    "needNormalization": false
   },
   {
     "name": "yolov3-608",
@@ -56,7 +60,8 @@
     "v3_masks":{
       "3": [[6, 7, 8], [3, 4, 5], [0, 1, 2]],
       "2": [[3, 4, 5], [1, 2, 3]]
-    }
+    },
+    "needNormalization": false
   },
   {
     "name": "yolov3-tiny",
@@ -72,7 +77,8 @@
     "v3_masks":{
       "3": [[6, 7, 8], [3, 4, 5], [0, 1, 2]],
       "2": [[3, 4, 5], [1, 2, 3]]
-    }
+    },
+    "needNormalization": false
   },
   {
     "name": "yolov3-tiny",
@@ -88,7 +94,8 @@
     "v3_masks":{
       "3": [[6, 7, 8], [3, 4, 5], [0, 1, 2]],
       "2": [[3, 4, 5], [1, 2, 3]]
-    }
+    },
+    "needNormalization": false
   },
   {
     "name": "yolo9000",
@@ -100,7 +107,8 @@
     "scoreThreshold" : 0.05,
     "iouThreshold" : 0.5,
     "anchors": [0.77871, 1.14074, 3.00525, 4.31277, 9.22725, 9.61974],
-    "labelFile": "yolo9000Labels"
+    "labelFile": "yolo9000Labels",
+    "needNormalization": false
   },
   {
     "name": "yolo9000",
@@ -112,6 +120,7 @@
     "scoreThreshold" : 0.1,
     "iouThreshold" : 0.5,
     "anchors": [0.77871, 1.14074, 3.00525, 4.31277, 9.22725, 9.61974],
-    "labelFile": "yolo9000Labels"
+    "labelFile": "yolo9000Labels",
+    "needNormalization": false
   }
 ]

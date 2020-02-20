@@ -52,6 +52,9 @@ export default class ObjectDetectionModel
 			default:
 				this.classNames = [];
 		}
+
+		this.labelFile = MODEL_CONFIG.labelFile;
+		this.needNormalization = MODEL_CONFIG.needNormalization;
 	}
 
 	async predictOrClassify(pictures)

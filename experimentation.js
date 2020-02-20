@@ -1,6 +1,6 @@
 import EXPERIMENTATIONS_CONFIG from './configFiles/experimentationsConfig.json'
 import RUN from "./main.js"
-import {mAP, mOverallAP} from "./performanceMetrics.js"
+import {mAP, mOverallAP, overallAP} from "./performanceMetrics.js"
 import filesSystem from "fs";
 import groundTruth from "./configFiles/groundTruth.json"
 import modelConfig from "./configFiles/modelsConfig"
@@ -40,13 +40,22 @@ function generateCombination(criteria)
     }
 }
 
+let usedPerformanceMetrics =
+    {
+        AP: overallAP,
+        recognizableObjectRate: (resultsOneQuery) => (resultsOneQuery.usedGroundTruthLength / resultsOneQuery.realGroundTruthLength),
+        rPrecision: () => 0.1,
+        precisionAt10: () => 0.0
+    };
+
+export {usedPerformanceMetrics}
+
 (async () =>
 {
     //Generate all combinations
     const criteria = EXPERIMENTATIONS_CONFIG.criteria;
     //let combinations = generateCombination(Object.keys(criteria).map((criterionName) => criteria[criterionName]));
     let combinations = generateCombination(Object.keys(criteria).map((criterionName) => criteria[criterionName]));
-    //combinations = [[ 'yolo9000__20_0.05_0.5', 'google', 200, 'sum' ]];
 
     //Use every combination
     for(let i = 0; i < combinations.length; i++)
@@ -155,11 +164,41 @@ function evaluateComb2(combination, groundTruth)
         return new Results(resultFile.query, realPreds, usedGroundTruthPreds, realGroundTruthPreds);
     });
 
-    //Calculate mAP
-    const res = mOverallAP(resultObjects, true, true);
+    //Calculate performances metrics
+    const metricsJSON = computePerformanceMetricsAllActivities(resultObjects);
 
     //Write file of combination
-    writeJSONFile(res, `${path}/finalResult.json`);
+    writeJSONFile(metricsJSON, `${path}/finalResult.json`);
+}
+
+function computePerformanceMetricsAllActivities(resultObjects)
+{
+    let performanceMetrics = resultObjects.map(resultsOneQuery =>
+        {
+            //Copy object
+            let metrics = {...usedPerformanceMetrics};
+            Object.keys(metrics).forEach(key =>
+            {
+                metrics[key] = metrics[key](resultsOneQuery);
+            });
+            return {
+                query: resultsOneQuery.query,
+                metrics: metrics
+            }
+        }
+    );
+
+    //For each perf metric, compute the mean
+    let perfNames = Object.keys(performanceMetrics[0].metrics);
+    let means = {};
+    perfNames.forEach(name =>
+    {
+        let noNull = performanceMetrics.filter(obj => obj.metrics[name] !== null);
+
+        means[`mean_${name}`] = noNull.map(obj => obj.metrics[name]).reduce((sum, curr) => sum + curr, 0) / noNull.length;
+    });
+
+    return {performanceMetrics: performanceMetrics, means: means};
 }
 
 function writeJSONFile(data, path)

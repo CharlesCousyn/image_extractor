@@ -176,4 +176,4 @@ function mAP(k, aucRule, results, giveAPForEachQuery)
     }
 }
 
-export {mAP, mOverallAP};
+export {mAP, mOverallAP, overallAP};

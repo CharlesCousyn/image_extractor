@@ -5,7 +5,7 @@
       "yolo9000__20_0.05_0.5", "yolov3-tiny__20_0.05_0.5", "yolov3-608__20_0.05_0.5",
       "yolo9000__20_0.1_0.5", "yolov3-tiny__20_0.1_0.5", "yolov3-608__20_0.1_0.5"],
     "searchEngine": ["google", "duckduckgo"],
-    "numberOfResultsUsed": [50, 100, 200, 500, 1000],
+    "numberOfResultsUsed": [25, 50, 100, 200, 500, 1000],
     "aggregationType": ["sum"]
   }
 }
