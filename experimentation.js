@@ -1,6 +1,6 @@
 import EXPERIMENTATIONS_CONFIG from './configFiles/experimentationsConfig.json'
 import RUN from "./main.js"
-import {mAP, mOverallAP, overallAP} from "./performanceMetrics.js"
+import {mAP, mOverallAP, overallAP, rPrecision, precisionAt10} from "./performanceMetrics.js"
 import filesSystem from "fs";
 import groundTruth from "./configFiles/groundTruth.json"
 import modelConfig from "./configFiles/modelsConfig"
@@ -44,8 +44,8 @@ let usedPerformanceMetrics =
     {
         AP: overallAP,
         recognizableObjectRate: (resultsOneQuery) => (resultsOneQuery.usedGroundTruthLength / resultsOneQuery.realGroundTruthLength),
-        rPrecision: () => 0.1,
-        precisionAt10: () => 0.0
+        rPrecision: rPrecision,
+        precisionAt10: precisionAt10
     };
 
 export {usedPerformanceMetrics}
@@ -60,7 +60,7 @@ export {usedPerformanceMetrics}
     //Use every combination
     for(let i = 0; i < combinations.length; i++)
     {
-        await RUN(...combinations[i]);
+        //await RUN(...combinations[i]);
 
         //Evaluate on combination
         //evaluateComb(combinations[i], groundTruth, 25);

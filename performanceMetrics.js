@@ -121,6 +121,58 @@ function overallAP(results)
     return sumPrecision / allPositivesLabels.length;
 }
 
+function rPrecision(results)
+{
+    //Get all the positive label to compare
+    let allPositivesLabels = results.data.map(line => line[1]).filter(pred => pred !== undefined && pred.correct).map(pred => pred.label);
+    if(allPositivesLabels.length === 0)
+    {
+        return null;
+    }
+
+    //Adding correctness column (Are the label predicted in groundtruth and correct?)
+    results.data = results.data
+        .map(line => (line[0] === undefined ? undefined : [...line, allPositivesLabels.indexOf(line[0].label) !== -1]))//Add boolean (true or false positive)
+        .filter(line => line !== undefined); //filter lines when there's more labels than predictions
+
+    let countTP = 0;
+    results.data.forEach((line, index) =>
+    {
+        if(line[2] && index < allPositivesLabels.length)
+        {
+            countTP++;
+        }
+    });
+
+    return precision(countTP, allPositivesLabels.length);
+}
+
+function precisionAt10(results)
+{
+    //Get all the positive label to compare
+    let allPositivesLabels = results.data.map(line => line[1]).filter(pred => pred !== undefined && pred.correct).map(pred => pred.label);
+    if(allPositivesLabels.length === 0)
+    {
+        return null;
+    }
+
+    //Adding correctness column (Are the label predicted in groundtruth and correct?)
+    results.data = results.data
+        .map(line => (line[0] === undefined ? undefined : [...line, allPositivesLabels.indexOf(line[0].label) !== -1]))//Add boolean (true or false positive)
+        .filter(line => line !== undefined); //filter lines when there's more labels than predictions
+
+    let countTP = 0;
+    results.data.forEach((line, index) =>
+    {
+        if(line[2] && index < 10)
+        {
+            countTP++;
+        }
+    });
+
+    return precision(countTP, 10);
+}
+
 /**
  * @param {Results[]} results - Array of results for multiple queries
  * @param {boolean} giveAPForEachQuery - Boolean to give AP for each query
@@ -176,4 +228,4 @@ function mAP(k, aucRule, results, giveAPForEachQuery)
     }
 }
 
-export {mAP, mOverallAP, overallAP};
+export {mAP, mOverallAP, overallAP, rPrecision, precisionAt10};
