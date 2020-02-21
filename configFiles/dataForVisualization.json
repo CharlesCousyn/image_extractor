@@ -914,6 +914,9 @@
                                     "fontSize": 16,
                                     "fontColor": "#666",
                                     "fontStyle": "bold"
+                                },
+                                "ticks": {
+                                    "beginAtZero": true
                                 }
                             }
                         ],
@@ -987,7 +990,15 @@
                             }
                         ]
                     },
-                    "plugins": {}
+                    "plugins": {},
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callback"
+                        },
+                        "footerFontStyle": "normal"
+                    }
                 }
             }
         },
@@ -1948,6 +1959,9 @@
                                     "fontSize": 16,
                                     "fontColor": "#666",
                                     "fontStyle": "bold"
+                                },
+                                "ticks": {
+                                    "beginAtZero": true
                                 }
                             }
                         ],
@@ -1979,7 +1993,15 @@
                             }
                         ]
                     },
-                    "plugins": {}
+                    "plugins": {},
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callback"
+                        },
+                        "footerFontStyle": "normal"
+                    }
                 }
             }
         },
@@ -2919,6 +2941,9 @@
                                     "fontSize": 16,
                                     "fontColor": "#666",
                                     "fontStyle": "bold"
+                                },
+                                "ticks": {
+                                    "beginAtZero": true
                                 }
                             }
                         ],
@@ -2956,7 +2981,15 @@
                             }
                         ]
                     },
-                    "plugins": {}
+                    "plugins": {},
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callback"
+                        },
+                        "footerFontStyle": "normal"
+                    }
                 }
             }
         },

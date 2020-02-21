@@ -91,7 +91,6 @@ function generateChartConfigFromOneCriterion(criterionIndex, classedCombinations
         .sort((a,b) => a.localeCompare(b));
 
     //Computing data
-    let meanNames=[];
     let dataObj = {};
     Object.keys(classedCombinations)
         .forEach(key =>
@@ -157,7 +156,8 @@ function generateChartConfigFromOneCriterion(criterionIndex, classedCombinations
                                         fontSize: 16,
                                         fontColor: "#666",
                                         fontStyle: "bold"
-                                    }
+                                    },
+                                    ticks: { beginAtZero: true }
                                 }],
                         xAxes:
                             [
@@ -176,7 +176,17 @@ function generateChartConfigFromOneCriterion(criterionIndex, classedCombinations
                                 }
                             ]
                     },
-                plugins: {}
+                plugins: {},
+                tooltips:
+                    {
+                        mode: 'index',
+                        axis: 'y',
+                        callbacks: {
+                            // Use the footer callback to display the result of a function
+                            label: "callback"
+                        },
+                        footerFontStyle: 'normal'
+                    }
             }
     };
 }
