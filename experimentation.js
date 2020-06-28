@@ -69,11 +69,58 @@ export {usedPerformanceMetrics}
 
     //evaluateComb2(combinations.find(comb => comb[0] === "yolov3-608__20_0.1_0.5" && comb[1] === "duckduckgo" && comb[2] ===  100 && comb[3] === "sum"), groundTruth);
 
+    //Get a ranking of configuration using WMAP
+    const ranking = rankConfiguration();
+    console.log(ranking);
+
     //Write json data for visualization
     const dataForVisualization = getAllDataForVisualization();
     writeJSONFile(dataForVisualization, "./configFiles/dataForVisualization.json");
 
 })();
+
+function rankConfiguration()
+{
+    //Retrieve all computed combinations
+    const path = `resultFiles/`;
+    const allCombinations = filesSystem.readdirSync( path, { encoding: 'utf8', withFileTypes: true })
+    .filter(dirent => dirent.isDirectory())
+    .map(dirent => dirent.name.split(" "));
+
+    //Get all final results files and adding the comb name
+    let allFinalResults = allCombinations
+    .map(comb =>
+    {
+        let perf = JSON.parse(filesSystem.readFileSync( `./resultFiles/${comb.join(" ")}/finalResult.json`));
+        perf.confName = comb.join(" ");
+        return perf;
+    })
+    .map(combPerf =>
+    {
+        let sumROR = combPerf.performanceMetrics.reduce((sumROR, combPerfOneActivity) =>
+        {
+            sumROR += combPerfOneActivity.metrics.recognizableObjectRate;
+            return sumROR;
+        }, 0.0);
+
+        let WMAP = combPerf.performanceMetrics.reduce((WMAP, combPerfOneActivity) =>
+        {
+            WMAP += combPerfOneActivity.metrics.AP * combPerfOneActivity.metrics.recognizableObjectRate / sumROR;
+            return WMAP;
+        }, 0.0);
+
+        combPerf.WMAP = WMAP;
+
+        delete combPerf.performanceMetrics;
+        delete  combPerf.means;
+
+        return combPerf;
+    })
+    .sort((finalRes1, finalRes2)=> finalRes2.WMAP - finalRes1.WMAP);
+
+    writeJSONFile(allFinalResults, "./resultFiles/configurationRanking.json");
+
+}
 
 function evaluateComb(combination, groundTruth, k)
 {
