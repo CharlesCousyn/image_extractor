@@ -899,7 +899,7 @@
                     },
                     "title": {
                         "display": true,
-                        "text": "Performances computed by used config"
+                        "text": "Performances computed by granularity"
                     },
                     "scales": {
                         "yAxes": [
@@ -924,60 +924,8 @@
                             {
                                 "type": "category",
                                 "labels": [
-                                    "inception_resnet_v2 100 sum",
-                                    "inception_resnet_v2 1000 sum",
-                                    "inception_resnet_v2 200 sum",
-                                    "inception_resnet_v2 25 sum",
-                                    "inception_resnet_v2 50 sum",
-                                    "inception_resnet_v2 500 sum",
-                                    "mobilenet_v2_140_224 100 sum",
-                                    "mobilenet_v2_140_224 1000 sum",
-                                    "mobilenet_v2_140_224 200 sum",
-                                    "mobilenet_v2_140_224 25 sum",
-                                    "mobilenet_v2_140_224 50 sum",
-                                    "mobilenet_v2_140_224 500 sum",
-                                    "pnasnet_large 100 sum",
-                                    "pnasnet_large 1000 sum",
-                                    "pnasnet_large 200 sum",
-                                    "pnasnet_large 25 sum",
-                                    "pnasnet_large 50 sum",
-                                    "pnasnet_large 500 sum",
-                                    "yolo9000__20_0.05_0.5 100 sum",
-                                    "yolo9000__20_0.05_0.5 1000 sum",
-                                    "yolo9000__20_0.05_0.5 200 sum",
-                                    "yolo9000__20_0.05_0.5 25 sum",
-                                    "yolo9000__20_0.05_0.5 50 sum",
-                                    "yolo9000__20_0.05_0.5 500 sum",
-                                    "yolo9000__20_0.1_0.5 100 sum",
-                                    "yolo9000__20_0.1_0.5 1000 sum",
-                                    "yolo9000__20_0.1_0.5 200 sum",
-                                    "yolo9000__20_0.1_0.5 25 sum",
-                                    "yolo9000__20_0.1_0.5 50 sum",
-                                    "yolo9000__20_0.1_0.5 500 sum",
-                                    "yolov3-608__20_0.05_0.5 100 sum",
-                                    "yolov3-608__20_0.05_0.5 1000 sum",
-                                    "yolov3-608__20_0.05_0.5 200 sum",
-                                    "yolov3-608__20_0.05_0.5 25 sum",
-                                    "yolov3-608__20_0.05_0.5 50 sum",
-                                    "yolov3-608__20_0.05_0.5 500 sum",
-                                    "yolov3-608__20_0.1_0.5 100 sum",
-                                    "yolov3-608__20_0.1_0.5 1000 sum",
-                                    "yolov3-608__20_0.1_0.5 200 sum",
-                                    "yolov3-608__20_0.1_0.5 25 sum",
-                                    "yolov3-608__20_0.1_0.5 50 sum",
-                                    "yolov3-608__20_0.1_0.5 500 sum",
-                                    "yolov3-tiny__20_0.05_0.5 100 sum",
-                                    "yolov3-tiny__20_0.05_0.5 1000 sum",
-                                    "yolov3-tiny__20_0.05_0.5 200 sum",
-                                    "yolov3-tiny__20_0.05_0.5 25 sum",
-                                    "yolov3-tiny__20_0.05_0.5 50 sum",
-                                    "yolov3-tiny__20_0.05_0.5 500 sum",
-                                    "yolov3-tiny__20_0.1_0.5 100 sum",
-                                    "yolov3-tiny__20_0.1_0.5 1000 sum",
-                                    "yolov3-tiny__20_0.1_0.5 200 sum",
-                                    "yolov3-tiny__20_0.1_0.5 25 sum",
-                                    "yolov3-tiny__20_0.1_0.5 50 sum",
-                                    "yolov3-tiny__20_0.1_0.5 500 sum"
+                                    "generic",
+                                    "specific"
                                 ],
                                 "label": "Combinations",
                                 "scaleLabel": {
@@ -1944,7 +1892,7 @@
                     },
                     "title": {
                         "display": true,
-                        "text": "Performances computed by used config"
+                        "text": "Performances computed by granularity"
                     },
                     "scales": {
                         "yAxes": [
@@ -1969,18 +1917,8 @@
                             {
                                 "type": "category",
                                 "labels": [
-                                    "duckduckgo 100 sum",
-                                    "duckduckgo 1000 sum",
-                                    "duckduckgo 200 sum",
-                                    "duckduckgo 25 sum",
-                                    "duckduckgo 50 sum",
-                                    "duckduckgo 500 sum",
-                                    "google 100 sum",
-                                    "google 1000 sum",
-                                    "google 200 sum",
-                                    "google 25 sum",
-                                    "google 50 sum",
-                                    "google 500 sum"
+                                    "generic",
+                                    "specific"
                                 ],
                                 "label": "Combinations",
                                 "scaleLabel": {
@@ -2926,7 +2864,7 @@
                     },
                     "title": {
                         "display": true,
-                        "text": "Performances computed by used config"
+                        "text": "Performances computed by granularity"
                     },
                     "scales": {
                         "yAxes": [
@@ -2951,24 +2889,8 @@
                             {
                                 "type": "category",
                                 "labels": [
-                                    "inception_resnet_v2 duckduckgo sum",
-                                    "inception_resnet_v2 google sum",
-                                    "mobilenet_v2_140_224 duckduckgo sum",
-                                    "mobilenet_v2_140_224 google sum",
-                                    "pnasnet_large duckduckgo sum",
-                                    "pnasnet_large google sum",
-                                    "yolo9000__20_0.05_0.5 duckduckgo sum",
-                                    "yolo9000__20_0.05_0.5 google sum",
-                                    "yolo9000__20_0.1_0.5 duckduckgo sum",
-                                    "yolo9000__20_0.1_0.5 google sum",
-                                    "yolov3-608__20_0.05_0.5 duckduckgo sum",
-                                    "yolov3-608__20_0.05_0.5 google sum",
-                                    "yolov3-608__20_0.1_0.5 duckduckgo sum",
-                                    "yolov3-608__20_0.1_0.5 google sum",
-                                    "yolov3-tiny__20_0.05_0.5 duckduckgo sum",
-                                    "yolov3-tiny__20_0.05_0.5 google sum",
-                                    "yolov3-tiny__20_0.1_0.5 duckduckgo sum",
-                                    "yolov3-tiny__20_0.1_0.5 google sum"
+                                    "generic",
+                                    "specific"
                                 ],
                                 "label": "Combinations",
                                 "scaleLabel": {
@@ -3861,6 +3783,872 @@
                         "axis": "y",
                         "callbacks": {
                             "label": "callbackGlobal"
+                        },
+                        "footerFontStyle": "normal"
+                    }
+                }
+            }
+        },
+        {
+            "criterion": "granularity",
+            "config": {
+                "type": "bar",
+                "data": {
+                    "labels": [
+                        "generic",
+                        "specific"
+                    ],
+                    "datasets": [
+                        {
+                            "label": "granularity",
+                            "borderWidth": 1,
+                            "data": [
+                                {
+                                    "x": "generic",
+                                    "y": 0.5282111614946322,
+                                    "mean_mean_AP": 0.5282111614946322,
+                                    "mean_mean_recognizableObjectRate": 0.39698818871384434,
+                                    "mean_mean_rPrecision": 0.48601558325603406,
+                                    "mean_mean_precisionAt10": 0.2829365079365081,
+                                    "standardDeviation_mean_AP": 0.2803952175487454,
+                                    "standardDeviation_mean_recognizableObjectRate": 0.2019068563985903,
+                                    "standardDeviation_mean_rPrecision": 0.20742602899162502,
+                                    "standardDeviation_mean_precisionAt10": 0.08081122925993882
+                                },
+                                {
+                                    "x": "specific",
+                                    "y": 0.41070017987738777,
+                                    "mean_mean_AP": 0.41070017987738777,
+                                    "mean_mean_recognizableObjectRate": 0.3328016391741887,
+                                    "mean_mean_rPrecision": 0.36021090534979394,
+                                    "mean_mean_precisionAt10": 0.19861111111111113,
+                                    "standardDeviation_mean_AP": 0.3040235333405239,
+                                    "standardDeviation_mean_recognizableObjectRate": 0.21186385204316396,
+                                    "standardDeviation_mean_rPrecision": 0.2425950833927335,
+                                    "standardDeviation_mean_precisionAt10": 0.1167956648350573
+                                }
+                            ],
+                            "errorBars": {
+                                "generic": {
+                                    "plus": 0.2803952175487454,
+                                    "minus": -0.2803952175487454
+                                },
+                                "specific": {
+                                    "plus": 0.3040235333405239,
+                                    "minus": -0.3040235333405239
+                                }
+                            },
+                            "yAxisID": "y-axis-0",
+                            "backgroundColor": "rgba(204,0,0,0.5)",
+                            "borderColor": "#CC0000",
+                            "allErrorBars": {
+                                "AP": {
+                                    "generic": {
+                                        "plus": 0.2803952175487454,
+                                        "minus": -0.2803952175487454
+                                    },
+                                    "specific": {
+                                        "plus": 0.3040235333405239,
+                                        "minus": -0.3040235333405239
+                                    }
+                                },
+                                "recognizableObjectRate": {
+                                    "generic": {
+                                        "plus": 0.2019068563985903,
+                                        "minus": -0.2019068563985903
+                                    },
+                                    "specific": {
+                                        "plus": 0.21186385204316396,
+                                        "minus": -0.21186385204316396
+                                    }
+                                },
+                                "rPrecision": {
+                                    "generic": {
+                                        "plus": 0.20742602899162502,
+                                        "minus": -0.20742602899162502
+                                    },
+                                    "specific": {
+                                        "plus": 0.2425950833927335,
+                                        "minus": -0.2425950833927335
+                                    }
+                                },
+                                "precisionAt10": {
+                                    "generic": {
+                                        "plus": 0.08081122925993882,
+                                        "minus": -0.08081122925993882
+                                    },
+                                    "specific": {
+                                        "plus": 0.1167956648350573,
+                                        "minus": -0.1167956648350573
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                "options": {
+                    "responsive": true,
+                    "legend": {
+                        "position": "top"
+                    },
+                    "title": {
+                        "display": true,
+                        "text": "Performances computed by used config"
+                    },
+                    "scales": {
+                        "yAxes": [
+                            {
+                                "label": "Performance",
+                                "id": "y-axis-0",
+                                "type": "linear",
+                                "position": "left",
+                                "scaleLabel": {
+                                    "labelString": "Performance",
+                                    "display": true,
+                                    "fontSize": 16,
+                                    "fontColor": "#666",
+                                    "fontStyle": "bold"
+                                },
+                                "ticks": {
+                                    "beginAtZero": true
+                                }
+                            }
+                        ],
+                        "xAxes": [
+                            {
+                                "type": "category",
+                                "labels": [
+                                    "generic",
+                                    "specific"
+                                ],
+                                "label": "Combinations",
+                                "scaleLabel": {
+                                    "labelString": "Combinations",
+                                    "display": true,
+                                    "fontSize": 16,
+                                    "fontColor": "#666",
+                                    "fontStyle": "bold"
+                                }
+                            }
+                        ]
+                    },
+                    "plugins": {
+                        "chartJsPluginErrorBars": {
+                            "width": "20px",
+                            "lineWidth": "2px",
+                            "absoluteValues": false
+                        }
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callback"
+                        },
+                        "footerFontStyle": "normal"
+                    }
+                }
+            }
+        },
+        {
+            "criterion": "activityGlobal",
+            "config": {
+                "type": "bar",
+                "data": {
+                    "labels": [
+                        "answer_the_phone",
+                        "bake_parmesan_turkey_meatballs",
+                        "choosing_outfit",
+                        "clean",
+                        "cook_pasta",
+                        "do_homework",
+                        "fill_medicine_cabinet",
+                        "make_coffee",
+                        "make_low_carb_pancakes",
+                        "make_mashed_potato_casserole",
+                        "make_stuffed_crust_pizza",
+                        "make_tea",
+                        "play_video_games",
+                        "prepare_birthday_card",
+                        "prepare_soup",
+                        "vacuum",
+                        "watch_tv",
+                        "water_plants"
+                    ],
+                    "datasets": [
+                        {
+                            "label": "granularity",
+                            "borderWidth": 1,
+                            "data": [
+                                {
+                                    "x": "answer_the_phone",
+                                    "y": 0.5205485967404648,
+                                    "mean_AP": 0.5205485967404648,
+                                    "standardDeviation_AP": 0.4316725125719261,
+                                    "mean_recognizableObjectRate": 0.48611111111111116,
+                                    "standardDeviation_recognizableObjectRate": 0.21606040536255636,
+                                    "mean_rPrecision": 0.5361111111111109,
+                                    "standardDeviation_rPrecision": 0.41368376721749606,
+                                    "mean_precisionAt10": 0.17222222222222236,
+                                    "standardDeviation_precisionAt10": 0.07049209744694193
+                                },
+                                {
+                                    "x": "bake_parmesan_turkey_meatballs",
+                                    "y": 0.22997882090749763,
+                                    "mean_AP": 0.22997882090749763,
+                                    "standardDeviation_AP": 0.14235575115009644,
+                                    "mean_recognizableObjectRate": 0.4012345679012334,
+                                    "standardDeviation_recognizableObjectRate": 0.23096650535641577,
+                                    "mean_rPrecision": 0.21049382716049408,
+                                    "standardDeviation_rPrecision": 0.13461178353481112,
+                                    "mean_precisionAt10": 0.15185185185185196,
+                                    "standardDeviation_precisionAt10": 0.0865827387226739
+                                },
+                                {
+                                    "x": "choosing_outfit",
+                                    "y": 0.47795305149211886,
+                                    "mean_AP": 0.47795305149211886,
+                                    "standardDeviation_AP": 0.26396213791540923,
+                                    "mean_recognizableObjectRate": 0.4728132387706847,
+                                    "standardDeviation_recognizableObjectRate": 0.33682758507742344,
+                                    "mean_rPrecision": 0.46899462762401095,
+                                    "standardDeviation_rPrecision": 0.21817598498673677,
+                                    "mean_precisionAt10": 0.4194444444444443,
+                                    "standardDeviation_precisionAt10": 0.20925721074054657
+                                },
+                                {
+                                    "x": "clean",
+                                    "y": 0.4804410348780096,
+                                    "mean_AP": 0.4804410348780096,
+                                    "standardDeviation_AP": 0.46150029899830514,
+                                    "mean_recognizableObjectRate": 0.20370370370370372,
+                                    "standardDeviation_recognizableObjectRate": 0.1624993405072613,
+                                    "mean_rPrecision": 0.4768518518518513,
+                                    "standardDeviation_rPrecision": 0.4650646738805604,
+                                    "mean_precisionAt10": 0.08333333333333343,
+                                    "standardDeviation_precisionAt10": 0.04409585518440981
+                                },
+                                {
+                                    "x": "cook_pasta",
+                                    "y": 0.2854223119704708,
+                                    "mean_AP": 0.2854223119704708,
+                                    "standardDeviation_AP": 0.17697006050463324,
+                                    "mean_recognizableObjectRate": 0.41880341880341854,
+                                    "standardDeviation_recognizableObjectRate": 0.2380921073022926,
+                                    "mean_rPrecision": 0.17690796857463542,
+                                    "standardDeviation_rPrecision": 0.2022838000780126,
+                                    "mean_precisionAt10": 0.2175925925925925,
+                                    "standardDeviation_precisionAt10": 0.12384929888384198
+                                },
+                                {
+                                    "x": "do_homework",
+                                    "y": 0.5130492458498416,
+                                    "mean_AP": 0.5130492458498416,
+                                    "standardDeviation_AP": 0.4239833047945262,
+                                    "mean_recognizableObjectRate": 0.4691358024691362,
+                                    "standardDeviation_recognizableObjectRate": 0.3055399671793722,
+                                    "mean_rPrecision": 0.5053417571595672,
+                                    "standardDeviation_rPrecision": 0.39838433709084503,
+                                    "mean_precisionAt10": 0.2314814814814812,
+                                    "standardDeviation_precisionAt10": 0.09194215990597335
+                                },
+                                {
+                                    "x": "fill_medicine_cabinet",
+                                    "y": 0.35166827632352554,
+                                    "mean_AP": 0.35166827632352554,
+                                    "standardDeviation_AP": 0.18584428073115097,
+                                    "mean_recognizableObjectRate": 0.32638888888888856,
+                                    "standardDeviation_recognizableObjectRate": 0.16867996946515462,
+                                    "mean_rPrecision": 0.28159538506760784,
+                                    "standardDeviation_rPrecision": 0.12913823101607932,
+                                    "mean_precisionAt10": 0.18703703703703708,
+                                    "standardDeviation_precisionAt10": 0.07465053470646808
+                                },
+                                {
+                                    "x": "make_coffee",
+                                    "y": 0.6848832713824544,
+                                    "mean_AP": 0.6848832713824544,
+                                    "standardDeviation_AP": 0.33697863869265104,
+                                    "mean_recognizableObjectRate": 0.4126984126984139,
+                                    "standardDeviation_recognizableObjectRate": 0.23756554836659954,
+                                    "mean_rPrecision": 0.5909511784511778,
+                                    "standardDeviation_rPrecision": 0.23710168774778023,
+                                    "mean_precisionAt10": 0.35648148148148173,
+                                    "standardDeviation_precisionAt10": 0.08742525712281557
+                                },
+                                {
+                                    "x": "make_low_carb_pancakes",
+                                    "y": 0.2915856157381259,
+                                    "mean_AP": 0.2915856157381259,
+                                    "standardDeviation_AP": 0.22017199082779146,
+                                    "mean_recognizableObjectRate": 0.3594771241830053,
+                                    "standardDeviation_recognizableObjectRate": 0.18693267511209286,
+                                    "mean_rPrecision": 0.2565843621399176,
+                                    "standardDeviation_rPrecision": 0.22783190683265553,
+                                    "mean_precisionAt10": 0.1944444444444443,
+                                    "standardDeviation_precisionAt10": 0.11850405004278647
+                                },
+                                {
+                                    "x": "make_mashed_potato_casserole",
+                                    "y": 0.38477611237597903,
+                                    "mean_AP": 0.38477611237597903,
+                                    "standardDeviation_AP": 0.23885126342158428,
+                                    "mean_recognizableObjectRate": 0.3006535947712414,
+                                    "standardDeviation_recognizableObjectRate": 0.22260635772452836,
+                                    "mean_rPrecision": 0.3240740740740741,
+                                    "standardDeviation_rPrecision": 0.23387649889472367,
+                                    "mean_precisionAt10": 0.20555555555555546,
+                                    "standardDeviation_precisionAt10": 0.1379971372041581
+                                },
+                                {
+                                    "x": "make_stuffed_crust_pizza",
+                                    "y": 0.7364601704879479,
+                                    "mean_AP": 0.7364601704879479,
+                                    "standardDeviation_AP": 0.32680692383231036,
+                                    "mean_recognizableObjectRate": 0.2698412698412695,
+                                    "standardDeviation_recognizableObjectRate": 0.16419175290140603,
+                                    "mean_rPrecision": 0.6496913580246926,
+                                    "standardDeviation_rPrecision": 0.27887728212421165,
+                                    "mean_precisionAt10": 0.2425925925925923,
+                                    "standardDeviation_precisionAt10": 0.0530612917847941
+                                },
+                                {
+                                    "x": "make_tea",
+                                    "y": 0.6464437414437417,
+                                    "mean_AP": 0.6464437414437417,
+                                    "standardDeviation_AP": 0.3295746410384683,
+                                    "mean_recognizableObjectRate": 0.38888888888888967,
+                                    "standardDeviation_recognizableObjectRate": 0.24845199749997668,
+                                    "mean_rPrecision": 0.5827160493827153,
+                                    "standardDeviation_rPrecision": 0.25732964229265565,
+                                    "mean_precisionAt10": 0.2796296296296299,
+                                    "standardDeviation_precisionAt10": 0.11365905746708987
+                                },
+                                {
+                                    "x": "play_video_games",
+                                    "y": 0.5949160174405005,
+                                    "mean_AP": 0.5949160174405005,
+                                    "standardDeviation_AP": 0.31843242047415804,
+                                    "mean_recognizableObjectRate": 0.4615384615384609,
+                                    "standardDeviation_recognizableObjectRate": 0.1332346775052982,
+                                    "mean_rPrecision": 0.5740050186741363,
+                                    "standardDeviation_rPrecision": 0.22629813344875832,
+                                    "mean_precisionAt10": 0.5990740740740743,
+                                    "standardDeviation_precisionAt10": 0.19220714634379268
+                                },
+                                {
+                                    "x": "prepare_birthday_card",
+                                    "y": 0.34373143674617496,
+                                    "mean_AP": 0.34373143674617496,
+                                    "standardDeviation_AP": 0.19714872481060594,
+                                    "mean_recognizableObjectRate": 0.4074074074074079,
+                                    "standardDeviation_recognizableObjectRate": 0.23055369625905067,
+                                    "mean_rPrecision": 0.27835464432686685,
+                                    "standardDeviation_rPrecision": 0.14611244256074066,
+                                    "mean_precisionAt10": 0.17129629629629625,
+                                    "standardDeviation_precisionAt10": 0.07334712739701324
+                                },
+                                {
+                                    "x": "prepare_soup",
+                                    "y": 0.5578747289376538,
+                                    "mean_AP": 0.5578747289376538,
+                                    "standardDeviation_AP": 0.30765507757909205,
+                                    "mean_recognizableObjectRate": 0.41666666666666796,
+                                    "standardDeviation_recognizableObjectRate": 0.24650332429581767,
+                                    "mean_rPrecision": 0.4729357062690389,
+                                    "standardDeviation_rPrecision": 0.21145102678587172,
+                                    "mean_precisionAt10": 0.31296296296296305,
+                                    "standardDeviation_precisionAt10": 0.15699291833084603
+                                },
+                                {
+                                    "x": "vacuum",
+                                    "y": 0.6649985302763084,
+                                    "mean_AP": 0.6649985302763084,
+                                    "standardDeviation_AP": 0.42296173642696006,
+                                    "mean_recognizableObjectRate": 0.20634920634920695,
+                                    "standardDeviation_recognizableObjectRate": 0.11878277418329977,
+                                    "mean_rPrecision": 0.6265432098765433,
+                                    "standardDeviation_rPrecision": 0.4663967309966346,
+                                    "mean_precisionAt10": 0.09351851851851863,
+                                    "standardDeviation_precisionAt10": 0.024619881111682115
+                                },
+                                {
+                                    "x": "watch_tv",
+                                    "y": 0.5704378409724944,
+                                    "mean_AP": 0.5704378409724944,
+                                    "standardDeviation_AP": 0.2955696467332582,
+                                    "mean_recognizableObjectRate": 0.5614035087719291,
+                                    "standardDeviation_recognizableObjectRate": 0.1889531511275263,
+                                    "mean_rPrecision": 0.5416177700899925,
+                                    "standardDeviation_rPrecision": 0.23522471742695047,
+                                    "mean_precisionAt10": 0.534259259259259,
+                                    "standardDeviation_precisionAt10": 0.20868283440961072
+                                },
+                                {
+                                    "x": "water_plants",
+                                    "y": 0.7025881764710903,
+                                    "mean_AP": 0.7025881764710903,
+                                    "standardDeviation_AP": 0.36462366495529924,
+                                    "mean_recognizableObjectRate": 0.3259259259259249,
+                                    "standardDeviation_recognizableObjectRate": 0.18444295700724062,
+                                    "mean_rPrecision": 0.6912918871252206,
+                                    "standardDeviation_rPrecision": 0.31547447040179283,
+                                    "mean_precisionAt10": 0.30277777777777737,
+                                    "standardDeviation_precisionAt10": 0.07259519080762214
+                                }
+                            ],
+                            "errorBars": {
+                                "answer_the_phone": {
+                                    "plus": 0.4316725125719261,
+                                    "minus": -0.4316725125719261
+                                },
+                                "bake_parmesan_turkey_meatballs": {
+                                    "plus": 0.14235575115009644,
+                                    "minus": -0.14235575115009644
+                                },
+                                "choosing_outfit": {
+                                    "plus": 0.26396213791540923,
+                                    "minus": -0.26396213791540923
+                                },
+                                "clean": {
+                                    "plus": 0.46150029899830514,
+                                    "minus": -0.46150029899830514
+                                },
+                                "cook_pasta": {
+                                    "plus": 0.17697006050463324,
+                                    "minus": -0.17697006050463324
+                                },
+                                "do_homework": {
+                                    "plus": 0.4239833047945262,
+                                    "minus": -0.4239833047945262
+                                },
+                                "fill_medicine_cabinet": {
+                                    "plus": 0.18584428073115097,
+                                    "minus": -0.18584428073115097
+                                },
+                                "make_coffee": {
+                                    "plus": 0.33697863869265104,
+                                    "minus": -0.33697863869265104
+                                },
+                                "make_low_carb_pancakes": {
+                                    "plus": 0.22017199082779146,
+                                    "minus": -0.22017199082779146
+                                },
+                                "make_mashed_potato_casserole": {
+                                    "plus": 0.23885126342158428,
+                                    "minus": -0.23885126342158428
+                                },
+                                "make_stuffed_crust_pizza": {
+                                    "plus": 0.32680692383231036,
+                                    "minus": -0.32680692383231036
+                                },
+                                "make_tea": {
+                                    "plus": 0.3295746410384683,
+                                    "minus": -0.3295746410384683
+                                },
+                                "play_video_games": {
+                                    "plus": 0.31843242047415804,
+                                    "minus": -0.31843242047415804
+                                },
+                                "prepare_birthday_card": {
+                                    "plus": 0.19714872481060594,
+                                    "minus": -0.19714872481060594
+                                },
+                                "prepare_soup": {
+                                    "plus": 0.30765507757909205,
+                                    "minus": -0.30765507757909205
+                                },
+                                "vacuum": {
+                                    "plus": 0.42296173642696006,
+                                    "minus": -0.42296173642696006
+                                },
+                                "watch_tv": {
+                                    "plus": 0.2955696467332582,
+                                    "minus": -0.2955696467332582
+                                },
+                                "water_plants": {
+                                    "plus": 0.36462366495529924,
+                                    "minus": -0.36462366495529924
+                                }
+                            },
+                            "yAxisID": "y-axis-0",
+                            "backgroundColor": "rgba(204,0,0,0.5)",
+                            "borderColor": "#CC0000",
+                            "allErrorBars": {
+                                "AP": {
+                                    "answer_the_phone": {
+                                        "plus": 0.4316725125719261,
+                                        "minus": -0.4316725125719261
+                                    },
+                                    "bake_parmesan_turkey_meatballs": {
+                                        "plus": 0.14235575115009644,
+                                        "minus": -0.14235575115009644
+                                    },
+                                    "choosing_outfit": {
+                                        "plus": 0.26396213791540923,
+                                        "minus": -0.26396213791540923
+                                    },
+                                    "clean": {
+                                        "plus": 0.46150029899830514,
+                                        "minus": -0.46150029899830514
+                                    },
+                                    "cook_pasta": {
+                                        "plus": 0.17697006050463324,
+                                        "minus": -0.17697006050463324
+                                    },
+                                    "do_homework": {
+                                        "plus": 0.4239833047945262,
+                                        "minus": -0.4239833047945262
+                                    },
+                                    "fill_medicine_cabinet": {
+                                        "plus": 0.18584428073115097,
+                                        "minus": -0.18584428073115097
+                                    },
+                                    "make_coffee": {
+                                        "plus": 0.33697863869265104,
+                                        "minus": -0.33697863869265104
+                                    },
+                                    "make_low_carb_pancakes": {
+                                        "plus": 0.22017199082779146,
+                                        "minus": -0.22017199082779146
+                                    },
+                                    "make_mashed_potato_casserole": {
+                                        "plus": 0.23885126342158428,
+                                        "minus": -0.23885126342158428
+                                    },
+                                    "make_stuffed_crust_pizza": {
+                                        "plus": 0.32680692383231036,
+                                        "minus": -0.32680692383231036
+                                    },
+                                    "make_tea": {
+                                        "plus": 0.3295746410384683,
+                                        "minus": -0.3295746410384683
+                                    },
+                                    "play_video_games": {
+                                        "plus": 0.31843242047415804,
+                                        "minus": -0.31843242047415804
+                                    },
+                                    "prepare_birthday_card": {
+                                        "plus": 0.19714872481060594,
+                                        "minus": -0.19714872481060594
+                                    },
+                                    "prepare_soup": {
+                                        "plus": 0.30765507757909205,
+                                        "minus": -0.30765507757909205
+                                    },
+                                    "vacuum": {
+                                        "plus": 0.42296173642696006,
+                                        "minus": -0.42296173642696006
+                                    },
+                                    "watch_tv": {
+                                        "plus": 0.2955696467332582,
+                                        "minus": -0.2955696467332582
+                                    },
+                                    "water_plants": {
+                                        "plus": 0.36462366495529924,
+                                        "minus": -0.36462366495529924
+                                    }
+                                },
+                                "recognizableObjectRate": {
+                                    "answer_the_phone": {
+                                        "plus": 0.21606040536255636,
+                                        "minus": -0.21606040536255636
+                                    },
+                                    "bake_parmesan_turkey_meatballs": {
+                                        "plus": 0.23096650535641577,
+                                        "minus": -0.23096650535641577
+                                    },
+                                    "choosing_outfit": {
+                                        "plus": 0.33682758507742344,
+                                        "minus": -0.33682758507742344
+                                    },
+                                    "clean": {
+                                        "plus": 0.1624993405072613,
+                                        "minus": -0.1624993405072613
+                                    },
+                                    "cook_pasta": {
+                                        "plus": 0.2380921073022926,
+                                        "minus": -0.2380921073022926
+                                    },
+                                    "do_homework": {
+                                        "plus": 0.3055399671793722,
+                                        "minus": -0.3055399671793722
+                                    },
+                                    "fill_medicine_cabinet": {
+                                        "plus": 0.16867996946515462,
+                                        "minus": -0.16867996946515462
+                                    },
+                                    "make_coffee": {
+                                        "plus": 0.23756554836659954,
+                                        "minus": -0.23756554836659954
+                                    },
+                                    "make_low_carb_pancakes": {
+                                        "plus": 0.18693267511209286,
+                                        "minus": -0.18693267511209286
+                                    },
+                                    "make_mashed_potato_casserole": {
+                                        "plus": 0.22260635772452836,
+                                        "minus": -0.22260635772452836
+                                    },
+                                    "make_stuffed_crust_pizza": {
+                                        "plus": 0.16419175290140603,
+                                        "minus": -0.16419175290140603
+                                    },
+                                    "make_tea": {
+                                        "plus": 0.24845199749997668,
+                                        "minus": -0.24845199749997668
+                                    },
+                                    "play_video_games": {
+                                        "plus": 0.1332346775052982,
+                                        "minus": -0.1332346775052982
+                                    },
+                                    "prepare_birthday_card": {
+                                        "plus": 0.23055369625905067,
+                                        "minus": -0.23055369625905067
+                                    },
+                                    "prepare_soup": {
+                                        "plus": 0.24650332429581767,
+                                        "minus": -0.24650332429581767
+                                    },
+                                    "vacuum": {
+                                        "plus": 0.11878277418329977,
+                                        "minus": -0.11878277418329977
+                                    },
+                                    "watch_tv": {
+                                        "plus": 0.1889531511275263,
+                                        "minus": -0.1889531511275263
+                                    },
+                                    "water_plants": {
+                                        "plus": 0.18444295700724062,
+                                        "minus": -0.18444295700724062
+                                    }
+                                },
+                                "rPrecision": {
+                                    "answer_the_phone": {
+                                        "plus": 0.41368376721749606,
+                                        "minus": -0.41368376721749606
+                                    },
+                                    "bake_parmesan_turkey_meatballs": {
+                                        "plus": 0.13461178353481112,
+                                        "minus": -0.13461178353481112
+                                    },
+                                    "choosing_outfit": {
+                                        "plus": 0.21817598498673677,
+                                        "minus": -0.21817598498673677
+                                    },
+                                    "clean": {
+                                        "plus": 0.4650646738805604,
+                                        "minus": -0.4650646738805604
+                                    },
+                                    "cook_pasta": {
+                                        "plus": 0.2022838000780126,
+                                        "minus": -0.2022838000780126
+                                    },
+                                    "do_homework": {
+                                        "plus": 0.39838433709084503,
+                                        "minus": -0.39838433709084503
+                                    },
+                                    "fill_medicine_cabinet": {
+                                        "plus": 0.12913823101607932,
+                                        "minus": -0.12913823101607932
+                                    },
+                                    "make_coffee": {
+                                        "plus": 0.23710168774778023,
+                                        "minus": -0.23710168774778023
+                                    },
+                                    "make_low_carb_pancakes": {
+                                        "plus": 0.22783190683265553,
+                                        "minus": -0.22783190683265553
+                                    },
+                                    "make_mashed_potato_casserole": {
+                                        "plus": 0.23387649889472367,
+                                        "minus": -0.23387649889472367
+                                    },
+                                    "make_stuffed_crust_pizza": {
+                                        "plus": 0.27887728212421165,
+                                        "minus": -0.27887728212421165
+                                    },
+                                    "make_tea": {
+                                        "plus": 0.25732964229265565,
+                                        "minus": -0.25732964229265565
+                                    },
+                                    "play_video_games": {
+                                        "plus": 0.22629813344875832,
+                                        "minus": -0.22629813344875832
+                                    },
+                                    "prepare_birthday_card": {
+                                        "plus": 0.14611244256074066,
+                                        "minus": -0.14611244256074066
+                                    },
+                                    "prepare_soup": {
+                                        "plus": 0.21145102678587172,
+                                        "minus": -0.21145102678587172
+                                    },
+                                    "vacuum": {
+                                        "plus": 0.4663967309966346,
+                                        "minus": -0.4663967309966346
+                                    },
+                                    "watch_tv": {
+                                        "plus": 0.23522471742695047,
+                                        "minus": -0.23522471742695047
+                                    },
+                                    "water_plants": {
+                                        "plus": 0.31547447040179283,
+                                        "minus": -0.31547447040179283
+                                    }
+                                },
+                                "precisionAt10": {
+                                    "answer_the_phone": {
+                                        "plus": 0.07049209744694193,
+                                        "minus": -0.07049209744694193
+                                    },
+                                    "bake_parmesan_turkey_meatballs": {
+                                        "plus": 0.0865827387226739,
+                                        "minus": -0.0865827387226739
+                                    },
+                                    "choosing_outfit": {
+                                        "plus": 0.20925721074054657,
+                                        "minus": -0.20925721074054657
+                                    },
+                                    "clean": {
+                                        "plus": 0.04409585518440981,
+                                        "minus": -0.04409585518440981
+                                    },
+                                    "cook_pasta": {
+                                        "plus": 0.12384929888384198,
+                                        "minus": -0.12384929888384198
+                                    },
+                                    "do_homework": {
+                                        "plus": 0.09194215990597335,
+                                        "minus": -0.09194215990597335
+                                    },
+                                    "fill_medicine_cabinet": {
+                                        "plus": 0.07465053470646808,
+                                        "minus": -0.07465053470646808
+                                    },
+                                    "make_coffee": {
+                                        "plus": 0.08742525712281557,
+                                        "minus": -0.08742525712281557
+                                    },
+                                    "make_low_carb_pancakes": {
+                                        "plus": 0.11850405004278647,
+                                        "minus": -0.11850405004278647
+                                    },
+                                    "make_mashed_potato_casserole": {
+                                        "plus": 0.1379971372041581,
+                                        "minus": -0.1379971372041581
+                                    },
+                                    "make_stuffed_crust_pizza": {
+                                        "plus": 0.0530612917847941,
+                                        "minus": -0.0530612917847941
+                                    },
+                                    "make_tea": {
+                                        "plus": 0.11365905746708987,
+                                        "minus": -0.11365905746708987
+                                    },
+                                    "play_video_games": {
+                                        "plus": 0.19220714634379268,
+                                        "minus": -0.19220714634379268
+                                    },
+                                    "prepare_birthday_card": {
+                                        "plus": 0.07334712739701324,
+                                        "minus": -0.07334712739701324
+                                    },
+                                    "prepare_soup": {
+                                        "plus": 0.15699291833084603,
+                                        "minus": -0.15699291833084603
+                                    },
+                                    "vacuum": {
+                                        "plus": 0.024619881111682115,
+                                        "minus": -0.024619881111682115
+                                    },
+                                    "watch_tv": {
+                                        "plus": 0.20868283440961072,
+                                        "minus": -0.20868283440961072
+                                    },
+                                    "water_plants": {
+                                        "plus": 0.07259519080762214,
+                                        "minus": -0.07259519080762214
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                "options": {
+                    "responsive": true,
+                    "legend": {
+                        "position": "top"
+                    },
+                    "title": {
+                        "display": true,
+                        "text": "Performances computed by activity name"
+                    },
+                    "scales": {
+                        "yAxes": [
+                            {
+                                "label": "Performance",
+                                "id": "y-axis-0",
+                                "type": "linear",
+                                "position": "left",
+                                "scaleLabel": {
+                                    "labelString": "Performance",
+                                    "display": true,
+                                    "fontSize": 16,
+                                    "fontColor": "#666",
+                                    "fontStyle": "bold"
+                                },
+                                "ticks": {
+                                    "beginAtZero": true
+                                }
+                            }
+                        ],
+                        "xAxes": [
+                            {
+                                "type": "category",
+                                "labels": [
+                                    "answer_the_phone",
+                                    "bake_parmesan_turkey_meatballs",
+                                    "choosing_outfit",
+                                    "clean",
+                                    "cook_pasta",
+                                    "do_homework",
+                                    "fill_medicine_cabinet",
+                                    "make_coffee",
+                                    "make_low_carb_pancakes",
+                                    "make_mashed_potato_casserole",
+                                    "make_stuffed_crust_pizza",
+                                    "make_tea",
+                                    "play_video_games",
+                                    "prepare_birthday_card",
+                                    "prepare_soup",
+                                    "vacuum",
+                                    "watch_tv",
+                                    "water_plants"
+                                ],
+                                "label": "Activités",
+                                "scaleLabel": {
+                                    "labelString": "Activités",
+                                    "display": true,
+                                    "fontSize": 16,
+                                    "fontColor": "#666",
+                                    "fontStyle": "bold"
+                                }
+                            }
+                        ]
+                    },
+                    "plugins": {
+                        "chartJsPluginErrorBars": {
+                            "width": "20px",
+                            "lineWidth": "2px",
+                            "absoluteValues": false
+                        }
+                    },
+                    "tooltips": {
+                        "mode": "index",
+                        "axis": "y",
+                        "callbacks": {
+                            "label": "callback"
                         },
                         "footerFontStyle": "normal"
                     }

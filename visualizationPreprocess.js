@@ -56,6 +56,14 @@ export function getAllDataForVisualization()
             {
                 criterion: "numberOfResultsUsedGlobal",
                 config: generateChartConfigFromOneCriterionGlobal(2, perNumberOfResultsUsed)
+            },
+            {
+                criterion: "granularity",
+                config: generateChartConfigFromGranularity(allCombinations)
+            },
+            {
+                criterion: "activityGlobal",
+                config: generateChartConfigFromActivityGlobal(allCombinations)
             }
         ],
         perCombination: perCombination
@@ -79,6 +87,414 @@ function classCombinationPerCriterionIndex(criterionIndex, allCombinations)
     }, {});
 }
 
+function generateChartConfigFromGranularity(combinations)
+{
+    //Computing data
+    let dataInDataset = [];
+
+    let allFinalResults = combinations.map(comb =>
+        JSON.parse(filesSystem.readFileSync( `./resultFiles/${comb.join(" ")}/finalResult.json`)).performanceMetrics);
+
+    allFinalResults = allFinalResults.map(fr =>
+    {
+        let [generic, specific] = fr.reduce((res, perf) =>
+        {
+            if(perf.query === "bake_parmesan_turkey_meatballs" ||
+                perf.query === "make_low_carb_pancakes" ||
+                perf.query === "make_mashed_potato_casserole" ||
+                perf.query === "make_stuffed_crust_pizza")
+            {
+                res[1].push(perf);
+            }
+            else
+            {
+                res[0].push(perf);
+            }
+            return res;
+        }, [[], []]);
+
+        return {generic, specific}
+    });
+
+    let orderedLabels = ["generic", "specific"];
+    let metricNames = Object.keys(allFinalResults[0].generic[0].metrics);
+
+    //Create init objects for reduce
+    let initObjectLittle = {};
+    metricNames.forEach((metricName) =>
+        {
+            initObjectLittle[`mean_${metricName}`] = 0.0;
+        }
+    );
+
+    //Create init objects for reduce
+    let initObjectBigMean = {};
+    metricNames.forEach((metricName) =>
+        {
+            initObjectBigMean[`mean_mean_${metricName}`] = 0.0;
+        }
+    );
+
+    let initObjectBigSD = {};
+    metricNames.forEach((metricName) =>
+        {
+            initObjectBigSD[`standardDeviation_mean_${metricName}`] = 0.0;
+        }
+    );
+
+    //Copy init objects
+    let initObject1 = {...initObjectBigMean};
+    let initObject2 = {...initObjectBigMean};
+    let initObject11 = {...initObjectBigSD};
+    let initObject21 = {...initObjectBigSD};
+
+    //Compute means and standard deviations
+
+    //Return means for each comb: [[meanGenComb1, meanSpecComb1], [meanGenComb2, meanSpecComb2], ...]
+    let tabMeansForAllComb = allFinalResults.map(
+        (combPerf, index1, arrayBig) =>
+        {
+            let initObject3 = {...initObjectLittle};
+            let initObject4 = {...initObjectLittle};
+
+            //Compute mean generic for one comb
+            let meanGenericOneComb = combPerf.generic.reduce((moyOneComb, perf, index, array) =>
+            {
+                metricNames.forEach(name =>
+                {
+                    moyOneComb[`mean_${name}`] += perf.metrics[name] / array.length;
+                });
+                return moyOneComb;
+            }, initObject3);
+
+            //Compute mean specific for one comb
+            let meanSpecificOneComb = combPerf.specific.reduce((moyOneComb, perf, index, array) =>
+            {
+                metricNames.forEach(name =>
+                {
+                    moyOneComb[`mean_${name}`] += perf.metrics[name] / array.length;
+                });
+                return moyOneComb;
+            }, initObject4);
+
+            return [meanGenericOneComb, meanSpecificOneComb];
+        });
+
+    //Return means for all comb: [meanGen, meanSpec]
+    let [genericMean, specificMean] = tabMeansForAllComb.reduce(
+        (meanMean, currMean, index, arrayBig)=>
+    {
+        //Compute mean for all comb incrementally
+        metricNames.forEach(name =>
+        {
+            meanMean[0][`mean_mean_${name}`] += currMean[0][`mean_${name}`] / arrayBig.length;
+            meanMean[1][`mean_mean_${name}`] += currMean[1][`mean_${name}`] / arrayBig.length;
+        });
+
+        return meanMean;
+    }, [initObject1, initObject2]);
+
+    //Return standard deviation for all comb: [standardDeviationGen, standardDeviationSpec]
+    let [genericSD, specificSD] = tabMeansForAllComb
+    .reduce((SDMean, currMean, index, arrayBig) =>
+        {
+            //Compute mean for all comb incrementally
+            metricNames.forEach(name =>
+            {
+                SDMean[0][`standardDeviation_mean_${name}`] += Math.pow(currMean[0][`mean_${name}`] - genericMean[`mean_mean_${name}`], 2)/ arrayBig.length;
+                SDMean[1][`standardDeviation_mean_${name}`] += Math.pow(currMean[0][`mean_${name}`] - specificMean[`mean_mean_${name}`], 2) / arrayBig.length;
+            });
+
+            return SDMean;
+        }, [initObject11, initObject21])
+    .map(perfObj =>
+    {
+        Object.keys(perfObj).forEach(metricName =>
+        {
+            perfObj[metricName] = Math.sqrt(perfObj[metricName]);
+        });
+        return perfObj;
+    });
+
+    //Fusion mean and SD
+    let genericPerf = {...genericMean, ...genericSD};
+    let specificPerf = {...specificMean, ...specificSD};
+
+    dataInDataset = [
+        {x: "generic", y: genericPerf[Object.keys(genericPerf)[0]], ...genericPerf}
+    ,{x: "specific", y: specificPerf[Object.keys(specificPerf)[0]], ...specificPerf}];
+
+    //Create errors bars
+    let allErrorBars = {};
+    metricNames.forEach(name =>
+    {
+        let errorBars = {};
+        errorBars["generic"] = {plus: genericSD[`standardDeviation_mean_${name}`], minus: - genericSD[`standardDeviation_mean_${name}`]};
+        errorBars["specific"] = {plus: specificSD[`standardDeviation_mean_${name}`], minus: - specificSD[`standardDeviation_mean_${name}`]};
+
+        allErrorBars[name] = errorBars;
+    });
+
+    const datasets = [{
+            label: "granularity",
+            borderWidth: 1,
+            data: dataInDataset,
+            errorBars: Object.keys(allErrorBars).map(key => allErrorBars[key])[0],
+            yAxisID: "y-axis-0",
+            backgroundColor: hex2rgba(colorCodes[0], 0.5),
+            borderColor: colorCodes[0],
+            allErrorBars: allErrorBars
+        }];
+    const data = {labels: orderedLabels, datasets: datasets};
+
+    //Final config object
+    return {
+        type: 'bar',
+        data: data,
+        options:
+            {
+                responsive: true,
+                legend: {position: 'top'},
+                title:
+                    {
+                        display: true,
+                        text: 'Performances computed by used config'
+                    },
+                scales:
+                    {
+                        yAxes:
+                            [
+                                {
+                                    label:"Performance",
+                                    id: 'y-axis-0',
+                                    type: 'linear',
+                                    position: 'left',
+                                    scaleLabel: {
+                                        labelString: "Performance",
+                                        display: true,
+                                        fontSize: 16,
+                                        fontColor: "#666",
+                                        fontStyle: "bold"
+                                    },
+                                    ticks: { beginAtZero: true }
+                                }],
+                        xAxes:
+                            [
+                                {
+                                    type: 'category',
+                                    labels: orderedLabels,
+                                    label: "Combinations",
+                                    scaleLabel:
+                                        {
+                                            labelString: "Combinations",
+                                            display: true,
+                                            fontSize: 16,
+                                            fontColor: "#666",
+                                            fontStyle: "bold"
+                                        }
+                                }
+                            ]
+                    },
+                plugins:
+                    {
+                        chartJsPluginErrorBars:
+                            {
+                                width: "20px",
+                                lineWidth: "2px",
+                                absoluteValues: false
+                            }
+                    },
+                tooltips:
+                    {
+                        mode: 'index',
+                        axis: 'y',
+                        callbacks: {
+                            // Use the footer callback to display the result of a function
+                            label: "callback"
+                        },
+                        footerFontStyle: 'normal'
+                    }
+            }
+    };
+}
+
+function generateChartConfigFromActivityGlobal(combinations)
+{
+    //Computing data
+    let dataInDataset = [];
+
+    let allFinalResults = combinations.map(comb =>
+        JSON.parse(filesSystem.readFileSync( `./resultFiles/${comb.join(" ")}/finalResult.json`)).performanceMetrics);
+
+    let orderedLabels = allFinalResults[0].map(finalRes => finalRes.query);
+    let metricNames = Object.keys(allFinalResults[0][0].metrics);
+
+    //Create init objects for reduce
+    let initObject = [];
+    orderedLabels.forEach(activity =>
+    {
+        initObject.push({query: activity, metrics: {}});
+    });
+    initObject = initObject.map(obj =>
+    {
+        metricNames.forEach((metricName) =>
+        {
+            obj.metrics[`mean_${metricName}`] = 0.0;
+            obj.metrics[`standardDeviation_${metricName}`] = 0.0;
+        });
+        return obj;
+    });
+
+    //Return means for each activity
+    let tabMeanPerActivity = allFinalResults.reduce(
+        (meanEachActivityOverAllCombination, currFinalRes, index, array)=>
+        {
+            meanEachActivityOverAllCombination.map(meanOneActivityOverAllCombination =>
+            {
+                let goodActivityRes = currFinalRes.find(actRes => actRes.query === meanOneActivityOverAllCombination.query);
+
+                metricNames.forEach((metricName) =>
+                {
+                    meanOneActivityOverAllCombination.metrics[`mean_${metricName}`] += goodActivityRes.metrics[metricName] / array.length;
+                });
+                return meanOneActivityOverAllCombination;
+            });
+
+            return meanEachActivityOverAllCombination;
+        }, initObject);
+
+    //Add standard deviation for each activity
+    tabMeanPerActivity = allFinalResults
+    .reduce((tabMeanAndSDPerActivity, currFinalRes, index, array)=>
+        {
+            tabMeanAndSDPerActivity.map(meanAndSDOneActivtyOverAllCombination =>
+            {
+                let goodActivityRes = currFinalRes.find(actRes => actRes.query === meanAndSDOneActivtyOverAllCombination.query);
+
+                metricNames.forEach((metricName) =>
+                {
+                    meanAndSDOneActivtyOverAllCombination.metrics[`standardDeviation_${metricName}`] +=
+                        Math.pow(goodActivityRes.metrics[metricName] - meanAndSDOneActivtyOverAllCombination.metrics[`mean_${metricName}`], 2) / array.length;
+                });
+                return meanAndSDOneActivtyOverAllCombination;
+            });
+
+            return tabMeanAndSDPerActivity;
+        }, tabMeanPerActivity)
+    .map(perfObj =>
+    {
+        metricNames.forEach((metricName) =>
+        {
+            perfObj.metrics[`standardDeviation_${metricName}`] = Math.sqrt(perfObj.metrics[`standardDeviation_${metricName}`]);
+        });
+        return perfObj;
+    });
+
+    console.log("tabMeanPerActivity", tabMeanPerActivity);
+
+    dataInDataset = tabMeanPerActivity.map(oneActivityPerf =>
+        {
+            return {x:oneActivityPerf.query,
+                y: oneActivityPerf.metrics[Object.keys(oneActivityPerf.metrics)[0]],
+                ...oneActivityPerf.metrics};
+        });
+
+    //Create errors bars
+    let allErrorBars = {};
+    metricNames.forEach(name =>
+    {
+        let errorBars = {};
+        tabMeanPerActivity.forEach(actRes =>
+            {
+                errorBars[actRes.query] = {plus: actRes.metrics[`standardDeviation_${name}`], minus: - actRes.metrics[`standardDeviation_${name}`]};
+            }
+        );
+        allErrorBars[name] = errorBars;
+    });
+
+
+    const datasets = [{
+        label: "granularity",
+        borderWidth: 1,
+        data: dataInDataset,
+        errorBars: Object.keys(allErrorBars).map(key => allErrorBars[key])[0],
+        yAxisID: "y-axis-0",
+        backgroundColor: hex2rgba(colorCodes[0], 0.5),
+        borderColor: colorCodes[0],
+        allErrorBars: allErrorBars
+    }];
+    const data = {labels: orderedLabels, datasets: datasets};
+
+    //Final config object
+    return {
+        type: 'bar',
+        data: data,
+        options:
+            {
+                responsive: true,
+                legend: {position: 'top'},
+                title:
+                    {
+                        display: true,
+                        text: 'Performances computed by activity name'
+                    },
+                scales:
+                    {
+                        yAxes:
+                            [
+                                {
+                                    label:"Performance",
+                                    id: 'y-axis-0',
+                                    type: 'linear',
+                                    position: 'left',
+                                    scaleLabel: {
+                                        labelString: "Performance",
+                                        display: true,
+                                        fontSize: 16,
+                                        fontColor: "#666",
+                                        fontStyle: "bold"
+                                    },
+                                    ticks: { beginAtZero: true }
+                                }],
+                        xAxes:
+                            [
+                                {
+                                    type: 'category',
+                                    labels: orderedLabels,
+                                    label: "Activités",
+                                    scaleLabel:
+                                        {
+                                            labelString: "Activités",
+                                            display: true,
+                                            fontSize: 16,
+                                            fontColor: "#666",
+                                            fontStyle: "bold"
+                                        }
+                                }
+                            ]
+                    },
+                plugins:
+                    {
+                        chartJsPluginErrorBars:
+                            {
+                                width: "20px",
+                                lineWidth: "2px",
+                                absoluteValues: false
+                            }
+                    },
+                tooltips:
+                    {
+                        mode: 'index',
+                        axis: 'y',
+                        callbacks: {
+                            // Use the footer callback to display the result of a function
+                            label: "callback"
+                        },
+                        footerFontStyle: 'normal'
+                    }
+            }
+    };
+}
 //Return an array of data sets
 function generateChartConfigFromOneCriterion(criterionIndex, classedCombinations)
 {
@@ -139,7 +555,7 @@ function generateChartConfigFromOneCriterion(criterionIndex, classedCombinations
                 title:
                     {
                         display: true,
-                        text: 'Performances computed by used config'
+                        text: 'Performances computed by granularity'
                     },
                 scales:
                     {
@@ -163,7 +579,7 @@ function generateChartConfigFromOneCriterion(criterionIndex, classedCombinations
                             [
                                 {
                                     type: 'category',
-                                    labels: orderedLabels,
+                                    labels: ["generic", "specific"],
                                     label: "Combinations",
                                     scaleLabel:
                                         {
@@ -322,8 +738,6 @@ function generateChartConfigFromOneCriterionGlobal(criterionIndex, classedCombin
                         },
                         footerFontStyle: 'normal'
                     }
-
-
             }
     };
 }
