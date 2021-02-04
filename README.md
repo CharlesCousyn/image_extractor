@@ -1,7 +1,7 @@
 # Image retrieval
 
 
-**Warning: this project is based on the assumption that you use projects to obtain the images to be analyzed.**
+**Warning: this project is based on the assumption that you use projects [Search Activities](https://github.com/CharlesCousyn/search_activities) and [Image retrieval](https://github.com/CharlesCousyn/image_retrieval) to obtain the images to be analyzed.**
 
 
 **Requirements** <br/>
