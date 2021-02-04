@@ -1,4 +1,4 @@
-# Image retrieval
+# Image extractor
 
 
 **Warning: this project is based on the assumption that you use projects [Search Activities](https://github.com/CharlesCousyn/search_activities) and [Image retrieval](https://github.com/CharlesCousyn/image_retrieval) to obtain the images to be analyzed.**
