@@ -194,7 +194,6 @@ function readActivityFolderByRelevance(activityFolderName, imageFolder, RESULTS)
 			let indexGoodFile = arrayOfFilesSplitExtension.map(el => el[0].split("_").pop()).indexOf(""+index);
 			return `${arrayOfFilesSplitExtension[indexGoodFile][0]}.${arrayOfFilesSplitExtension[indexGoodFile][1]}`;
 		});
-
 	//Produce a Stream of images order by pertinence in search engine in descending order
 	return from(goodResults)
 		.pipe(map(imageName => new Image(activityFolderName, `${pathToActivityFolder}${imageName}`, imageName)));
